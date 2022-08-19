@@ -1,0 +1,40 @@
+.nav {
+  grid-area: n;
+  background-color: #61dafb;
+  padding: 20px;
+  font-size: 2rem;
+}
+
+.item {
+  padding-bottom: 15px;
+  color: aliceblue;
+}
+
+.item a {
+  color: rgb(28, 94, 153);
+  text-decoration: none;
+}
+
+.item:last-of-type {
+padding-top: 25px;}
+
+.item:last-child a{
+ padding-top: 40px;
+  color: rgb(10, 45, 76);
+}
+
+
+.item a.activeLink {
+  color: rgb(236, 109, 18);
+}
+
+.friends{
+  padding-top: 40px;
+  color: rgb(101, 89, 212);
+}
+.itemFriend{
+  font-size: 1.5rem;
+  color:rgb(160, 95, 156);
+  display: inline-block;
+  padding-right: 10px;
+}

@@ -1,0 +1,11 @@
+.content {
+  grid-area: c;
+  background-color: rgb(208, 234, 122);
+}
+.active{
+  color:blueviolet;
+}
+.Image {
+  max-width: 100%;
+  height: auto;
+}

@@ -1,0 +1,20 @@
+.item{
+  display: flex;
+  justify-content: space-evenly;
+  width: 150px;
+  margin: 15px 0px 15px 0px;
+  /* margin-left: 0px; */
+  padding-left: 10px;
+}
+
+.item img{
+  width: 50px;
+  height: auto;
+}
+
+.button{
+  position: relative;
+  display: inline-block;
+  top:-15px;
+  margin-left: 15px;
+}

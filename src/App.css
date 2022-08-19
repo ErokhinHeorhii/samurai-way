@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -32,7 +32,34 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+ul {
+  list-style: none;
+} */
+
+/* Header */
+
+
+.app-wrapper {
+  display: grid;
+  width: 1200px;
+  margin: 0 auto;
+
+  grid-template-areas:
+    'h h'
+    'n c';
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 3fr 10fr;
+  grid-gap: 10px;
+}
+
+.app-wrapper-content {
+  grid-area: c;
+  background-color: rgb(208, 234, 122);
+
 }
