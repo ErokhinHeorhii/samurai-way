@@ -1,0 +1,29 @@
+.dialogs {
+  max-width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialogsItem {
+  font-size: 1.5rem;
+  padding-top: 15px;
+  padding-left: 15px;
+  color: darkblue;
+}
+
+.dialogsItem .dialog {
+  padding-bottom: 15px;
+}
+
+.dialog.active{
+ color: rgb(130, 41, 41);
+}
+.messages {
+  font-size: 1.3rem;
+  padding-top: 15px;
+  color: rgb(88, 88, 159);
+}
+
+.message {
+  padding-bottom: 15px;
+}

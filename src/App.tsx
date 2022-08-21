@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
-import s from "./components/Dialogs/Dialogs.module.css";
+// import s from "./components/Dialogs/Dialogs.module.css";
 import { BrowserRouter,  Route } from "react-router-dom";
 import News from './Router/News/News';
 import Music from './Router/Music/Music';
