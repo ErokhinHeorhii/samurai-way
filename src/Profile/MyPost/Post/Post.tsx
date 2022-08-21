@@ -1,18 +1,19 @@
 import s from './Post.module.css'
 
-type PostType={
-message:string
-likeCounts:string
+type PostType = {
+  message: string
+  likeCounts: string
 }
 
-const Post = (props:PostType) => {
+const Post = (props: PostType) => {
   return (
 
     <div>
       <div className={s.item}>
         <img className={s.image} src="https://klike.net/uploads/posts/2019-03/1551511823_2.jpg" alt="img"></img>
-        {props.message}</div>
-      <div>
+        <div className={s.itemMessage}>{props.message}</div>
+      </div>
+      <div className={s.likeItem}>
         <span>like {props.likeCounts} </span>
       </div >
     </div>
