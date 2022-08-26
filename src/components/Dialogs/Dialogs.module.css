@@ -1,14 +1,13 @@
 .dialogs {
-  max-width: 40%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+ grid-template-columns: 4fr 10fr;
 }
 
 .dialogsItem {
   font-size: 1.5rem;
   padding-top: 15px;
   padding-left: 15px;
-  color: darkblue;
+ 
 }
 
 .dialogsItem .dialog {
@@ -17,9 +16,10 @@
 
 .navLink{
   text-decoration: none;
+  color:rgb(125, 125, 27);
 }
 
-.navLink.active{
+.activeLink{
  color: rgb(130, 41, 41);
 }
 .messages {
