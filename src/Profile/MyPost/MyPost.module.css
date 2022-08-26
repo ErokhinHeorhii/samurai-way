@@ -15,6 +15,9 @@
 .button{
   position: relative;
   display: inline-block;
-  top:-15px;
-  margin-left: 15px;
+}
+
+.postsBlock{
+  padding-left: 10px;
+  margin-top: 10px;
 }

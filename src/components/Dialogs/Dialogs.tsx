@@ -16,14 +16,34 @@ const DialogItem = (props: DialogItemType) => {
     )
 }
 
-const Message = (props: { message: string }) => {
+type MessageType = {
+    message: string
+}
+
+const Message = (props: MessageType) => {
     return (
         <div className={s.message}>{props.message}</div>
-
     )
 }
 
 const Dialogs = (props: any) => {
+
+    let dialogsData = [
+        { id: 1, name: "Borya" },
+        { id: 2, name: "Olga" },
+        { id: 3, name: "Misha" },
+        { id: 4, name: "George" },
+        { id: 5, name: "Sacha" },
+        { id: 6, name: "Tanya" }
+    ]
+
+    let messagesData = [
+        { id: 1, message: "Hi" },
+        { id: 2, message: "How are you" },
+        { id: 3, message: "yooo" },
+        { id: 4, message: "byu" },
+    ]
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
@@ -40,6 +60,5 @@ const Dialogs = (props: any) => {
         </div>
     )
 }
-
 
 export default Dialogs
