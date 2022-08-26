@@ -4,7 +4,7 @@ import s from "./Dialogs.module.css"
 
 type DialogItemType = {
     name: string
-    id: string
+    id: string| number
 }
 
 const DialogItem = (props: DialogItemType) => {
@@ -18,6 +18,7 @@ const DialogItem = (props: DialogItemType) => {
 
 type MessageType = {
     message: string
+    id: string | number
 }
 
 const Message = (props: MessageType) => {
@@ -36,6 +37,9 @@ const Dialogs = (props: any) => {
         { id: 5, name: "Sacha" },
         { id: 6, name: "Tanya" }
     ]
+    let dialogsElements= dialogsData.map(item=>{
+        return <DialogItem name={item.name} id={item.id} />
+    })
 
     let messagesData = [
         { id: 1, message: "Hi" },
@@ -43,20 +47,18 @@ const Dialogs = (props: any) => {
         { id: 3, message: "yooo" },
         { id: 4, message: "byu" },
     ]
+    let messagesElements= messagesData.map(item=>{
+        return <Message message={item.message} id={item.id} />
+    })
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
-                <DialogItem name={"Borya"} id={'1'} />
-                <DialogItem name={"Olga"} id={'2'} />
-                <DialogItem name={"Misha"} id={'3'} />
-                <DialogItem name={"George"} id={'4'} />
-            </div>
-            <div className={s.messages}>
-                <Message message="Hi" />
-                <Message message="How are you" />
-                <Message message="Buy" />
-            </div>
+                {dialogsElements}
+            </div> 
+             <div className={s.messages}>
+                {messagesElements}
+            </div> 
         </div>
     )
 }
