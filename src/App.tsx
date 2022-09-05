@@ -11,7 +11,8 @@ import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
 
 
-function App(props: any) {
+function App() {
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">

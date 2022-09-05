@@ -1,21 +1,21 @@
-import { isTemplateMiddle } from 'typescript'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
 
-const MyPost = () => {
+type myPostType={
+  id:number
+  message:string
+  likeCount:number
+}
 
-  let postsData = [
-    { id: 1, message: "Hi", likeCount: 10 },
-    { id: 2, message: "How are you", likeCount: 2 },
-    { id: 3, message: "yooo", likeCount: 4 },
-    { id: 4, message: "byu", likeCount: 14 },
-    { id: 5, message: "ouyy", likeCount: 2 },
-    { id: 6, message: "kyy", likeCount: 0 },
-    { id: 7, message: "byu", likeCount: 1 },
-  ]
+type postDataType={
+  postsData:myPostType[]
+}
+
+const MyPost = (props:postDataType) => {
+  const postsData=props.postsData
 
   let postsElements = postsData.map(item => {
-    return <Post message={item.message} likeCounts={item.likeCount} />
+    return <Post  key={item.id} message={item.message} likeCounts={item.likeCount} />
   })
 
   return (

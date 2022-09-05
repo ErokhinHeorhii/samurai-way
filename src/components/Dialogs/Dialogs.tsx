@@ -1,31 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import s from "./Dialogs.module.css"
+import DialogItem from "./DialogsItem/DialogItem";
+import Message from "./Message/Message";
 
-type DialogItemType = {
-    name: string
-    id: string| number
-}
 
-const DialogItem = (props: DialogItemType) => {
-    let path = "/dialogs/" + props.id;
-    return (
-        <div className={s.dialog}>
-            <NavLink className={s.navLink} to={path} activeClassName={s.activeLink} >{props.name}</NavLink>
-        </div>
-    )
-}
-
-type MessageType = {
-    message: string
-    id: string | number
-}
-
-const Message = (props: MessageType) => {
-    return (
-        <div className={s.message}>{props.message}</div>
-    )
-}
 
 const Dialogs = (props: any) => {
 
@@ -35,10 +13,11 @@ const Dialogs = (props: any) => {
         { id: 3, name: "Misha" },
         { id: 4, name: "George" },
         { id: 5, name: "Sacha" },
-        { id: 6, name: "Tanya" }
+        { id: 6, name: "Tanya" },
+        { id: 7, name: "Sacha" }
     ]
-    let dialogsElements= dialogsData.map(item=>{
-        return <DialogItem name={item.name} id={item.id} />
+    let dialogsElements = dialogsData.map(item => {
+        return <DialogItem key={item.id} name={item.name} id={item.id} />
     })
 
     let messagesData = [
@@ -47,18 +26,18 @@ const Dialogs = (props: any) => {
         { id: 3, message: "yooo" },
         { id: 4, message: "byu" },
     ]
-    let messagesElements= messagesData.map(item=>{
-        return <Message message={item.message} id={item.id} />
+    let messagesElements = messagesData.map(item => {
+        return <Message key={item.id} message={item.message} id={item.id} />
     })
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
                 {dialogsElements}
-            </div> 
-             <div className={s.messages}>
+            </div>
+            <div className={s.messages}>
                 {messagesElements}
-            </div> 
+            </div>
         </div>
     )
 }
