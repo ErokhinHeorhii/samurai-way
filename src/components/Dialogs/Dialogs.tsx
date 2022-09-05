@@ -1,29 +1,23 @@
 import React from "react";
+import { dialogsPageType } from "../../App";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogsItem/DialogItem";
-import Message, { myMessageType } from "./Message/Message";
+import Message from "./Message/Message";
 
- export type myDialogsDataType={
-    id:number
-    name:string
+export type myDialogsDataType = {
+    id: number
+    name: string
 }
 
-export type dialogsMessageDataType={
-    dialogsData: myDialogsDataType[]
-    messagesData:myMessageType[]
-}
+const Dialogs = (props: dialogsPageType) => {
+    const { dialogs, messages } = props.dialogsData
 
 
-const Dialogs = (props: dialogsMessageDataType  ) => {
-const {dialogsData, messagesData}= props
-
-   
-    let dialogsElements = dialogsData.map(item => {
+    let dialogsElements = dialogs.map(item => {
         return <DialogItem key={item.id} name={item.name} id={item.id} />
     })
 
-  
-    let messagesElements = messagesData.map(item => {
+    let messagesElements = messages.map(item => {
         return <Message key={item.id} message={item.message} id={item.id} />
     })
 

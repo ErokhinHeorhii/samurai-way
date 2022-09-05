@@ -8,14 +8,13 @@ import Post from './Post/Post'
 }
 
  export type postDataType={
-  postsData:myPostType[]
+  posts:myPostType[]
 }
 
 
 const MyPost = (props:postDataType) => {
- const {postsData}=props
-
-  let postsElements = postsData.map(item => {
+ const {posts}=props
+  let postsElements = posts.map(item => {
     return <Post  key={item.id} message={item.message} likeCounts={item.likeCount} />
   })
 

@@ -1,12 +1,13 @@
-import MyPost, { postDataType } from './MyPost/MyPost'
+import { postPageType } from '../App'
+import MyPost from './MyPost/MyPost'
 import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
 
-const Profile = (props:postDataType) => {
-const {postsData} = props
- 
+const Profile = (props:postPageType) => {
+const {posts} = props.postsData
+
   return (<div >
     <ProfileInfo/>
-    < MyPost postsData={postsData} />
+    < MyPost posts={posts} />
 
   </div>)
 }
