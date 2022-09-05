@@ -1,18 +1,19 @@
 import s from './MyPost.module.css'
 import Post from './Post/Post'
 
-type myPostType={
+ export type myPostType={
   id:number
   message:string
   likeCount:number
 }
 
-type postDataType={
+ export type postDataType={
   postsData:myPostType[]
 }
 
+
 const MyPost = (props:postDataType) => {
-  const postsData=props.postsData
+ const {postsData}=props
 
   let postsElements = postsData.map(item => {
     return <Post  key={item.id} message={item.message} likeCounts={item.likeCount} />
