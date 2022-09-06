@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
+import Navbar, { mySideBar } from './components/Navbar/Navbar';
 import Profile from './Profile/Profile';
 import Dialogs, { myDialogsDataType } from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -13,8 +13,9 @@ import { myMessageType } from './components/Dialogs/Message/Message';
 
 export type dialogsPageType = {
     dialogsData: {
-        dialogs: myDialogsDataType[],
+        dialogs: myDialogsDataType[]
         messages: myMessageType[]
+        answerMessages: myMessageType[]
     }
 }
 export type postPageType = {
@@ -23,30 +24,39 @@ export type postPageType = {
     }
 }
 
+export type sideBarPageType = {
+    sideBarData: {
+        sideBar: mySideBar[]
+    }
+}
 
 export type TypeForAllData = {
-   
+
     profilePage: {
         posts: myPostType[]
     },
     dialogsPage: {
-        dialogs: myDialogsDataType[],
+        dialogs: myDialogsDataType[]
         messages: myMessageType[]
+        answerMessages: myMessageType[]
+    }
+    sideBarPage: {
+        sideBar: mySideBar[]
     }
 }
 
-type AppStateType={
- appState: TypeForAllData
+type AppStateType = {
+    appState: TypeForAllData
 }
 
 function App(props: AppStateType) {
-    const { profilePage, dialogsPage } = props.appState;
+    const { profilePage, dialogsPage, sideBarPage } = props.appState;
 
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
-                <Navbar />
+                <Navbar  sideBarData={sideBarPage}/>
                 <div className='app-wrapper-content'>
 
                     <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsPage} />} />
@@ -56,6 +66,7 @@ function App(props: AppStateType) {
                     <Route path='/setting' component={Setting} />
 
                 </div>
+
             </div>
         </BrowserRouter>
     );

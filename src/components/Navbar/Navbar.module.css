@@ -16,10 +16,11 @@
 }
 
 .item:last-of-type {
-padding-top: 25px;}
+  padding-top: 25px;
+}
 
-.item:last-child a{
- padding-top: 40px;
+.item:last-child a {
+  padding-top: 40px;
   color: rgb(232, 232, 129);
 }
 
@@ -28,13 +29,38 @@ padding-top: 25px;}
   color: rgb(236, 109, 18);
 }
 
-.friends{
+.friends {
   padding-top: 40px;
   color: rgb(101, 89, 212);
+
 }
-.itemFriend{
+
+.itemFriend {
   font-size: 1.5rem;
-  color:rgb(160, 95, 156);
+  color: rgb(160, 95, 156);
   display: inline-block;
   padding-right: 10px;
+}
+
+.itemFriends {
+  display: flex;
+  width: 50px;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.imgFriends {
+  width: 45px;
+  border-radius: 20px;
+}
+
+.wrapperFriends {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nameFriends {
+  margin-top: 10px;
 }

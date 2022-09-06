@@ -1,27 +1,28 @@
 .dialogs {
   display: grid;
- grid-template-columns: 4fr 10fr;
+  grid-template-columns: 4fr 5fr 5fr;
 }
 
 .dialogsItem {
   font-size: 1.5rem;
   padding-top: 15px;
   padding-left: 15px;
- 
+
 }
 
 .dialogsItem .dialog {
   padding-bottom: 15px;
 }
 
-.navLink{
+.navLink {
   text-decoration: none;
-  color:rgb(125, 125, 27);
+  color: rgb(125, 125, 27);
 }
 
-.activeLink{
- color: rgb(130, 41, 41);
+.activeLink {
+  color: rgb(130, 41, 41);
 }
+
 .messages {
   font-size: 1.2rem;
   padding-top: 15px;
@@ -30,4 +31,9 @@
 
 .message {
   padding-bottom: 10px;
+}
+
+.imgForDialogs {
+  width: 40px;
+  margin-right: 10px;
 }

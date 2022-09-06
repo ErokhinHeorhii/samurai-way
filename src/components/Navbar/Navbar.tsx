@@ -1,8 +1,24 @@
 import { NavLink } from 'react-router-dom';
+import { sideBarPageType } from '../../App';
 import s from './Navbar.module.css'
 
+export type mySideBar = {
+  avatarSrc: string
+  name: string
+}
 
-const Navbar = () => {
+
+const Navbar = (props: sideBarPageType) => {
+
+  const { sideBar } = props.sideBarData
+
+  const newSideBar = sideBar.map(item => {
+    return (<div className={s.itemFriends}>
+      <img className={s.imgFriends} alt="img" src={item.avatarSrc}></img>
+      <div className={s.nameFriends} >{item.name}</div>
+    </div>)
+  })
+
   return (
     <nav className={s.nav}>
       <div className={s.item}>
@@ -19,6 +35,11 @@ const Navbar = () => {
       </div>
       <div className={s.item}>
         <NavLink to="/setting" activeClassName={s.activeLink}>Setting</NavLink>
+        <div className={s.friends}>Friends
+          <div className={s.wrapperFriends}>
+            {newSideBar}
+          </div>
+        </div>
       </div>
     </nav>)
 }
