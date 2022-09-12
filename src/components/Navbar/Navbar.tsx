@@ -10,7 +10,7 @@ export type mySideBar = {
 
 const Navbar = (props: sideBarPageType) => {
 
-  const { sideBar } = props.sideBarData
+  const { sideBar } = props.sideBar
 
   const newSideBar = sideBar.map(item => {
     return (<div className={s.itemFriends}>

@@ -8,9 +8,10 @@ export type myMessageType = {
 }
 
 const Message = (props: myMessageType) => {
-    return (<>
+    return (<div>
         <li className={s.message}>{props.message}</li>
-    </>
+   
+    </div>
     )
 }
 

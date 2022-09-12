@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Navbar, { mySideBar } from './components/Navbar/Navbar';
 import Profile from './Profile/Profile';
 import Dialogs, { myDialogsDataType } from "./components/Dialogs/Dialogs";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import News from './Router/News/News';
 import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
@@ -25,7 +25,7 @@ export type postPageType = {
 }
 
 export type sideBarPageType = {
-    sideBarData: {
+    sideBar: {
         sideBar: mySideBar[]
     }
 }
@@ -40,7 +40,7 @@ export type TypeForAllData = {
         messages: myMessageType[]
         answerMessages: myMessageType[]
     }
-    sideBarPage: {
+    sideBar: {
         sideBar: mySideBar[]
     }
 }
@@ -50,25 +50,20 @@ type AppStateType = {
 }
 
 function App(props: AppStateType) {
-    const { profilePage, dialogsPage, sideBarPage } = props.appState;
+    const { profilePage, dialogsPage, sideBar } = props.appState;
 
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header />
-                <Navbar  sideBarData={sideBarPage}/>
-                <div className='app-wrapper-content'>
-
-                    <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsPage} />} />
-                    <Route path='/profile' render={() => <Profile postsData={profilePage} />} />
-                    <Route path='/news' component={News} />
-                    <Route path='/music' component={Music} />
-                    <Route path='/setting' component={Setting} />
-
-                </div>
-
+        <div className="app-wrapper">
+            <Header />
+            <Navbar sideBar={sideBar} />
+            <div className='app-wrapper-content'>
+                <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsPage} />} />
+                <Route path='/profile' render={() => <Profile postsData={profilePage} />} />
+                <Route path='/news' component={News} />
+                <Route path='/music' component={Music} />
+                <Route path='/setting' component={Setting} />
             </div>
-        </BrowserRouter>
+        </div>
     );
 }
 

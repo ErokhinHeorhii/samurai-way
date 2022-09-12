@@ -1,0 +1,29 @@
+.default {
+    background: rgb(189, 211, 189);
+    border: 1px Solid rgb(198, 209, 198);
+}
+
+.default:disabled {
+    background: gray;
+    cursor: auto;
+    opacity: 1;
+}
+
+.red {
+    background: red;
+}
+
+.button {
+    width: 4rem;
+    height: 1.5rem;
+    cursor: pointer;
+   
+}
+.button:hover{
+    opacity: .7;
+}
+
+.wrapperButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

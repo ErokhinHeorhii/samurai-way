@@ -29,7 +29,7 @@ const state = {
       { id: 4, message: "see you leter" },
     ]
   },
-  sideBarPage: {
+  sideBar: {
     sideBar: [
       { avatarSrc: "https://cspromogame.ru//storage/upload_images/avatars/897.jpg", name: "Borya" },
       { avatarSrc: "https://cspromogame.ru//storage/upload_images/avatars/4169.jpg", name: "Vashya" },
