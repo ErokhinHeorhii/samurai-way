@@ -1,3 +1,4 @@
+import { myPostType } from "../../Profile/MyPost/MyPost";
 
 const state = {
   profilePage: {
@@ -34,8 +35,21 @@ const state = {
       { avatarSrc: "https://cspromogame.ru//storage/upload_images/avatars/897.jpg", name: "Borya" },
       { avatarSrc: "https://cspromogame.ru//storage/upload_images/avatars/4169.jpg", name: "Vashya" },
       { avatarSrc: "https://cspromogame.ru//storage/upload_images/avatars/899.jpg", name: "Igor" },
-      
+
     ]
   }
 }
+
+ export const addPost = (postMessage: string) => {
+  const newPost:myPostType = {
+    id: 5,
+    message: postMessage,
+    likeCount: 0
+  };
+
+  state.profilePage.posts.push(newPost)
+  console.log(state.profilePage.posts)
+}
+
+
 export default state

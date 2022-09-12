@@ -10,6 +10,7 @@ export type myPostType = {
 
 export type postDataType = {
   posts: myPostType[]
+  addPost: (postMessage: string )=>void
 }
 
 const MyPost = (props: postDataType) => {
@@ -21,10 +22,10 @@ const MyPost = (props: postDataType) => {
   let newPostElement = React.createRef<HTMLTextAreaElement>()
 
   const onClickHandler = () => {
-    // if (newPostElement.current) {
-      let text = newPostElement.current?.value
-      return alert(text)
-    // }
+    if (newPostElement.current) {
+      const text = newPostElement.current.value
+     props.addPost(text)
+    }
   }
 
   return (

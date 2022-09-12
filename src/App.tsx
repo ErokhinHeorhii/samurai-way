@@ -22,6 +22,7 @@ export type postPageType = {
     postsData: {
         posts: myPostType[]
     }
+    addPost:(postMessage: string)=>void
 }
 
 export type sideBarPageType = {
@@ -47,6 +48,7 @@ export type TypeForAllData = {
 
 type AppStateType = {
     appState: TypeForAllData
+    addPost:(postMessage: string)=>void
 }
 
 function App(props: AppStateType) {
@@ -58,7 +60,7 @@ function App(props: AppStateType) {
             <Navbar sideBar={sideBar} />
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsPage} />} />
-                <Route path='/profile' render={() => <Profile postsData={profilePage} />} />
+                <Route path='/profile' render={() => <Profile postsData={profilePage}  addPost={props.addPost}/>} />
                 <Route path='/news' component={News} />
                 <Route path='/music' component={Music} />
                 <Route path='/setting' component={Setting} />
