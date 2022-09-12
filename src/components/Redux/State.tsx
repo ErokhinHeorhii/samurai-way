@@ -1,4 +1,5 @@
 import { myPostType } from "../../Profile/MyPost/MyPost";
+import { rerenderEntireTree } from "../../render";
 
 const state = {
   profilePage: {
@@ -40,6 +41,7 @@ const state = {
   }
 }
 
+
  export const addPost = (postMessage: string) => {
   const newPost:myPostType = {
     id: 5,
@@ -49,6 +51,7 @@ const state = {
 
   state.profilePage.posts.push(newPost)
   console.log(state.profilePage.posts)
+  rerenderEntireTree(state)
 }
 
 

@@ -25,6 +25,7 @@ const MyPost = (props: postDataType) => {
     if (newPostElement.current) {
       const text = newPostElement.current.value
      props.addPost(text)
+     newPostElement.current.value=" "
     }
   }
 

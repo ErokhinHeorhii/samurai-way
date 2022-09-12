@@ -46,7 +46,7 @@ export type TypeForAllData = {
     }
 }
 
-type AppStateType = {
+ export type AppStateType = {
     appState: TypeForAllData
     addPost:(postMessage: string)=>void
 }
