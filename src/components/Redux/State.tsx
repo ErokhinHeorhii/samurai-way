@@ -7,7 +7,8 @@ const state = {
       { id: 1, message: "Hi", likeCount: 10 },
       { id: 2, message: "How are you", likeCount: 2 },
       { id: 3, message: "yooo", likeCount: 4 },
-    ]
+    ],
+    newPostText: "Hello everybody)!"
   },
   dialogsPage: {
     dialogs: [
@@ -24,6 +25,7 @@ const state = {
       { id: 3, message: "yooo" },
       { id: 4, message: "byu" },
     ],
+    newDialogsMessage : "Hello",
     answerMessages: [
       { id: 1, message: "Hello here" },
       { id: 2, message: "Fine" },
@@ -41,17 +43,35 @@ const state = {
   }
 }
 
-
- export const addPost = (postMessage: string) => {
-  const newPost:myPostType = {
+export const addPost = () => {
+  const newPost: myPostType = {
     id: 5,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     likeCount: 0
   };
 
   state.profilePage.posts.push(newPost)
-  console.log(state.profilePage.posts)
+  state.profilePage.newPostText = ""
   rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+  state.profilePage.newPostText = newText
+  rerenderEntireTree(state)
+}
+
+export const addMessage = () => {
+  const newMessage = {
+    id: 1, message: state.dialogsPage.newDialogsMessage
+  }
+  state.dialogsPage.messages.push(newMessage)
+  state.dialogsPage.newDialogsMessage = ''
+  rerenderEntireTree(state)
+}
+
+export const updateNewMessageText=(newMessage:string)=>{
+state.dialogsPage.newDialogsMessage=newMessage
+rerenderEntireTree(state)
 }
 
 

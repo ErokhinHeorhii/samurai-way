@@ -1,13 +1,25 @@
-import { postPageType } from '../App'
-import MyPost from './MyPost/MyPost'
+// import { postPageType } from '../App'
+import MyPost, { myPostType } from './MyPost/MyPost'
 import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
 
-const Profile = (props:postPageType) => {
-const {posts} = props.postsData
+export type postPageType = {
+  postsData: {
+    posts: myPostType[]
+    newPostText: string
+  }
+  addPost: () => void
+  updateNewPostText: (newText: string) => void
+}
+
+const Profile = (props: postPageType) => {
+  const { posts, newPostText } = props.postsData
+  const { addPost, updateNewPostText } = props
 
   return (<div >
-    <ProfileInfo/>
-    < MyPost posts={posts} addPost={props.addPost}/>
+    <ProfileInfo />
+    < MyPost posts={posts} addPost={addPost}
+      newPostText={newPostText}
+      updateNewPostText={updateNewPostText} />
 
   </div>)
 }

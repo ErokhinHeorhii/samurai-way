@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import { sideBarPageType } from '../../App';
 import s from './Navbar.module.css'
 
 export type mySideBar = {
@@ -7,6 +6,11 @@ export type mySideBar = {
   name: string
 }
 
+export type sideBarPageType = {
+  sideBar: {
+    sideBar: mySideBar[]
+  }
+}
 
 const Navbar = (props: sideBarPageType) => {
 

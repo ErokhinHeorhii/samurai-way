@@ -11,34 +11,17 @@ import Setting from './Router/Setting/Setting';
 import { myPostType } from './Profile/MyPost/MyPost';
 import { myMessageType } from './components/Dialogs/Message/Message';
 
-export type dialogsPageType = {
-    dialogsData: {
-        dialogs: myDialogsDataType[]
-        messages: myMessageType[]
-        answerMessages: myMessageType[]
-    }
-}
-export type postPageType = {
-    postsData: {
-        posts: myPostType[]
-    }
-    addPost:(postMessage: string)=>void
-}
-
-export type sideBarPageType = {
-    sideBar: {
-        sideBar: mySideBar[]
-    }
-}
 
 export type TypeForAllData = {
 
     profilePage: {
         posts: myPostType[]
+        newPostText: string
     },
     dialogsPage: {
         dialogs: myDialogsDataType[]
         messages: myMessageType[]
+        newDialogsMessage: string
         answerMessages: myMessageType[]
     }
     sideBar: {
@@ -46,21 +29,34 @@ export type TypeForAllData = {
     }
 }
 
- export type AppStateType = {
+export type AppStateType = {
     appState: TypeForAllData
-    addPost:(postMessage: string)=>void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    addMessage: () => void
+    updateNewMessageText:(newMessage:string)=>void
 }
 
 function App(props: AppStateType) {
     const { profilePage, dialogsPage, sideBar } = props.appState;
+    const { addPost, addMessage, updateNewPostText, updateNewMessageText } = props
 
     return (
         <div className="app-wrapper">
             <Header />
             <Navbar sideBar={sideBar} />
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsPage} />} />
-                <Route path='/profile' render={() => <Profile postsData={profilePage}  addPost={props.addPost}/>} />
+                
+                <Route path='/dialogs' render={() =>
+                    <Dialogs dialogsData={dialogsPage}
+                        addMessage={addMessage}
+                        updateNewMessageText={updateNewMessageText} />} />
+
+                <Route path='/profile' render={() =>
+                    <Profile postsData={profilePage}
+                        addPost={addPost}
+                        updateNewPostText={updateNewPostText} />} />
+
                 <Route path='/news' component={News} />
                 <Route path='/music' component={Music} />
                 <Route path='/setting' component={Setting} />

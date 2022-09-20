@@ -47,4 +47,5 @@
 
 .textarea{
   margin-top: 15px;
+  resize: none;
 }
