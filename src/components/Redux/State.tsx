@@ -1,5 +1,14 @@
 import { myPostType } from "../../Profile/MyPost/MyPost";
-import { rerenderEntireTree } from "../../render";
+
+
+let  rerenderEntireTree =()=>{
+  // console.log("state changed")
+}
+
+export const subscribe =(observer:()=>void)=>{
+rerenderEntireTree = observer 
+//  патерн -observer, такой же как и add.eventListener
+}
 
 const state = {
   profilePage: {
@@ -52,12 +61,12 @@ export const addPost = () => {
 
   state.profilePage.posts.push(newPost)
   state.profilePage.newPostText = ""
-  rerenderEntireTree(state)
+  rerenderEntireTree()
 }
 
 export const updateNewPostText = (newText: string) => {
   state.profilePage.newPostText = newText
-  rerenderEntireTree(state)
+  rerenderEntireTree()
 }
 
 export const addMessage = () => {
@@ -66,12 +75,12 @@ export const addMessage = () => {
   }
   state.dialogsPage.messages.push(newMessage)
   state.dialogsPage.newDialogsMessage = ''
-  rerenderEntireTree(state)
+  rerenderEntireTree()
 }
 
 export const updateNewMessageText=(newMessage:string)=>{
 state.dialogsPage.newDialogsMessage=newMessage
-rerenderEntireTree(state)
+rerenderEntireTree()
 }
 
 
