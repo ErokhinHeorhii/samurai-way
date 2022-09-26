@@ -1,8 +1,22 @@
 import { TypeForAllData } from "../../App";
 import { myPostType } from "../../Profile/MyPost/MyPost";
 
+type StoreType = {
+  _state: TypeForAllData
 
-const store = {
+  addPost: () => void
+  addMessage: () => void
+  getState: () => TypeForAllData
+
+  updateNewPostText: (newText: string) => void
+  _callSubScriber: (state: TypeForAllData) => void
+  updateNewMessageText: (newMessage: string) => void
+
+  subscribe: (observer: (state: TypeForAllData) => void) => void
+
+}
+
+const store: StoreType = {
 
   _state: {
     profilePage: {
@@ -46,9 +60,9 @@ const store = {
     }
   },
 
- getState(){
-  return this._state
- },
+  getState() {
+    return this._state
+  },
 
   _callSubScriber(state: TypeForAllData) {
     // console.log("state changed")
@@ -65,7 +79,6 @@ const store = {
       message: this._state.profilePage.newPostText,
       likeCount: 0
     };
-
     this._state.profilePage.posts.push(newPost)
     this._state.profilePage.newPostText = ""
     this._callSubScriber(this._state)
