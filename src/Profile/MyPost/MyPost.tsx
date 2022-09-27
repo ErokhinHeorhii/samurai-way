@@ -1,4 +1,5 @@
 import React from 'react'
+import { AddMessageType, AddPostActionType, UpdateNewMessageTextType, UpdateNewPostTextActionType } from '../../components/Redux/State'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
 
@@ -11,13 +12,19 @@ export type myPostType = {
 export type postDataType = {
   posts: myPostType[]
   newPostText: string
-  addPost: () => void
-  updateNewPostText: (newText: string) => void
+  // addPost: () => void
+  // updateNewPostText: (newText: string) => void
+  dispatch: (action: AddPostActionType |
+    UpdateNewPostTextActionType |
+    UpdateNewMessageTextType |
+    AddMessageType
+  ) => void
 }
 
 const MyPost = (props: postDataType) => {
-  
-  const { posts, newPostText, addPost, updateNewPostText } = props
+
+  const { posts, newPostText } = props
+  const { dispatch } = props
 
   let postsElements = posts.map(item => {
     return <Post key={item.id} message={item.message} likeCounts={item.likeCount} />
@@ -26,12 +33,17 @@ const MyPost = (props: postDataType) => {
   let newPostElement = React.createRef<HTMLTextAreaElement>()
 
   const onClickHandler = () => {
-      addPost()
+    // addPost()
+    dispatch({ type: "ADD-POST" })
   }
 
   const onChangeHandler = () => {
     let text = newPostElement.current ? newPostElement.current.value : " "
-    updateNewPostText(text)
+    // updateNewPostText(text)
+    dispatch({
+      type: "UPDATE-NEW-POST-TEXT",
+      newText: text,
+    })
   }
 
   return (

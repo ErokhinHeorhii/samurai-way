@@ -10,6 +10,7 @@ import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
 import { myPostType } from './Profile/MyPost/MyPost';
 import { myMessageType } from './components/Dialogs/Message/Message';
+import { AddMessageType, AddPostActionType, UpdateNewMessageTextType, UpdateNewPostTextActionType } from './components/Redux/State';
 
 
 export type TypeForAllData = {
@@ -31,31 +32,36 @@ export type TypeForAllData = {
 
 export type AppStateType = {
     appState: TypeForAllData
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: () => void
-    updateNewMessageText:(newMessage:string)=>void
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    // addMessage: () => void
+    // updateNewMessageText:(newMessage:string)=>void
+    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType|UpdateNewMessageTextType |AddMessageType) => void
 }
 
 function App(props: AppStateType) {
     const { profilePage, dialogsPage, sideBar } = props.appState;
-    const { addPost, addMessage, updateNewPostText, updateNewMessageText } = props
+    const { dispatch } = props
 
     return (
         <div className="app-wrapper">
             <Header />
             <Navbar sideBar={sideBar} />
             <div className='app-wrapper-content'>
-                
+
                 <Route path='/dialogs' render={() =>
                     <Dialogs dialogsData={dialogsPage}
-                        addMessage={addMessage}
-                        updateNewMessageText={updateNewMessageText} />} />
+                        // addMessage={addMessage}
+                        // updateNewMessageText={updateNewMessageText} 
+                        dispatch={dispatch}
+                        />} />
 
                 <Route path='/profile' render={() =>
                     <Profile postsData={profilePage}
-                        addPost={addPost}
-                        updateNewPostText={updateNewPostText} />} />
+                        // addPost={addPost}
+                        // updateNewPostText={updateNewPostText}
+                        dispatch={dispatch}
+                    />} />
 
                 <Route path='/news' component={News} />
                 <Route path='/music' component={Music} />
