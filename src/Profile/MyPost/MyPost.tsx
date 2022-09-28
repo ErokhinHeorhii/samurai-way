@@ -1,5 +1,10 @@
 import React from 'react'
-import { AddMessageType, AddPostActionType, UpdateNewMessageTextType, UpdateNewPostTextActionType } from '../../components/Redux/State'
+import {
+  AddMessageType, addPostActionCreater,
+  AddPostActionType, UpdateNewMessageTextType,
+  updateNewPostTextActionCreater,
+  UpdateNewPostTextActionType
+} from '../../components/Redux/State'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
 
@@ -34,16 +39,13 @@ const MyPost = (props: postDataType) => {
 
   const onClickHandler = () => {
     // addPost()
-    dispatch({ type: "ADD-POST" })
+    dispatch(addPostActionCreater())
   }
 
   const onChangeHandler = () => {
     let text = newPostElement.current ? newPostElement.current.value : " "
     // updateNewPostText(text)
-    dispatch({
-      type: "UPDATE-NEW-POST-TEXT",
-      newText: text,
-    })
+    dispatch(updateNewPostTextActionCreater(text))
   }
 
   return (

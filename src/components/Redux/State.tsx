@@ -1,7 +1,10 @@
 import { TypeForAllData } from "../../App";
 import { myPostType } from "../../Profile/MyPost/MyPost";
+const ADD_POST = "ADD-POST"
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 
- export type StoreType = {
+
+export type StoreType = {
   _state: TypeForAllData
 
   _callSubScriber: (state: TypeForAllData) => void
@@ -13,25 +16,32 @@ import { myPostType } from "../../Profile/MyPost/MyPost";
   addMessage: () => void
 
   subscribe: (observer: (state: TypeForAllData) => void) => void
-  dispatch: (action: AddPostActionType | UpdateNewPostTextActionType|UpdateNewMessageTextType |AddMessageType) => void
+  dispatch: (action: AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageTextType | AddMessageType) => void
 }
 
- export type AddPostActionType = {
-  type: "ADD-POST"
-}
- export type UpdateNewPostTextActionType = {
-  type: "UPDATE-NEW-POST-TEXT"
-  newText: string
-}
+export type AddPostActionType = ReturnType<typeof addPostActionCreater>
+export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreater>
+export type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextTypeActionType>
+export type AddMessageType = ReturnType<typeof addMessageActionType>
 
- export type UpdateNewMessageTextType = {
-  type: "UPDATE-NEW-MESSAGE-TEXT"
-  newMessage: string
-}
 
- export type AddMessageType = {
+export const addPostActionCreater = () => ({ type: "ADD-POST" }) as const
+
+export const updateNewPostTextActionCreater = (text: string) =>
+({
+  type: "UPDATE-NEW-POST-TEXT",
+  newText: text
+}) as const
+export const updateNewMessageTextTypeActionType = (newMessage: string) =>
+({
+  type: "UPDATE-NEW-MESSAGE-TEXT",
+  newMessage: newMessage
+}) as const
+export const addMessageActionType = () =>
+({
   type: "ADD-MESSAGE"
-}
+}) as const
+
 const store: StoreType = {
 
   _state: {
@@ -134,4 +144,6 @@ const store: StoreType = {
     }
   }
 }
+
+
 export default store
