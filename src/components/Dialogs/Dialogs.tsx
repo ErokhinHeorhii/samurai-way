@@ -1,6 +1,11 @@
 import React, { ChangeEvent } from "react";
 import SuperButton from "../../SuperButton/SuperButton";
-import { AddMessageType, AddPostActionType, UpdateNewMessageTextType, UpdateNewPostTextActionType } from "../Redux/State";
+import {
+    AddMessageType,
+    AddPostActionType,
+    UpdateNewMessageTextType,
+    UpdateNewPostTextActionType
+} from "../Redux/State";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogsItem/DialogItem";
 import Message, { myMessageType } from "./Message/Message";
@@ -20,7 +25,12 @@ export type dialogsPageType = {
     }
     // addMessage: () => void
     // updateNewMessageText: (newMessage: string) => void
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType|UpdateNewMessageTextType |AddMessageType) => void
+    dispatch: (
+        action: AddPostActionType |
+            UpdateNewPostTextActionType |
+            UpdateNewMessageTextType |
+            AddMessageType
+    ) => void
 }
 
 const Dialogs = (props: dialogsPageType) => {

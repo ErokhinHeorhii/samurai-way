@@ -1,8 +1,10 @@
 import { TypeForAllData } from "../../App";
 import { myPostType } from "../../Profile/MyPost/MyPost";
+
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
+const ADD_MESSAGE = "ADD-MESSAGE"
 
 export type StoreType = {
   _state: TypeForAllData
@@ -16,7 +18,12 @@ export type StoreType = {
   addMessage: () => void
 
   subscribe: (observer: (state: TypeForAllData) => void) => void
-  dispatch: (action: AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageTextType | AddMessageType) => void
+  dispatch: (
+    action: AddPostActionType |
+      UpdateNewPostTextActionType |
+      UpdateNewMessageTextType |
+      AddMessageType
+  ) => void
 }
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreater>
@@ -25,22 +32,21 @@ export type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextTyp
 export type AddMessageType = ReturnType<typeof addMessageActionType>
 
 
-export const addPostActionCreater = () => ({ type: "ADD-POST" }) as const
+export const addPostActionCreater = () => ({ type: ADD_POST }) as const
 
-export const updateNewPostTextActionCreater = (text: string) =>
-({
-  type: "UPDATE-NEW-POST-TEXT",
+export const updateNewPostTextActionCreater = (text: string) => ({
+  type: UPDATE_NEW_POST_TEXT,
   newText: text
 }) as const
-export const updateNewMessageTextTypeActionType = (newMessage: string) =>
-({
-  type: "UPDATE-NEW-MESSAGE-TEXT",
+
+export const updateNewMessageTextTypeActionType = (newMessage: string) => ({
+  type: UPDATE_NEW_MESSAGE_TEXT,
   newMessage: newMessage
 }) as const
-export const addMessageActionType = () =>
-({
-  type: "ADD-MESSAGE"
-}) as const
+
+export const addMessageActionType = () => ({ type: ADD_MESSAGE }) as const
+
+// ////////////////////////////////////////////////////////////////////////
 
 const store: StoreType = {
 
@@ -100,14 +106,17 @@ const store: StoreType = {
   },
 
   addPost() {
-    const newPost: myPostType = {
-      id: 5,
-      message: this._state.profilePage.newPostText,
-      likeCount: 0
-    };
-    this._state.profilePage.posts.push(newPost)
-    this._state.profilePage.newPostText = ""
-    this._callSubScriber(this._state)
+    if (!this._state.profilePage.newPostText) { return }
+    else {
+      const newPost: myPostType = {
+        id: 5,
+        message: this._state.profilePage.newPostText,
+        likeCount: 0
+      };
+      this._state.profilePage.posts.push(newPost)
+      this._state.profilePage.newPostText = ""
+      this._callSubScriber(this._state)
+    }
   },
 
   updateNewPostText(newText: string) {
@@ -116,12 +125,15 @@ const store: StoreType = {
   },
 
   addMessage() {
-    const newMessage = {
-      id: 1, message: this._state.dialogsPage.newDialogsMessage
+    if (!this._state.dialogsPage.newDialogsMessage) { return }
+    else {
+      const newMessage = {
+        id: 1, message: this._state.dialogsPage.newDialogsMessage
+      }
+      this._state.dialogsPage.messages.push(newMessage)
+      this._state.dialogsPage.newDialogsMessage = ''
+      this._callSubScriber(this._state)
     }
-    this._state.dialogsPage.messages.push(newMessage)
-    this._state.dialogsPage.newDialogsMessage = ''
-    this._callSubScriber(this._state)
   },
 
   updateNewMessageText(newMessage: string) {
@@ -130,16 +142,16 @@ const store: StoreType = {
   },
 
   dispatch(action) { // {type: "ADD-POST"}
-    if (action.type === "ADD-POST") {
+    if (action.type === ADD_POST) {
       this.addPost()
     }
-    else if (action.type === "UPDATE-NEW-POST-TEXT") {
+    else if (action.type === UPDATE_NEW_POST_TEXT) {
       this.updateNewPostText(action.newText)
     }
-    else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+    else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
       this.updateNewMessageText(action.newMessage)
     }
-    else if (action.type === "ADD-MESSAGE") {
+    else if (action.type === ADD_MESSAGE) {
       this.addMessage()
     }
   }

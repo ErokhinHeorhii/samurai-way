@@ -36,7 +36,12 @@ export type AppStateType = {
     // updateNewPostText: (newText: string) => void
     // addMessage: () => void
     // updateNewMessageText:(newMessage:string)=>void
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType|UpdateNewMessageTextType |AddMessageType) => void
+    dispatch: (
+        action: AddPostActionType |
+            UpdateNewPostTextActionType |
+            UpdateNewMessageTextType |
+            AddMessageType
+    ) => void
 }
 
 function App(props: AppStateType) {
@@ -54,7 +59,7 @@ function App(props: AppStateType) {
                         // addMessage={addMessage}
                         // updateNewMessageText={updateNewMessageText} 
                         dispatch={dispatch}
-                        />} />
+                    />} />
 
                 <Route path='/profile' render={() =>
                     <Profile postsData={profilePage}

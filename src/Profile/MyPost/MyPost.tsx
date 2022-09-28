@@ -28,8 +28,7 @@ export type postDataType = {
 
 const MyPost = (props: postDataType) => {
 
-  const { posts, newPostText } = props
-  const { dispatch } = props
+  const { posts, newPostText, dispatch } = props
 
   let postsElements = posts.map(item => {
     return <Post key={item.id} message={item.message} likeCounts={item.likeCount} />
