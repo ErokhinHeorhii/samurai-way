@@ -1,13 +1,13 @@
 import { TypeForAllData } from "../../App";
-import DialogReducer from "./DialogReduser";
-import ProfileReducer from "./ProfileReduser";
+import DialogReducer, { addMessageActionCreater, updateNewMessageTextActionCreater} from "./DialogReduser";
+import ProfileReducer, { addPostActionCreater, ADD_POST, updateNewPostTextActionCreater, UPDATE_NEW_POST_TEXT } from "./ProfileReduser";
 // import ProfileReducer from "./ProfileReduser";
 // import SideBarReducer from "./SidebarReduser";
 
-export const ADD_POST = "ADD-POST"
-export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
-export const ADD_MESSAGE = "ADD-MESSAGE"
+// export const ADD_POST = "ADD-POST"
+// export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+// export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
+// export const ADD_MESSAGE = "ADD-MESSAGE"
 
 export type StoreType = {
   _state: TypeForAllData
@@ -34,24 +34,7 @@ export type AddPostActionType = ReturnType<typeof addPostActionCreater>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreater>
 export type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextActionCreater>
 export type AddMessageType = ReturnType<typeof addMessageActionCreater>
-
-
-export const addPostActionCreater = () => ({ type: ADD_POST }) as const
-
-export const updateNewPostTextActionCreater = (text: string) => ({
-  type: UPDATE_NEW_POST_TEXT,
-  newText: text
-}) as const
-
-export const updateNewMessageTextActionCreater = (newMessage: string) => ({
-  type: UPDATE_NEW_MESSAGE_TEXT,
-  newMessage: newMessage
-}) as const
-
-export const addMessageActionCreater = () => ({ type: ADD_MESSAGE }) as const
-
-// ////////////////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////////////////////////////////
 const store: StoreType = {
 
   _state: {
@@ -109,41 +92,6 @@ const store: StoreType = {
     //  патерн -observer, такой же как и add.eventListener
   },
 
-  // addPost() {
-  //   if (!this._state.profilePage.newPostText) { return }
-  //   else {
-  //     const newPost: myPostType = {
-  //       id: 5,
-  //       message: this._state.profilePage.newPostText,
-  //       likeCount: 0
-  //     };
-  //     this._state.profilePage.posts.push(newPost)
-  //     this._state.profilePage.newPostText = ""
-  //     this._callSubScriber(this._state)
-  //   }
-  // },
-
-  // updateNewPostText(newText: string) {
-  //   this._state.profilePage.newPostText = newText
-  //   this._callSubScriber(this._state)
-  // },
-
-  // addMessage() {
-  //   if (!this._state.dialogsPage.newDialogsMessage) { return }
-  //   else {
-  //     const newMessage = {
-  //       id: 1, message: this._state.dialogsPage.newDialogsMessage
-  //     }
-  //     this._state.dialogsPage.messages.push(newMessage)
-  //     this._state.dialogsPage.newDialogsMessage = ''
-  //     this._callSubScriber(this._state)
-  //   }
-  // },
-
-  // updateNewMessageText(newMessage: string) {
-  //   this._state.dialogsPage.newDialogsMessage = newMessage
-  //   this._callSubScriber(this._state)
-  // },
 
   dispatch(action: AllActionType) { // {type: "ADD-POST"}
 
@@ -153,27 +101,11 @@ const store: StoreType = {
       this._state.dialogsPage = DialogReducer(this._state.dialogsPage, action)
     }
 
-    // this._state.sideBar= SideBarReducer(this._state.sideBar, action)
-
-    // if (action.type === ADD_POST) {
-    //   this.addPost()
-    // }
-    // else if (action.type === UPDATE_NEW_POST_TEXT) {
-    //   this.updateNewPostText(action.newText)
-    // }
-    // else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-    //   this.updateNewMessageText(action.newMessage)
-    // }
-    // else if (action.type === ADD_MESSAGE) {
-    //   this.addMessage()
-    // }
     this._callSubScriber(this._state)
   }
 }
 
-
 export default store
-
 
 //@ts-ignore
 window.store = store;

@@ -1,8 +1,8 @@
 import { NewDialogsPageType } from "../Dialogs/Dialogs";
 import { AddMessageType, UpdateNewMessageTextType } from "./State";
 
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
-const ADD_MESSAGE = "ADD-MESSAGE";
+ export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+ export const ADD_MESSAGE = "ADD-MESSAGE";
 
 const DialogReducer = (
   state: NewDialogsPageType,
@@ -30,4 +30,12 @@ const DialogReducer = (
       return state;
   }
 };
+
+export const updateNewMessageTextActionCreater = (newMessage: string) => ({
+  type: UPDATE_NEW_MESSAGE_TEXT,
+  newMessage: newMessage
+}) as const
+
+export const addMessageActionCreater = () => ({ type: ADD_MESSAGE }) as const
+
 export default DialogReducer;

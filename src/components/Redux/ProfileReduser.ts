@@ -36,4 +36,11 @@ const ProfileReducer = (
   
 };
 
+export const addPostActionCreater = () => ({ type: ADD_POST }) as const
+export const updateNewPostTextActionCreater = (text: string) => ({
+  type: UPDATE_NEW_POST_TEXT,
+  newText: text
+}) as const
+
+
 export default ProfileReducer;
