@@ -1,10 +1,13 @@
 import { TypeForAllData } from "../../App";
-import { myPostType } from "../../Profile/MyPost/MyPost";
+import DialogReducer from "./DialogReduser";
+import ProfileReducer from "./ProfileReduser";
+// import ProfileReducer from "./ProfileReduser";
+// import SideBarReducer from "./SidebarReduser";
 
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
-const ADD_MESSAGE = "ADD-MESSAGE"
+export const ADD_POST = "ADD-POST"
+export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
+export const ADD_MESSAGE = "ADD-MESSAGE"
 
 export type StoreType = {
   _state: TypeForAllData
@@ -12,24 +15,25 @@ export type StoreType = {
   _callSubScriber: (state: TypeForAllData) => void
   getState: () => TypeForAllData
 
-  updateNewPostText: (newText: string) => void
-  updateNewMessageText: (newMessage: string) => void
-  addPost: () => void
-  addMessage: () => void
+  // updateNewPostText: (newText: string) => void
+  // updateNewMessageText: (newMessage: string) => void
+  // addPost: () => void
+  // addMessage: () => void
 
   subscribe: (observer: (state: TypeForAllData) => void) => void
   dispatch: (
-    action: AddPostActionType |
-      UpdateNewPostTextActionType |
-      UpdateNewMessageTextType |
-      AddMessageType
+    action: AllActionType
   ) => void
 }
+export type AllActionType = AddPostActionType |
+  UpdateNewPostTextActionType |
+  UpdateNewMessageTextType |
+  AddMessageType
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreater>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreater>
-export type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextTypeActionType>
-export type AddMessageType = ReturnType<typeof addMessageActionType>
+export type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextActionCreater>
+export type AddMessageType = ReturnType<typeof addMessageActionCreater>
 
 
 export const addPostActionCreater = () => ({ type: ADD_POST }) as const
@@ -39,12 +43,12 @@ export const updateNewPostTextActionCreater = (text: string) => ({
   newText: text
 }) as const
 
-export const updateNewMessageTextTypeActionType = (newMessage: string) => ({
+export const updateNewMessageTextActionCreater = (newMessage: string) => ({
   type: UPDATE_NEW_MESSAGE_TEXT,
   newMessage: newMessage
 }) as const
 
-export const addMessageActionType = () => ({ type: ADD_MESSAGE }) as const
+export const addMessageActionCreater = () => ({ type: ADD_MESSAGE }) as const
 
 // ////////////////////////////////////////////////////////////////////////
 
@@ -105,57 +109,72 @@ const store: StoreType = {
     //  патерн -observer, такой же как и add.eventListener
   },
 
-  addPost() {
-    if (!this._state.profilePage.newPostText) { return }
-    else {
-      const newPost: myPostType = {
-        id: 5,
-        message: this._state.profilePage.newPostText,
-        likeCount: 0
-      };
-      this._state.profilePage.posts.push(newPost)
-      this._state.profilePage.newPostText = ""
-      this._callSubScriber(this._state)
-    }
-  },
+  // addPost() {
+  //   if (!this._state.profilePage.newPostText) { return }
+  //   else {
+  //     const newPost: myPostType = {
+  //       id: 5,
+  //       message: this._state.profilePage.newPostText,
+  //       likeCount: 0
+  //     };
+  //     this._state.profilePage.posts.push(newPost)
+  //     this._state.profilePage.newPostText = ""
+  //     this._callSubScriber(this._state)
+  //   }
+  // },
 
-  updateNewPostText(newText: string) {
-    this._state.profilePage.newPostText = newText
+  // updateNewPostText(newText: string) {
+  //   this._state.profilePage.newPostText = newText
+  //   this._callSubScriber(this._state)
+  // },
+
+  // addMessage() {
+  //   if (!this._state.dialogsPage.newDialogsMessage) { return }
+  //   else {
+  //     const newMessage = {
+  //       id: 1, message: this._state.dialogsPage.newDialogsMessage
+  //     }
+  //     this._state.dialogsPage.messages.push(newMessage)
+  //     this._state.dialogsPage.newDialogsMessage = ''
+  //     this._callSubScriber(this._state)
+  //   }
+  // },
+
+  // updateNewMessageText(newMessage: string) {
+  //   this._state.dialogsPage.newDialogsMessage = newMessage
+  //   this._callSubScriber(this._state)
+  // },
+
+  dispatch(action: AllActionType) { // {type: "ADD-POST"}
+
+    if (action.type === UPDATE_NEW_POST_TEXT || action.type === ADD_POST) {
+      this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+    } else {
+      this._state.dialogsPage = DialogReducer(this._state.dialogsPage, action)
+    }
+
+    // this._state.sideBar= SideBarReducer(this._state.sideBar, action)
+
+    // if (action.type === ADD_POST) {
+    //   this.addPost()
+    // }
+    // else if (action.type === UPDATE_NEW_POST_TEXT) {
+    //   this.updateNewPostText(action.newText)
+    // }
+    // else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+    //   this.updateNewMessageText(action.newMessage)
+    // }
+    // else if (action.type === ADD_MESSAGE) {
+    //   this.addMessage()
+    // }
     this._callSubScriber(this._state)
-  },
-
-  addMessage() {
-    if (!this._state.dialogsPage.newDialogsMessage) { return }
-    else {
-      const newMessage = {
-        id: 1, message: this._state.dialogsPage.newDialogsMessage
-      }
-      this._state.dialogsPage.messages.push(newMessage)
-      this._state.dialogsPage.newDialogsMessage = ''
-      this._callSubScriber(this._state)
-    }
-  },
-
-  updateNewMessageText(newMessage: string) {
-    this._state.dialogsPage.newDialogsMessage = newMessage
-    this._callSubScriber(this._state)
-  },
-
-  dispatch(action) { // {type: "ADD-POST"}
-    if (action.type === ADD_POST) {
-      this.addPost()
-    }
-    else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this.updateNewPostText(action.newText)
-    }
-    else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-      this.updateNewMessageText(action.newMessage)
-    }
-    else if (action.type === ADD_MESSAGE) {
-      this.addMessage()
-    }
   }
 }
 
 
 export default store
+
+
+//@ts-ignore
+window.store = store;
+

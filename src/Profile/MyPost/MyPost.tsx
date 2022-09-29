@@ -1,9 +1,8 @@
 import React from 'react'
 import {
-  AddMessageType, addPostActionCreater,
-  AddPostActionType, UpdateNewMessageTextType,
+  addPostActionCreater,
+  AllActionType,
   updateNewPostTextActionCreater,
-  UpdateNewPostTextActionType
 } from '../../components/Redux/State'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
@@ -14,15 +13,17 @@ export type myPostType = {
   likeCount: number
 }
 
-export type postDataType = {
+export type NewPostDataTypeForReduser = {
   posts: myPostType[]
   newPostText: string
+}
+
+export type postDataType = NewPostDataTypeForReduser & {
+  // posts: myPostType[]
+  // newPostText: string
   // addPost: () => void
   // updateNewPostText: (newText: string) => void
-  dispatch: (action: AddPostActionType |
-    UpdateNewPostTextActionType |
-    UpdateNewMessageTextType |
-    AddMessageType
+  dispatch: (action: AllActionType
   ) => void
 }
 

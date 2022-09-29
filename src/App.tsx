@@ -10,7 +10,7 @@ import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
 import { myPostType } from './Profile/MyPost/MyPost';
 import { myMessageType } from './components/Dialogs/Message/Message';
-import { AddMessageType, AddPostActionType, UpdateNewMessageTextType, UpdateNewPostTextActionType } from './components/Redux/State';
+import { AllActionType } from './components/Redux/State';
 
 
 export type TypeForAllData = {
@@ -37,10 +37,7 @@ export type AppStateType = {
     // addMessage: () => void
     // updateNewMessageText:(newMessage:string)=>void
     dispatch: (
-        action: AddPostActionType |
-            UpdateNewPostTextActionType |
-            UpdateNewMessageTextType |
-            AddMessageType
+        action: AllActionType 
     ) => void
 }
 

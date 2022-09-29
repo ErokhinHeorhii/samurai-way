@@ -1,11 +1,6 @@
 import React, { ChangeEvent } from "react";
 import SuperButton from "../../SuperButton/SuperButton";
-import {
-    AddMessageType,
-    AddPostActionType,
-    UpdateNewMessageTextType,
-    UpdateNewPostTextActionType
-} from "../Redux/State";
+import { addMessageActionCreater, AllActionType, updateNewMessageTextActionCreater } from "../Redux/State";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogsItem/DialogItem";
 import Message, { myMessageType } from "./Message/Message";
@@ -15,21 +10,19 @@ export type myDialogsDataType = {
     name: string
     src: string
 }
+export type NewDialogsPageType = {
+    dialogs: myDialogsDataType[]
+    messages: myMessageType[]
+    newDialogsMessage: string
+    answerMessages: myMessageType[]
+}
 
 export type dialogsPageType = {
-    dialogsData: {
-        dialogs: myDialogsDataType[]
-        messages: myMessageType[]
-        newDialogsMessage: string
-        answerMessages: myMessageType[]
-    }
+    dialogsData: NewDialogsPageType
     // addMessage: () => void
     // updateNewMessageText: (newMessage: string) => void
     dispatch: (
-        action: AddPostActionType |
-            UpdateNewPostTextActionType |
-            UpdateNewMessageTextType |
-            AddMessageType
+        action: AllActionType
     ) => void
 }
 
@@ -54,17 +47,14 @@ const Dialogs = (props: dialogsPageType) => {
 
     const addValueTextarea = () => {
         // addMessage()
-        dispatch({ type: "ADD-MESSAGE" })
+        dispatch(addMessageActionCreater())
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // const text = refLinkToTextarea.current?.value ? refLinkToTextarea.current.value : " "
         const text = e.currentTarget ? e.currentTarget.value : " "
         // updateNewMessageText(text)
-        dispatch({
-            type: "UPDATE-NEW-MESSAGE-TEXT",
-            newMessage: text
-        })
+        dispatch(updateNewMessageTextActionCreater(text))
     }
 
     return (<>
