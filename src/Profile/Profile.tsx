@@ -28,9 +28,8 @@ const Profile = (props: postPageType) => {
 
   return (<div >
     <ProfileInfo />
-    < MyPostContainer 
-    posts={posts}
-      // addPost={addPost}
+    < MyPostContainer  posts={posts}
+       // addPost={addPost}
       newPostText={newPostText}
       // updateNewPostText={updateNewPostText} 
       dispatch={dispatch}

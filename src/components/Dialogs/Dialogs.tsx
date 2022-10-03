@@ -1,7 +1,5 @@
 import React, { ChangeEvent } from "react";
 import SuperButton from "../../SuperButton/SuperButton";
-import { addMessageActionCreater, updateNewMessageTextActionCreater } from "../Redux/DialogReduser";
-import { AllActionType } from "../Redux/Store";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogsItem/DialogItem";
 import Message, { myMessageType } from "./Message/Message";
@@ -20,17 +18,16 @@ export type NewDialogsPageType = {
 
 export type dialogsPageType = {
     dialogsData: NewDialogsPageType
-    // addMessage: () => void
-    // updateNewMessageText: (newMessage: string) => void
-    dispatch: (
-        action: AllActionType
-    ) => void
+    addMessage: () => void
+    updateNewMessageText: (newMessage: string) => void
+    // dispatch: (
+    //     action: AllActionType
+    // ) => void
 }
 
 const Dialogs = (props: dialogsPageType) => {
     const { dialogs, messages, answerMessages, newDialogsMessage } = props.dialogsData
-    const { dispatch } = props
-
+    const { addMessage, updateNewMessageText } = props
     let dialogsElements = dialogs.map(item => {
         return <DialogItem key={item.id} name={item.name} id={item.id} src={item.src} />
     })
@@ -47,15 +44,15 @@ const Dialogs = (props: dialogsPageType) => {
     let refLinkToTextarea = React.createRef<HTMLTextAreaElement>()
 
     const addValueTextarea = () => {
-        // addMessage()
-        dispatch(addMessageActionCreater())
+        addMessage()
+        // dispatch(addMessageActionCreater())
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // const text = refLinkToTextarea.current?.value ? refLinkToTextarea.current.value : " "
         const text = e.currentTarget ? e.currentTarget.value : " "
-        // updateNewMessageText(text)
-        dispatch(updateNewMessageTextActionCreater(text))
+        updateNewMessageText(text)
+        // dispatch(updateNewMessageTextActionCreater(text))
     }
 
     return (<>

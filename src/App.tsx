@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar, { mySideBar } from './components/Navbar/Navbar';
 import Profile from './Profile/Profile';
-import Dialogs, { myDialogsDataType } from "./components/Dialogs/Dialogs";
+import  { myDialogsDataType } from "./components/Dialogs/Dialogs";
 import { Route } from "react-router-dom";
 import News from './Router/News/News';
 import Music from './Router/Music/Music';
@@ -11,6 +11,7 @@ import Setting from './Router/Setting/Setting';
 import { myPostType } from './Profile/MyPost/MyPost';
 import { myMessageType } from './components/Dialogs/Message/Message';
 import { AllActionType } from './components/Redux/Store';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
 export type TypeForAllData = {
@@ -48,7 +49,7 @@ function App(props: AppStateType) {
             <div className='app-wrapper-content'>
 
                 <Route path='/dialogs' render={() =>
-                    <Dialogs dialogsData={dialogsPage}
+                    <DialogsContainer dialogsData={dialogsPage}
                         dispatch={dispatch}
                     />} />
                 {/* <Route path='/' render={() => <Profile postsData={profilePage}
