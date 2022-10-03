@@ -2,7 +2,7 @@ import React from 'react'
 import { addPostActionCreater, updateNewPostTextActionCreater } from '../../components/Redux/ProfileReduser'
 import {
   AllActionType,
-} from '../../components/Redux/State'
+} from '../../components/Redux/Store'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
 

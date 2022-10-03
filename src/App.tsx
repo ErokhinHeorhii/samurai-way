@@ -10,7 +10,7 @@ import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
 import { myPostType } from './Profile/MyPost/MyPost';
 import { myMessageType } from './components/Dialogs/Message/Message';
-import { AllActionType } from './components/Redux/State';
+import { AllActionType } from './components/Redux/Store';
 
 
 export type TypeForAllData = {

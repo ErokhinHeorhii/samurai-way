@@ -1,10 +1,7 @@
 // import { postPageType } from '../App'
-import {
-  AddMessageType,
-  AddPostActionType,
-  UpdateNewMessageTextType,
-  UpdateNewPostTextActionType
-} from '../components/Redux/State'
+
+import { AddMessageType, UpdateNewMessageTextType } from '../components/Redux/DialogReduser'
+import { AddPostActionType, UpdateNewPostTextActionType } from '../components/Redux/ProfileReduser'
 import MyPost, { myPostType } from './MyPost/MyPost'
 import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
 

@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import SuperButton from "../../SuperButton/SuperButton";
 import { addMessageActionCreater, updateNewMessageTextActionCreater } from "../Redux/DialogReduser";
-import { AllActionType } from "../Redux/State";
+import { AllActionType } from "../Redux/Store";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogsItem/DialogItem";
 import Message, { myMessageType } from "./Message/Message";

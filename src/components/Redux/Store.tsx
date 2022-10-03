@@ -1,8 +1,7 @@
 import { TypeForAllData } from "../../App";
-import DialogReducer, { addMessageActionCreater, updateNewMessageTextActionCreater} from "./DialogReduser";
-import ProfileReducer, { addPostActionCreater, ADD_POST, updateNewPostTextActionCreater, UPDATE_NEW_POST_TEXT } from "./ProfileReduser";
-// import ProfileReducer from "./ProfileReduser";
-// import SideBarReducer from "./SidebarReduser";
+import DialogReducer, {  AddMessageType, ADD_MESSAGE,  UpdateNewMessageTextType, UPDATE_NEW_MESSAGE_TEXT } from "./DialogReduser";
+import ProfileReducer, { AddPostActionType, ADD_POST,  UpdateNewPostTextActionType, UPDATE_NEW_POST_TEXT } from "./ProfileReduser";
+import SideBarReducer from "./SideBarReduser";
 
 // export const ADD_POST = "ADD-POST"
 // export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -25,15 +24,12 @@ export type StoreType = {
     action: AllActionType
   ) => void
 }
-export type AllActionType = AddPostActionType |
+export type AllActionType =
+  AddPostActionType |
   UpdateNewPostTextActionType |
   UpdateNewMessageTextType |
   AddMessageType
 
-export type AddPostActionType = ReturnType<typeof addPostActionCreater>
-export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreater>
-export type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextActionCreater>
-export type AddMessageType = ReturnType<typeof addMessageActionCreater>
 ///////////////////////////////////////////////////////////////////////
 const store: StoreType = {
 
@@ -53,7 +49,7 @@ const store: StoreType = {
         { id: 3, name: "Misha", src: "https://cspromogame.ru//storage/upload_images/avatars/858.jpg" },
         { id: 4, name: "George", src: "https://cspromogame.ru//storage/upload_images/avatars/833.jpg" },
         { id: 5, name: "Sacha", src: "https://cspromogame.ru//storage/upload_images/avatars/3975.jpg" },
-        { id: 6, name: "Tanya", src: "https://cspromogame.ru//storage/upload_images/avatars/3958.jpg" },
+        { id: 6, name: "Tanya", src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSot6M-oAP1lg2OuHL4lieNgospaOdne0hmQ&usqp=CAU" },
       ],
       messages: [
         { id: 1, message: "Hi" },
@@ -80,7 +76,6 @@ const store: StoreType = {
   },
 
   _callSubScriber(state: TypeForAllData) {
-    // console.log("state changed")
   },
 
   getState() {
@@ -97,9 +92,9 @@ const store: StoreType = {
 
     if (action.type === UPDATE_NEW_POST_TEXT || action.type === ADD_POST) {
       this._state.profilePage = ProfileReducer(this._state.profilePage, action)
-    } else {
+    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT || action.type === ADD_MESSAGE) {
       this._state.dialogsPage = DialogReducer(this._state.dialogsPage, action)
-    }
+    } else { this._state.sideBar = SideBarReducer(this._state.sideBar, action) }
 
     this._callSubScriber(this._state)
   }

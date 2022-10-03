@@ -1,4 +1,4 @@
-import store from './components/Redux/State';
+import store from './components/Redux/RedaxStore';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App, { TypeForAllData } from './App';
@@ -16,4 +16,6 @@ const rerenderEntireTree = (state: TypeForAllData) => {
   );
 }
 rerenderEntireTree(store.getState())
-store.subscribe(rerenderEntireTree)
+store.subscribe(()=> {
+  let state =store.getState()
+  rerenderEntireTree(state)})

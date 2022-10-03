@@ -2,12 +2,23 @@ import {
   myPostType,
   NewPostDataTypeForReduser,
 } from "../../Profile/MyPost/MyPost";
-import { AddPostActionType, UpdateNewPostTextActionType } from "./State";
+
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+export type AddPostActionType = ReturnType<typeof addPostActionCreater>
+export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreater>
+
+let initialState= {
+  posts: [
+    { id: 1, message: "Hi", likeCount: 10 },
+    { id: 2, message: "How are you", likeCount: 2 },
+    { id: 3, message: "yooo", likeCount: 4 },
+  ],
+  newPostText: "Hello everybody)!"
+}
 
 const ProfileReducer = (
-  state: NewPostDataTypeForReduser,
+  state: NewPostDataTypeForReduser  = initialState,
   action: AddPostActionType | UpdateNewPostTextActionType
 ): NewPostDataTypeForReduser => {
   switch (action.type) {
