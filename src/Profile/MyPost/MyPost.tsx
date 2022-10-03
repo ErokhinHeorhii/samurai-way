@@ -1,8 +1,4 @@
 import React from 'react'
-import { addPostActionCreater, updateNewPostTextActionCreater } from '../../components/Redux/ProfileReduser'
-import {
-  AllActionType,
-} from '../../components/Redux/Store'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
 
@@ -17,18 +13,24 @@ export type NewPostDataTypeForReduser = {
   newPostText: string
 }
 
-export type postDataType = NewPostDataTypeForReduser & {
+export type postDataType = 
+NewPostDataTypeForReduser & 
+{
   // posts: myPostType[]
-  // newPostText: string
-  // addPost: () => void
-  // updateNewPostText: (newText: string) => void
-  dispatch: (action: AllActionType
-  ) => void
+  newPostText: string
+  addPost: () => void
+  updateNewPostText: (newText: string) => void
+  // dispatch: (action: AllActionType
+  // ) => void
 }
 
 const MyPost = (props: postDataType) => {
 
-  const { posts, newPostText, dispatch } = props
+  const { posts,
+     newPostText,
+      // dispatch,
+      addPost,
+    updateNewPostText } = props
 
   let postsElements = posts.map(item => {
     return <Post key={item.id} message={item.message} likeCounts={item.likeCount} />
@@ -36,21 +38,21 @@ const MyPost = (props: postDataType) => {
 
   let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-  const onClickHandler = () => {
-    // addPost()
-    dispatch(addPostActionCreater())
+  const onAddPost = () => {
+    addPost()
+    // dispatch(addPostActionCreater())
   }
 
-  const onChangeHandler = () => {
+  const onPostChange = () => {
     let text = newPostElement.current ? newPostElement.current.value : " "
-    // updateNewPostText(text)
-    dispatch(updateNewPostTextActionCreater(text))
+    updateNewPostText(text)
+    // dispatch(updateNewPostTextActionCreater(text))
   }
 
   return (
     <div className={s.postsBlock}> My Post
-      <div><textarea ref={newPostElement} onChange={onChangeHandler} value={newPostText}></textarea></div>
-      <div><button className={s.button} onClick={onClickHandler}>Add</button></div>
+      <div><textarea ref={newPostElement} onChange={onPostChange} value={newPostText}></textarea></div>
+      <div><button className={s.button} onClick={onAddPost}>Add</button></div>
       <div>
         {postsElements}
       </div>

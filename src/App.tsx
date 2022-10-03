@@ -32,12 +32,8 @@ export type TypeForAllData = {
 
 export type AppStateType = {
     appState: TypeForAllData
-    // addPost: () => void
-    // updateNewPostText: (newText: string) => void
-    // addMessage: () => void
-    // updateNewMessageText:(newMessage:string)=>void
     dispatch: (
-        action: AllActionType 
+        action: AllActionType
     ) => void
 }
 
@@ -53,15 +49,12 @@ function App(props: AppStateType) {
 
                 <Route path='/dialogs' render={() =>
                     <Dialogs dialogsData={dialogsPage}
-                        // addMessage={addMessage}
-                        // updateNewMessageText={updateNewMessageText} 
                         dispatch={dispatch}
                     />} />
-
+                {/* <Route path='/' render={() => <Profile postsData={profilePage}
+                    dispatch={dispatch} />} /> */}
                 <Route path='/profile' render={() =>
                     <Profile postsData={profilePage}
-                        // addPost={addPost}
-                        // updateNewPostText={updateNewPostText}
                         dispatch={dispatch}
                     />} />
 
