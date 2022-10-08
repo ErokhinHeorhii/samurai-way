@@ -70,8 +70,8 @@ const DialogReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case UPDATE_NEW_MESSAGE_TEXT: {
-      state.newDialogsMessage = action.newMessage;
-      return state;
+      // state.newDialogsMessage = action.newMessage;
+      return {...state, newDialogsMessage:action.newMessage};
     }
     case ADD_MESSAGE: {
       if (!state.newDialogsMessage) {
@@ -81,9 +81,9 @@ const DialogReducer = (
           id: 1,
           message: state.newDialogsMessage,
         };
-        state.messages.push(newMessage);
-        state.newDialogsMessage = "";
-        return state;
+         let newState={...state, messages: [ newMessage,...state.messages ]};
+        newState.newDialogsMessage = "";
+        return newState;
       }
     }
     default:
