@@ -8,32 +8,36 @@ export type myPostType = {
   likeCount: number
 }
 
-export type NewPostDataTypeForReduser = {
+ type NewPostDataTypeForReduser = {
   posts: myPostType[]
   newPostText: string
 }
 
-export type postDataType = 
-NewPostDataTypeForReduser & 
-{
-  // posts: myPostType[]
-  newPostText: string
-  addPost: () => void
-  updateNewPostText: (newText: string) => void
-  // dispatch: (action: AllActionType
-  // ) => void
-}
+export type postDataType =
+  NewPostDataTypeForReduser &
+  {
+    // posts: myPostType[]
+    newPostText: string
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    // dispatch: (action: AllActionType
+    // ) => void
+  }
 
 const MyPost = (props: postDataType) => {
 
   const { posts,
-     newPostText,
-      // dispatch,
-      addPost,
+    newPostText,
+    // dispatch,
+    addPost,
     updateNewPostText } = props
 
   let postsElements = posts.map(item => {
-    return <Post key={item.id} message={item.message} likeCounts={item.likeCount} />
+    return <Post
+      key={item.id}
+      message={item.message}
+      likeCounts={item.likeCount}
+    />
   })
 
   let newPostElement = React.createRef<HTMLTextAreaElement>()

@@ -1,6 +1,11 @@
 import { mySideBar } from "../Navbar/Navbar";
 
-let initialState = {
+
+ export type IsideinitialStateTypeForNavbar = {
+  sideBar: mySideBar[];
+};
+
+let initialState: IsideinitialStateTypeForNavbar = {
   sideBar: [
     {
       avatarSrc:
@@ -20,11 +25,9 @@ let initialState = {
   ],
 };
 export const SideBarReducer = (
-  state: {
-    sideBar: mySideBar[];
-  } = initialState,
-  action:any
-) => {
+  state: IsideinitialStateTypeForNavbar = initialState,
+  action: any
+) : IsideinitialStateTypeForNavbar=> {
   return state;
 };
 
