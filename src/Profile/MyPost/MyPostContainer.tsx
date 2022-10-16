@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addPostActionCreater, updateNewPostTextActionCreater } from '../../components/Redux/ProfileReduser'
+import { addPostActionCreater, updateNewPostTextActionCreater } 
+from '../../components/Redux/ProfileReduser'
 import { AllAppStateType } from '../../components/Redux/RedaxStore'
 import MyPost, { myPostType } from './MyPost'
 

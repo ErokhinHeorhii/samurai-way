@@ -14,6 +14,7 @@ export type AllAppStateType =ReturnType<typeof rootReduser>
 
 let store = createStore(rootReduser)
 
-// window.store =store
+// @ts-ignore
+window.store = store
 export default store
 

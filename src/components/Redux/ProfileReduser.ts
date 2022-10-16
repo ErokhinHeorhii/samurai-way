@@ -37,8 +37,7 @@ const ProfileReducer = (
           message: state.newPostText,
           likeCount: 5,
         };
-        let newState = {...state, posts:[newPost, ...state.posts]}
-        newState.newPostText=" " 
+        let newState = {...state, posts:[newPost, ...state.posts], newPostText:" "}
         // state.posts.push(newPost);
         // state.newPostText = "";
         return newState;

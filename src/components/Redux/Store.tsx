@@ -102,6 +102,6 @@ const store: StoreType = {
 
 export default store
 
-//@ts-ignore
+// @ts-ignore
 window.store = store;
 

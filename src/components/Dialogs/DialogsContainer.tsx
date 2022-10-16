@@ -61,7 +61,7 @@ type MapDispatchToPropsType = {
     updateNewMessageText: (text: string) => void
     addMessage: () => void
 }
-export type DialogsPropsType =MapStateToPropsType & MapDispatchToPropsType 
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {

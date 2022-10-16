@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import  { mySideBar } from './components/Navbar/Navbar';
+import { mySideBar } from './components/Navbar/Navbar';
 import Profile from './Profile/Profile';
 import { myDialogsDataType } from "./components/Dialogs/Dialogs";
 import { Route } from "react-router-dom";
@@ -13,6 +13,7 @@ import { myMessageType } from './components/Dialogs/Message/Message';
 import { AllActionType } from './components/Redux/Store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
+import Users from './components/Users/Users';
 
 
 export type TypeForAllData = {
@@ -59,6 +60,8 @@ function App() {
                     // postsData={profilePage}
                     //     dispatch={dispatch}
                     />} />
+                <Route path='/users' render={() =>
+                  <Users/> } />
 
                 <Route path='/news' component={News} />
                 <Route path='/music' component={Music} />

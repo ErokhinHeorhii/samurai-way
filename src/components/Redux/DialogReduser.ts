@@ -81,8 +81,7 @@ const DialogReducer = (
           id: 1,
           message: state.newDialogsMessage,
         };
-         let newState={...state, messages: [ newMessage,...state.messages ]};
-        newState.newDialogsMessage = "";
+         let newState={...state, messages: [ newMessage,...state.messages ], newDialogsMessage:"" };
         return newState;
       }
     }
