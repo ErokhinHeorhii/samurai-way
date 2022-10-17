@@ -2,14 +2,16 @@ const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SETUSERS = "SETUSERS";
 
-type UsersType = {
+ export type UsersType = {
   id: number;
+  photoUrl: string
   foollowed: boolean;
   fullName: string;
   status: string;
+  message:string;
   location: { city: string; contry: string };
 };
-type InitialStateType = {
+ export type InitialStateType = {
   users: UsersType[];
 };
 
@@ -20,35 +22,9 @@ type SetUsersAcType = ReturnType<typeof setUsersAC>;
 type ActionType = FollowACType | UnFollowACType | SetUsersAcType;
 
 const initialState: InitialStateType = {
-  users: [
-    {
-      id: 1,
-      foollowed: false,
-      fullName: "George",
-      status: "boss",
-      location: { city: "Brest", contry: "Belarus" },
-    },
-    {
-      id: 2,
-      foollowed: true,
-      fullName: "Marc",
-      status: "boss",
-      location: { city: "Minsk", contry: "Belarus" },
-    },
-    {
-      id: 3,
-      foollowed: false,
-      fullName: "Pit",
-      status: "boss",
-      location: { city: "Moskow", contry: "Russia" },
-    },
-    {
-      id: 4,
-      foollowed: true,
-      fullName: "Anna",
-      status: "boss",
-      location: { city: "Kiev", contry: "Ukraine" },
-    },
+  users: 
+  [
+   
   ],
 };
 
