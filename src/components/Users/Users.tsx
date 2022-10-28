@@ -15,13 +15,14 @@ import avatar from "../../assets/images/avatar.png"
 // };
 
 const Users = (props: UsersPropsType) => {
+  const getUsers = () => {
+    if (props.users.length === 0) {
+      axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        .then(res => {
+          props.setUsers(res.data.items)
+        })
 
-  if (props.users.length === 0) {
-
-    axios.get('https://social-network.samuraijs.com/api/1.0/users')
-      .then(res => {
-        props.setUsers(res.data.items)
-      })
+    }
 
 
     // props.setUsers([{
@@ -33,37 +34,12 @@ const Users = (props: UsersPropsType) => {
     //   message: "Hello",
     //   location: { city: "Brest", contry: "Belarus" },
     // },
-    // {
-    //   id: 2,
-    //   photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8r9te0aQZe9O5cFBJ53Jl7-JselY4fdEvdg&usqp=CAU',
-    //   foollowed: true,
-    //   fullName: "Marc",
-    //   status: "boss",
-    //   message: "What you say?",
-    //   location: { city: "Minsk", contry: "Belarus" },
-    // },
-    // {
-    //   id: 3,
-    //   photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQwWMJbZoZ26ZyYB8M-1e7OLBVUWXRLNSO6A&usqp=CAU',
-    //   foollowed: false,
-    //   fullName: "Pit",
-    //   status: "boss",
-    //   message: "How are you?",
-    //   location: { city: "Moskow", contry: "Russia" },
-    // },
-    // {
-    //   id: 4,
-    //   photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp3xq6yMAh7HKpnLoT17HDDvOIAJb0u98jPw&usqp=CAU',
-    //   foollowed: true,
-    //   fullName: "Anna",
-    //   status: "boss",
-    //   message: "YYYOOOO",
-    //   location: { city: "Kiev", contry: "Ukraine" },
-    // }]
+    // ]
     // )
   }
 
   return (<div>
+    <button onClick={getUsers}>Get Users</button>
     {props.users.map(item => {
       return <div key={item.id} className={s.wrapperItem}>
         <div className={s.wrapperImageButton}>
@@ -84,7 +60,8 @@ const Users = (props: UsersPropsType) => {
             <div className={s.text} >{item.message}</div>
           </div>
           <div className={s.wrapperContry}>
-            <div>{"item.location.city"},  {"item.location.contry"}</div>
+            <div>{"item.location.city"}, </div >
+            <div>{"item.location.contry"}</div>
           </div>
         </div>
       </div>

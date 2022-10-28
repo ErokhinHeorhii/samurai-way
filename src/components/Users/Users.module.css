@@ -24,7 +24,7 @@
   display: flex;
   margin: 5px;
   font-size: 1.2rem;
-  color: rgb(39, 39, 164);
+  color: rgb(79, 12, 141);
   flex-direction: column;
   justify-content: space-between;
 }
@@ -35,17 +35,18 @@
 }
 .wrapperDialog{
   border:2px Solid blueviolet;
-  width: 350px;
-  /* height: 50px; */
+  width: 450px;
+  height: 80px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
+  margin-left: 10px;
 }
 .wrapperContry{
   display: flex;
   margin: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: rgb(39, 39, 164);
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: column; 
+ justify-content: start;
 }
