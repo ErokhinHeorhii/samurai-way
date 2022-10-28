@@ -8,13 +8,21 @@ import { UsersPropsType } from "./UsersContainer"
 export class Users extends React.Component<UsersPropsType> {
   constructor(props: UsersPropsType) {
     super(props)
+
       // if (this.props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-          .then(res => {
-            this.props.setUsers(res.data.items)
-          })
+        // axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        //   .then(res => {
+        //     this.props.setUsers(res.data.items)
+        //   })
       // }
     
+  }
+// метод вызывается после вмонтирования компоненты в DOM
+  componentDidMount(): void {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
+    .then(res => {
+      this.props.setUsers(res.data.items)
+    })
   }
   render() {
     return <div>
