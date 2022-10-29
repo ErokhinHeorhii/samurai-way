@@ -15,12 +15,14 @@
   border-radius: 15px;
 
 }
-.wrapperImageButton{
-  display:flex;
+
+.wrapperImageButton {
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
-.wrapperName{
+
+.wrapperName {
   display: flex;
   margin: 5px;
   font-size: 1.2rem;
@@ -29,12 +31,13 @@
   justify-content: space-between;
 }
 
-.text{
+.text {
   font-size: 1.1rem;
   color: rgb(6, 87, 79);
 }
-.wrapperDialog{
-  border:2px Solid blueviolet;
+
+.wrapperDialog {
+  border: 2px Solid blueviolet;
   width: 450px;
   height: 80px;
   border-radius: 8px;
@@ -42,11 +45,30 @@
   justify-content: space-between;
   margin-left: 10px;
 }
-.wrapperContry{
+
+.wrapperContry {
   display: flex;
   margin: 5px;
   font-size: 1rem;
   color: rgb(39, 39, 164);
-  flex-direction: column; 
- justify-content: start;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.selectedPage {
+  font-weight: bold;
+  color: blueviolet;
+  font-size: 1.1rem;
+}
+
+.page {
+  margin: 5px;
+  cursor: pointer;
+
+}
+
+.wrapperPage{
+  border-radius: 8px;
+  width: 200px;
+  margin: 5px auto;
 }
