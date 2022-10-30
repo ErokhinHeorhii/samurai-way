@@ -114,6 +114,7 @@ export const setUsersAC = (users: UsersType[]) =>
       users: users,
     },
   } as const);
+  
 export const setCurrentPageAC = (currentPage: number) =>
   ({
     type: SET_CURRENT_PAGE,
