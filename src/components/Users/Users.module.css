@@ -72,3 +72,21 @@
   width: 200px;
   margin: 5px auto;
 }
+
+.wrapperImage{
+  position: relative;
+  z-index: 2;
+  display: flex;
+justify-content: center;
+}
+.imageLoader{
+  display: inline-block;
+  width: 250px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.wrapperUsers{
+  position: relative;
+  height: 100%;
+}
