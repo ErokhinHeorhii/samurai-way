@@ -22,20 +22,20 @@ import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
 // }
 
 const Profile = () => {
-  // const { posts, newPostText } = props.postsData
-  // const { addPost, updateNewPostText } = props
-  // const { dispatch } = props
+    // const { posts, newPostText } = props.postsData
+    // const { addPost, updateNewPostText } = props
+    // const { dispatch } = props
 
-  return (<div >
-    <ProfileInfo />
-    < MyPostContainer
-      // posts={posts}
-      // // addPost={addPost}
-      // newPostText={newPostText}
-      // // updateNewPostText={updateNewPostText} 
-      // dispatch={dispatch}
-    />
+    return (<div>
+        <ProfileInfo/>
+        < MyPostContainer
+            // posts={posts}
+            // // addPost={addPost}
+            // newPostText={newPostText}
+            // // updateNewPostText={updateNewPostText}
+            // dispatch={dispatch}
+        />
 
-  </div>)
+    </div>)
 }
 export default Profile

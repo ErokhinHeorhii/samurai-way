@@ -1,7 +1,7 @@
-import React, { ChangeEvent } from "react";
+import React, {ChangeEvent} from "react";
 import SuperButton from "../../SuperButton/SuperButton";
 import s from "./Dialogs.module.css"
-import { DialogsPropsType } from "./DialogsContainer";
+import {DialogsPropsType} from "./DialogsContainer";
 import DialogItem from "./DialogsItem/DialogItem";
 import Message
     //  { myMessageType } 
@@ -29,19 +29,19 @@ export type myDialogsDataType = {
 // }
 
 const Dialogs = (props: DialogsPropsType) => {
-    const { dialogs, messages, answerMessages, newDialogsMessage } = props.dialogsPage
-    const { addMessage, updateNewMessageText } = props
+    const {dialogs, messages, answerMessages, newDialogsMessage} = props.dialogsPage
+    const {addMessage, updateNewMessageText} = props
     let dialogsElements = dialogs.map(item => {
-        return <DialogItem key={item.id} name={item.name} id={item.id} src={item.src} />
+        return <DialogItem key={item.id} name={item.name} id={item.id} src={item.src}/>
     })
 
     let messagesElements = messages.map(item => {
-        return (<Message key={item.id} message={item.message} id={item.id} />
+        return (<Message key={item.id} message={item.message} id={item.id}/>
         )
     })
 
     let answerMessagesElements = answerMessages.map(item => {
-        return <Message key={item.id} message={item.message} id={item.id} />
+        return <Message key={item.id} message={item.message} id={item.id}/>
     })
 
     let refLinkToTextarea = React.createRef<HTMLTextAreaElement>()
@@ -60,27 +60,28 @@ const Dialogs = (props: DialogsPropsType) => {
 
     return (<>
 
-        <div className={s.dialogs}>
-            <div className={s.dialogsItem}>
-                {dialogsElements}
-            </div>
-            <div className={s.messages}>
+            <div className={s.dialogs}>
+                <div className={s.dialogsItem}>
+                    {dialogsElements}
+                </div>
+                <div className={s.messages}>
                 <textarea
                     className={s.textarea}
                     ref={refLinkToTextarea}
                     value={newDialogsMessage}
-                    onChange={onChangeHandler} >
+                    onChange={onChangeHandler}>
                 </textarea>
-                <SuperButton onClick={addValueTextarea} >Add</SuperButton>
-                {messagesElements}
+                    <SuperButton onClick={addValueTextarea}>Add</SuperButton>
+                    {messagesElements}
 
+                </div>
+                <div className={s.messages}>
+                    {answerMessagesElements}
+                </div>
             </div>
-            <div className={s.messages}>
-                {answerMessagesElements}
-            </div>
-        </div>
-    </>
+        </>
     )
 }
 
 export default Dialogs
+

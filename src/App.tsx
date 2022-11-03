@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import { mySideBar } from './components/Navbar/Navbar';
+import {mySideBar} from './components/Navbar/Navbar';
 import Profile from './Profile/Profile';
-import { myDialogsDataType } from "./components/Dialogs/Dialogs";
-import { Route } from "react-router-dom";
+import {myDialogsDataType} from "./components/Dialogs/Dialogs";
+import {Route} from "react-router-dom";
 import News from './Router/News/News';
 import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
-import { myPostType } from './Profile/MyPost/MyPost';
-import { myMessageType } from './components/Dialogs/Message/Message';
-import { AllActionType } from './components/Redux/Store';
+import {myPostType} from './Profile/MyPost/MyPost';
+import {myMessageType} from './components/Dialogs/Message/Message';
+import {AllActionType} from './components/Redux/Store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-import UsersContainer from './components/Users/UsersContainer';
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 export type TypeForAllData = {
@@ -47,25 +47,25 @@ function App() {
 
     return (
         <div className="app-wrapper">
-            <Header />
-            <NavbarContainer />
+            <Header/>
+            <NavbarContainer/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() =>
                     <DialogsContainer
-                    />} />
+                    />}/>
                 {/* <Route path='/' render={() => <Profile postsData={profilePage}
                     dispatch={dispatch} />} /> */}
                 <Route path='/profile' render={() =>
                     <Profile
-                    // postsData={profilePage}
-                    //     dispatch={dispatch}
-                    />} />
+                        // postsData={profilePage}
+                        //     dispatch={dispatch}
+                    />}/>
                 <Route path='/users' render={() =>
-                  <UsersContainer/> } />
+                    <UsersContainer/>}/>
 
-                <Route path='/news' component={News} />
-                <Route path='/music' component={Music} />
-                <Route path='/setting' component={Setting} />
+                <Route path='/news' component={News}/>
+                <Route path='/music' component={Music}/>
+                <Route path='/setting' component={Setting}/>
             </div>
         </div>
     );
