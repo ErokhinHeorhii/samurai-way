@@ -1,11 +1,38 @@
 
-.active{
-  color:blueviolet;
+.active {
+    color: blueviolet;
 }
+
 .Image {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
-.discriptionBlock{
-  padding-left: 15px;
+
+.discriptionBlock {
+    margin: 10px;
+    display: flex;
+
+}
+
+.wrapperImage {
+    width: 90px;
+    hight: 90px;
+}
+
+.avatarImage {
+    width: 100%;
+    border-radius: 15px;
+}
+.wrapperName{
+
+    color: #4f0c8d;
+    margin: 5px;
+    text-transform:capitalize;
+    /*padding: 10px;*/
+    font-size: 1.3rem;
+}
+.lookingJob{
+    font-size: 1rem;
+    margin: 5px;
+
 }

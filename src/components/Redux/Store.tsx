@@ -91,7 +91,7 @@ const store: StoreType = {
   dispatch(action: AllActionType) { // {type: "ADD-POST"}
 
     if (action.type === UPDATE_NEW_POST_TEXT || action.type === ADD_POST) {
-      this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+      // this._state.profilePage = ProfileReducer(this._state.profilePage, action)
     } else if (action.type === UPDATE_NEW_MESSAGE_TEXT || action.type === ADD_MESSAGE) {
       this._state.dialogsPage = DialogReducer(this._state.dialogsPage, action)
     } else { this._state.sideBar = SideBarReducer(this._state.sideBar, action) }
@@ -103,5 +103,5 @@ const store: StoreType = {
 export default store
 
 // @ts-ignore
-window.store = store;
+// window.store = store;
 

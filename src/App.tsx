@@ -14,6 +14,7 @@ import {AllActionType} from './components/Redux/Store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./Profile/ProfileContainer";
 
 
 export type TypeForAllData = {
@@ -56,7 +57,7 @@ function App() {
                 {/* <Route path='/' render={() => <Profile postsData={profilePage}
                     dispatch={dispatch} />} /> */}
                 <Route path='/profile' render={() =>
-                    <Profile
+                    <ProfileContainer
                         // postsData={profilePage}
                         //     dispatch={dispatch}
                     />}/>

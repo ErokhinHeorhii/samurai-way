@@ -5,6 +5,7 @@
 // import { myPostType } from './MyPost/MyPost'
 import MyPostContainer from './MyPost/MyPostContainer'
 import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
+import {ProfilePageType} from "../components/Redux/ProfileReduser";
 
 // export type postPageType = {
 //   postsData: {
@@ -21,13 +22,18 @@ import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
 //   ) => void
 // }
 
-const Profile = () => {
+ type PropsType={
+    profile:ProfilePageType
+}
+
+
+const Profile = (props:PropsType) => {
     // const { posts, newPostText } = props.postsData
     // const { addPost, updateNewPostText } = props
     // const { dispatch } = props
 
     return (<div>
-        <ProfileInfo/>
+        <ProfileInfo profile={props.profile}/>
         < MyPostContainer
             // posts={posts}
             // // addPost={addPost}
