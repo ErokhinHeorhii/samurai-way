@@ -31,7 +31,7 @@ export type ProfilePageType = {
         small: string
         large: string
     }
-}
+} | null
 
 
 export type InitialStateTypeForProfile = {
@@ -47,27 +47,27 @@ let initialState = {
         {id: 3, message: "yooo", likeCount: 4},
     ],
     newPostText: "Hello everybody)!",
-    profile:
-        {
-        userId: 'string',
-        lookingForAJob: true,
-        lookingForAJobDescription: "string",
-        fullName: "string",
-        contacts: {
-            github: "string",
-            vk: "string",
-            facebook: "string",
-            instagram: "string",
-            twitter: "string",
-            website: "string",
-            youtube: "string",
-            mainLink: "string",
-        },
-        photos: {
-            small: "string",
-            large: "string",
-        }
-    }
+    profile:null
+    //     {
+    //     userId: 'string',
+    //     lookingForAJob: true,
+    //     lookingForAJobDescription: "string",
+    //     fullName: "string",
+    //     contacts: {
+    //         github: "string",
+    //         vk: "string",
+    //         facebook: "string",
+    //         instagram: "string",
+    //         twitter: "string",
+    //         website: "string",
+    //         youtube: "string",
+    //         mainLink: "string",
+    //     },
+    //     photos: {
+    //         small: "string",
+    //         large: "string",
+    //     }
+    // }
 }
 
 const ProfileReducer = (

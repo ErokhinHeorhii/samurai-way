@@ -56,7 +56,7 @@ function App() {
                     />}/>
                 {/* <Route path='/' render={() => <Profile postsData={profilePage}
                     dispatch={dispatch} />} /> */}
-                <Route path='/profile' render={() =>
+                <Route path='/profile/:userId?' render={() =>
                     <ProfileContainer
                         // postsData={profilePage}
                         //     dispatch={dispatch}
