@@ -16,7 +16,7 @@ type setAuthUserDataType = {
 }
 
 type MapStateToPropsType = {
-    id: number | null
+    id?: number | null
     email?: string | null
     login: string | null
     isAuth: boolean
@@ -35,7 +35,8 @@ class HeaderContainer extends React.Component<HeaderPropsType> {
                 if (res.data.resultCode === 0) {
                     console.log(res.data.data)
                     const {id, login, email} = res.data.data
-                    this.props.setAuthUserData(id, email, login)
+                this.props.setAuthUserData(id, email, login)
+
                 }
             })
     }

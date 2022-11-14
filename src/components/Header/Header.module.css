@@ -16,7 +16,27 @@
 }
 
 .navLink{
+    display: inline-block;
+    background-color: #a05f9c;
     text-decoration: none;
-    color: darkred;
+    color: #61dafb;
     cursor: pointer;
+    border: 1px Solid darkblue;
+    padding: 3px;
+    border-radius: 5px;
+}
+.auth {
+    /*padding-right: 10px;*/
+    display: inline-block;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid darkblue;
+    /*text-align: center;*/
+    /*vertical-align: center;*/
+    align-items: center;
+    justify-content: center;
+    background-color: #a05f9c;
+    color: #61dafb;
 }
