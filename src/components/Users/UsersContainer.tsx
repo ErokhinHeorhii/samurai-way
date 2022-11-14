@@ -49,7 +49,7 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
             .then(res => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCount(Math.ceil(res.data.totalCount / 350))
+                this.props.setTotalUsersCount(Math.ceil(res.data.totalCount / 250))
             })
     }
 

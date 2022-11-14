@@ -48,26 +48,6 @@ let initialState = {
     ],
     newPostText: "Hello everybody)!",
     profile:null
-    //     {
-    //     userId: 'string',
-    //     lookingForAJob: true,
-    //     lookingForAJobDescription: "string",
-    //     fullName: "string",
-    //     contacts: {
-    //         github: "string",
-    //         vk: "string",
-    //         facebook: "string",
-    //         instagram: "string",
-    //         twitter: "string",
-    //         website: "string",
-    //         youtube: "string",
-    //         mainLink: "string",
-    //     },
-    //     photos: {
-    //         small: "string",
-    //         large: "string",
-    //     }
-    // }
 }
 
 const ProfileReducer = (

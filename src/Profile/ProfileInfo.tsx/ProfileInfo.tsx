@@ -8,7 +8,7 @@ type PropsType = {
 }
 const ProfileInfo = (props: PropsType) => {
     if (!props.profile) {
-        return   <div>
+        return <div>
             <img
                 className={s.Image}
                 src="https://klike.net/uploads/posts/2019-06/1561526578_1.jpg"
@@ -25,7 +25,9 @@ const ProfileInfo = (props: PropsType) => {
         </div>
         <div className={s.discriptionBlock}>
             <div className={s.wrapperImage}>
-                <img className={s.avatarImage} src={props.profile.photos.small== null?avatarProfile:props.profile.photos.small }/>
+                <img className={s.avatarImage} src={props.profile.photos.small == null
+                    ? avatarProfile
+                    : props.profile.photos.small}/>
             </div>
             <span className={s.wrapperName}>{props.profile.fullName}
                 {props.profile.lookingForAJob

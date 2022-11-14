@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
 import {mySideBar} from './components/Navbar/Navbar';
-import Profile from './Profile/Profile';
 import {myDialogsDataType} from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from './Router/News/News';
@@ -15,6 +13,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 export type TypeForAllData = {
@@ -48,7 +47,7 @@ function App() {
 
     return (
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer/>
             <NavbarContainer/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() =>
@@ -57,6 +56,7 @@ function App() {
                 {/* <Route path='/' render={() => <Profile postsData={profilePage}
                     dispatch={dispatch} />} /> */}
                 <Route path='/profile/:userId?' render={() =>
+                    //обозначение параментра для withRouter в "match/path/userId"
                     <ProfileContainer
                         // postsData={profilePage}
                         //     dispatch={dispatch}
