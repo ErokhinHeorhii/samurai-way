@@ -7,14 +7,14 @@ import {
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
-    toggleIsFetchingAC,
+    toggleIsFetchingAC, toggleIsFollowingAC,
     unfollowAC,
     UsersType
 } from "../Redux/UsersReduser"
 import Users from "./Users"
 import s from "./Users.module.css"
 import Preloader from "../common/preloader/Preloader"
-import { userApi} from "../../api/Api";
+import {userApi} from "../../api/Api";
 
 export type MapStateToPropsType = {
     users: UsersType[]
@@ -22,6 +22,7 @@ export type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    isFollowingInProgress: number[]
 }
 
 type MapDispatchToPropsType = {
@@ -31,6 +32,7 @@ type MapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingInProgress: (isFollowing: boolean, userId:number) => void
 }
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -78,6 +80,8 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
                     users={this.props.users}
                     follow={this.props.follow}
                     unFollow={this.props.unFollow}
+                    toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
+                    isFollowingInProgress={this.props.isFollowingInProgress}
                 />}
 
         </div>
@@ -90,7 +94,8 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        isFollowingInProgress:state.usersPage.followingInProgress
     }
 }
 
@@ -124,5 +129,6 @@ export default connect(mapStateToProps, {
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setTotalUsersCountAC,
-    toggleIsFetching: toggleIsFetchingAC
+    toggleIsFetching: toggleIsFetchingAC,
+    toggleIsFollowingInProgress: toggleIsFollowingAC
 })(UsersApiComponent)
