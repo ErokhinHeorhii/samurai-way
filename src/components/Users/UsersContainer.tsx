@@ -3,12 +3,12 @@ import {connect} from "react-redux"
 // import {Dispatch} from "redux"
 import {AllAppStateType} from "../Redux/RedaxStore"
 import {
-    followAC,
+    followAC, followSuccessThunkCreator, getUsersThunkCreator,
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
     toggleIsFetchingAC, toggleIsFollowingAC,
-    unfollowAC,
+    unfollowAC, unFollowSuccessThunkCreator,
     UsersType
 } from "../Redux/UsersReduser"
 import Users from "./Users"
@@ -28,11 +28,14 @@ export type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-    setUsers: (users: UsersType[]) => void
+    // setUsers: (users: UsersType[]) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
+    // setTotalUsersCount: (totalUsersCount: number) => void
+    // toggleIsFetching: (isFetching: boolean) => void
     toggleIsFollowingInProgress: (isFollowing: boolean, userId:number) => void
+    getUsersThunkCreator:any
+    followSuccessThunkCreator:any
+    unFollowSuccessThunkCreator:any
 }
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -44,26 +47,34 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
 
     // метод вызывается после вмонтирования компоненты в DOM
     componentDidMount(): void {
-        this.props.toggleIsFetching(true)
-        userApi.getUsers(this.props.currentPage, this.props.pageSize)
-            /*вынесли запрос в файл api.js в функцию getUsers*/
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(Math.ceil(data.totalCount / 350))
-            })
+        /*используем санки для запроса к серверу*/
+        this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
+
+        // this.props.toggleIsFetching(true)
+        //
+        // userApi.getUsers(this.props.currentPage, this.props.pageSize)
+        //     /*вынесли запрос в файл api.js в функцию getUsers*/
+        //     .then(data => {
+        //         this.props.toggleIsFetching(false)
+        //         this.props.setUsers(data.items)
+        //         this.props.setTotalUsersCount(Math.ceil(data.totalCount / 350))
+        //     })
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.toggleIsFetching(true)
+
+        /*используем санки для запроса к серверу*/
+        this.props.getUsersThunkCreator(pageNumber,this.props.pageSize)
         this.props.setCurrentPage(pageNumber)
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true})
-        userApi.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                console.log(data)
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
+
+        // this.props.toggleIsFetching(true)
+        // // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true})
+        // userApi.getUsers(pageNumber, this.props.pageSize)
+        //     .then(data => {
+        //         console.log(data)
+        //         this.props.toggleIsFetching(false)
+        //         this.props.setUsers(data.items)
+        //     })
     }
 
     render() {
@@ -80,8 +91,10 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
                     users={this.props.users}
                     follow={this.props.follow}
                     unFollow={this.props.unFollow}
-                    toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
+                    // toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
                     isFollowingInProgress={this.props.isFollowingInProgress}
+                    followSuccessThunkCreator={this.props.followSuccessThunkCreator}
+                    unFollowSuccessThunkCreator={this.props.unFollowSuccessThunkCreator}
                 />}
 
         </div>
@@ -126,9 +139,12 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 export default connect(mapStateToProps, {
     follow: followAC,
     unFollow: unfollowAC,
-    setUsers: setUsersAC,
+    // setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
-    setTotalUsersCount: setTotalUsersCountAC,
-    toggleIsFetching: toggleIsFetchingAC,
-    toggleIsFollowingInProgress: toggleIsFollowingAC
+    // setTotalUsersCount: setTotalUsersCountAC,
+    // toggleIsFetching: toggleIsFetchingAC,
+    toggleIsFollowingInProgress: toggleIsFollowingAC,
+    getUsersThunkCreator:getUsersThunkCreator,
+    followSuccessThunkCreator:followSuccessThunkCreator,
+    unFollowSuccessThunkCreator: unFollowSuccessThunkCreator
 })(UsersApiComponent)

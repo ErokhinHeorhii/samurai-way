@@ -14,8 +14,10 @@ type NewUsersPropsType = {
     users: Array<UsersType>
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-    toggleIsFollowingInProgress: (isFollowing: boolean,userId:number) => void
+    // toggleIsFollowingInProgress: (isFollowing: boolean,userId:number) => void
     isFollowingInProgress:number[]
+    followSuccessThunkCreator:any
+    unFollowSuccessThunkCreator:any
 }
 
 
@@ -55,26 +57,31 @@ const Users = (props: NewUsersPropsType) => {
                                 {
                                     item.followed
                                         ? <button disabled={props.isFollowingInProgress.some(el=> el===item.id)} onClick={() => {
-                                            props.toggleIsFollowingInProgress(true,  item.id)
-                                            //логика запроса перенесена в userApi
-                                            userApi.unFollow(item.id)
-                                                .then((res) => {
-                                                    if (res.data.resultCode == 0) {
-                                                        props.unFollow(item.id)
-                                                    }
-                                                    props.toggleIsFollowingInProgress(false, item.id)
-                                                })
+
+                                            // props.toggleIsFollowingInProgress(true,  item.id)
+                                            // //логика запроса перенесена в userApi
+                                            // userApi.unFollow(item.id)
+                                            //     .then((res) => {
+                                            //         if (res.data.resultCode == 0) {
+                                            //             props.unFollow(item.id)
+                                            //         }
+                                            //         props.toggleIsFollowingInProgress(false, item.id)
+                                            //     })
+
+                                        /*вызываеем санккреэйтор */
+                                        props.unFollowSuccessThunkCreator(item.id)
 
                                         }}> Unfollow</button>
                                         : <button  disabled={props.isFollowingInProgress.some(el=> el===item.id)} onClick={() => {
-                                            props.toggleIsFollowingInProgress(true,  item.id)
-                                            userApi.follow(item.id)
-                                                .then((res) => {
-                                                    if (res.data.resultCode == 0) {
-                                                        props.follow(item.id)
-                                                    }
-                                                    props.toggleIsFollowingInProgress(false,  item.id)
-                                                })
+                                            // props.toggleIsFollowingInProgress(true,  item.id)
+                                            // userApi.follow(item.id)
+                                            //     .then((res) => {
+                                            //         if (res.data.resultCode == 0) {
+                                            //             props.follow(item.id)
+                                            //         }
+                                            //         props.toggleIsFollowingInProgress(false,  item.id)
+                                            //     })
+                                            props.followSuccessThunkCreator(item.id)
                                         }}> Follow </button>
                                 }
                             </div>
