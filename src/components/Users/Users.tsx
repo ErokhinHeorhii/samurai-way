@@ -4,6 +4,7 @@ import avatar from "../../assets/images/avatar.png"
 import {UsersType} from "../Redux/UsersReduser"
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {userApi} from "../../api/Api";
 
 type NewUsersPropsType = {
     onPageChanged: (pageNumber: number) => void
@@ -37,7 +38,6 @@ const Users = (props: NewUsersPropsType) => {
                     }
                 )}
             </div>
-            {/* <button onClick={()=>{}}>Get Users</button> */}
             {
                 props.users.map(item => {
                     return <div key={item.id} className={s.wrapperItem}>
@@ -53,10 +53,8 @@ const Users = (props: NewUsersPropsType) => {
                                 {
                                     item.followed
                                         ? <button onClick={() => {
-                                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`, {
-                                                withCredentials: true,
-                                                headers: {"API-KEY": "f3e0224e-c3b3-4350-8aca-c2b6191bc369"}
-                                            })
+                                            //логика запроса перенесена в userApi
+                                            userApi.unFollow(item.id)
                                                 .then((res) => {
                                                     if (res.data.resultCode == 0) {
                                                         props.unFollow(item.id)
@@ -65,17 +63,12 @@ const Users = (props: NewUsersPropsType) => {
 
                                         }}> Unfollow</button>
                                         : <button onClick={() => {
-                                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`,
-                                                {}, {
-                                                    withCredentials: true,
-                                                    headers: {"API-KEY": "f3e0224e-c3b3-4350-8aca-c2b6191bc369"}
-                                                })
+                                            userApi.follow(item.id)
                                                 .then((res) => {
                                                     if (res.data.resultCode == 0) {
                                                         props.follow(item.id)
                                                     }
                                                 })
-
                                         }}> Follow </button>
                                 }
                             </div>
@@ -83,7 +76,7 @@ const Users = (props: NewUsersPropsType) => {
                         <div className={s.wrapperDialog}>
                             <div className={s.wrapperName}>
                                 <span>{item.name} {item.status} </span>
-                                <div className={s.text}>{item.message}</div>
+                                <div className={s.text}>{item.uniqueUrlName}</div>
                             </div>
                             <div className={s.wrapperContry}>
                                 <div>{"item.location.city"},</div>

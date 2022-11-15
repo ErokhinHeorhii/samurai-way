@@ -54,7 +54,7 @@ const Users = (props: UsersPropsType) => {
         <div className={s.wrapperDialog}>
           <div className={s.wrapperName}>
             <span>{item.name},  {item.status} </span>
-            <div className={s.text} >{item.message}</div>
+            <div className={s.text} >{item.uniqueUrlName}</div>
           </div>
           <div className={s.wrapperContry}>
             <div>{"item.location.city"}, </div >

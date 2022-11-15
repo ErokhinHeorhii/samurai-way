@@ -1,4 +1,3 @@
-import axios from "axios"
 import React from "react"
 import {connect} from "react-redux"
 // import {Dispatch} from "redux"
@@ -13,9 +12,9 @@ import {
     UsersType
 } from "../Redux/UsersReduser"
 import Users from "./Users"
-// import preloader from "../../../src/assets/images/preloader.gif"
 import s from "./Users.module.css"
 import Preloader from "../common/preloader/Preloader"
+import { userApi} from "../../api/Api";
 
 export type MapStateToPropsType = {
     users: UsersType[]
@@ -36,46 +35,40 @@ type MapDispatchToPropsType = {
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-
 export class UsersApiComponent extends React.Component<UsersPropsType> {
     // constructor(props: UsersPropsType) {
     //   super(props)
     // }
-    // метод вызывается после вмонтирования компоненты в DOM
 
+    // метод вызывается после вмонтирования компоненты в DOM
     componentDidMount(): void {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials:true})
-            .then(res => {
+        userApi.getUsers(this.props.currentPage, this.props.pageSize)
+            /*вынесли запрос в файл api.js в функцию getUsers*/
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCount(Math.ceil(res.data.totalCount / 350))
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(Math.ceil(data.totalCount / 350))
             })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true})
-            .then(res => {
-                console.log(res)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true})
+        userApi.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
+                console.log(data)
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
     render() {
-        // let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        // let pagesArr = []
-        // for (let i = 1; i <= pagesCount; i++) {
-        //   pagesArr.push(i)
-        // }
-        // console.log(pagesArr)
-
-
         return <div className={s.wrapperUsers}>
             {this.props.isFetching
-                ? <><Preloader/>
+                ? <>
+                    <Preloader/>
                 </>
                 : <Users
                     onPageChanged={this.onPageChanged}
@@ -122,10 +115,9 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
              dispatch(toggleIsFetchingAC(isFetching))
            }
 
-    //    в случа когда мы передаем в connect обьект под копотом connect доставляет dispatch
     }
 }*/
-
+//    в случа когда мы передаем в connect обьект под копотом connect доставляет dispatch
 export default connect(mapStateToProps, {
     follow: followAC,
     unFollow: unfollowAC,

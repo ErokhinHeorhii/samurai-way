@@ -1,11 +1,10 @@
 import React from "react";
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {ProfilePageType, setUserProfile} from "../components/Redux/ProfileReduser";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import avatarProfile from "../../src/assets/images/AvatarForProfile.jpg"
+import {userApi} from "../api/Api";
 
 type WithRouterType = {
     userId: string
@@ -28,9 +27,10 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         if (!userId) {
             userId = "2"
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+userApi.getProfile(userId)
             .then(res => {
+                console.log(res)
                 // if(res.data.profile.photos.small = null ){
                 //     res.data.profile.photos.small = avatarProfile}
                 this.props.setUserProfile(res.data)

@@ -11,11 +11,10 @@ export type UsersType = {
     small: string | null;
     large: string | null;
   };
-  foollowed: boolean;
+  followed: boolean;
   name: string;
   status: string;
-  message: string;
-  location: { city: string; contry: string };
+  uniqueUrlName: null|string
 };
 export type InitialStateType = {
   users: UsersType[];
@@ -58,7 +57,7 @@ const UsersRedusers = (
         ...state,
         users: [...state["users"]].map((item) =>
           item.id === action.payload.userId
-            ? { ...item, foollowed: true }
+            ? { ...item, followed: true }
             : item
         ),
       };
@@ -68,7 +67,7 @@ const UsersRedusers = (
         ...state,
         users: [...state["users"]].map((item) =>
           item.id === action.payload.userId
-            ? { ...item, foollowed: false }
+            ? { ...item, followed: false }
             : item
         ),
       };
