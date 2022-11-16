@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {ProfilePageType, setUserProfile} from "../components/Redux/ProfileReduser";
+import {getProfileThunkCreator, ProfilePageType, setUserProfile} from "../components/Redux/ProfileReduser";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {userApi} from "../api/Api";
@@ -15,6 +15,7 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
     setUserProfile: (profile: ProfilePageType) => void
+    getProfileThunkCreator:any
 }
 
 export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<WithRouterType>
@@ -27,14 +28,16 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         if (!userId) {
             userId = "2"
         }
+
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-userApi.getProfile(userId)
-            .then(res => {
-                console.log(res)
-                // if(res.data.profile.photos.small = null ){
-                //     res.data.profile.photos.small = avatarProfile}
-                this.props.setUserProfile(res.data)
-            })
+// userApi.getProfile(userId)
+//             .then(res => {
+//                 this.props.setUserProfile(res.data)
+//             })
+
+
+//        перенесли логику в Thunk
+        this.props.getProfileThunkCreator(userId)
     }
 
     render() {
@@ -50,4 +53,4 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {setUserProfile, getProfileThunkCreator})(WithUrlDataContainerComponent);

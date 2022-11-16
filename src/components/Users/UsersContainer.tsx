@@ -29,7 +29,7 @@ type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     // setUsers: (users: UsersType[]) => void
-    setCurrentPage: (currentPage: number) => void
+    // setCurrentPage: (currentPage: number) => void
     // setTotalUsersCount: (totalUsersCount: number) => void
     // toggleIsFetching: (isFetching: boolean) => void
     toggleIsFollowingInProgress: (isFollowing: boolean, userId:number) => void
@@ -51,7 +51,6 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
         this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
 
         // this.props.toggleIsFetching(true)
-        //
         // userApi.getUsers(this.props.currentPage, this.props.pageSize)
         //     /*вынесли запрос в файл api.js в функцию getUsers*/
         //     .then(data => {
@@ -65,8 +64,7 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
 
         /*используем санки для запроса к серверу*/
         this.props.getUsersThunkCreator(pageNumber,this.props.pageSize)
-        this.props.setCurrentPage(pageNumber)
-
+        // this.props.setCurrentPage(pageNumber)
         // this.props.toggleIsFetching(true)
         // // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true})
         // userApi.getUsers(pageNumber, this.props.pageSize)
@@ -140,7 +138,7 @@ export default connect(mapStateToProps, {
     follow: followAC,
     unFollow: unfollowAC,
     // setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
+    // setCurrentPage: setCurrentPageAC,
     // setTotalUsersCount: setTotalUsersCountAC,
     // toggleIsFetching: toggleIsFetchingAC,
     toggleIsFollowingInProgress: toggleIsFollowingAC,

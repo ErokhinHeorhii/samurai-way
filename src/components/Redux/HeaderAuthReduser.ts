@@ -1,3 +1,7 @@
+import {Dispatch} from "redux";
+import {userApi} from "../../api/Api";
+import {setUserProfile} from "./ProfileReduser";
+
 const SET_USERS_DATA = "SET_USERS_DATA";
 
 export type InitialStateType = {
@@ -43,5 +47,21 @@ export const setAuthUserData = (userId: number, email: string, login: string) =>
             login: login
         },
     } as const);
+
+export const getAuthThunkCreator = () => {
+    return (dispatch: Dispatch) => {
+
+        userApi.getAuth()
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    const {id, login, email} = res.data.data
+                    dispatch(setAuthUserData(id, email, login))
+
+                }
+            })
+    }
+}
+
+
 
 export default HeaderAuthReduser;

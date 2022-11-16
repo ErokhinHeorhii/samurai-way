@@ -1,6 +1,9 @@
 import {
     myPostType,
 } from "../../Profile/MyPost/MyPost";
+import {Dispatch} from "redux";
+import {userApi} from "../../api/Api";
+import {followAC, toggleIsFollowingAC} from "./UsersReduser";
 
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -37,7 +40,7 @@ export type ProfilePageType = {
 export type InitialStateTypeForProfile = {
     posts: myPostType[]
     newPostText: string
-    profile:  ProfilePageType
+    profile: ProfilePageType
 }
 
 let initialState = {
@@ -47,7 +50,7 @@ let initialState = {
         {id: 3, message: "yooo", likeCount: 4},
     ],
     newPostText: "Hello everybody)!",
-    profile:null
+    profile: null
 }
 
 const ProfileReducer = (
@@ -94,5 +97,16 @@ export const setUserProfile = (profile: ProfilePageType) =>
         type: SET_USER_PROFILE,
         profile: profile,
     } as const);
+
+export const getProfileThunkCreator = (userId: string) => {
+    return (dispatch: Dispatch) => {
+
+        userApi.getProfile(userId)
+            .then(res => {
+                dispatch(setUserProfile(res.data))
+            })
+    }
+}
+
 
 export default ProfileReducer;
