@@ -1,5 +1,8 @@
 import {userApi} from "../../api/Api";
 import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {AllAppStateType, AppThunk} from "./RedaxStore";
+import {ActionTypeForAuthReduser} from "./HeaderAuthReduser";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -37,7 +40,7 @@ type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>;
 type SetIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
 type toggleIsFollowingACType = ReturnType<typeof toggleIsFollowingAC>
 
-type ActionType =
+export type ActionTypeForUserReduser =
     | FollowACType
     | UnFollowACType
     | SetUsersAcType
@@ -57,7 +60,7 @@ const initialState: InitialStateType = {
 
 const UsersRedusers = (
     state: InitialStateType = initialState,
-    action: ActionType
+    action: ActionTypeForUserReduser
 ): InitialStateType => {
     switch (action.type) {
         case FOLLOW: {
@@ -175,12 +178,11 @@ export const toggleIsFollowingAC = (isFollowing: boolean, userId: number) =>
     } as const);
 
 
-
-export const getUsersThunkCreator = (currentPage:number,pageSize:number ) => {
-    return (dispatch: Dispatch) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number):AppThunk => {
+    return (dispatch: Dispatch<ActionTypeForUserReduser>) => {
 
         dispatch(toggleIsFetchingAC(true))
-
+        dispatch(setCurrentPageAC(currentPage))
         userApi.getUsers(currentPage, pageSize)
             /*вынесли запрос в файл api.js в функцию getUsers*/
             .then(data => {
@@ -191,8 +193,8 @@ export const getUsersThunkCreator = (currentPage:number,pageSize:number ) => {
     }
 }
 
-export const followSuccessThunkCreator = (userId:number) => {
-    return (dispatch: Dispatch) => {
+export const followSuccessThunkCreator = (userId: number) :AppThunk=> {
+    return (dispatch: Dispatch<ActionTypeForUserReduser>) => {
         dispatch(toggleIsFollowingAC(true, userId))
 
         //логика запроса перенесена в userApi
@@ -207,8 +209,8 @@ export const followSuccessThunkCreator = (userId:number) => {
     }
 }
 
-export const unFollowSuccessThunkCreator = (userId:number) => {
-    return (dispatch: Dispatch) => {
+export const unFollowSuccessThunkCreator = (userId: number) :AppThunk => {
+    return (dispatch: Dispatch<ActionTypeForUserReduser>) => {
         dispatch(toggleIsFollowingAC(true, userId))
 
         //логика запроса перенесена в userApi

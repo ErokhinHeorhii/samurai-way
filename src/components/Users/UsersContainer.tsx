@@ -1,8 +1,9 @@
 import React from "react"
 import {connect} from "react-redux"
 // import {Dispatch} from "redux"
-import {AllAppStateType} from "../Redux/RedaxStore"
+import {AllAppStateType, AppThunk} from "../Redux/RedaxStore"
 import {
+    ActionTypeForUserReduser,
     followAC, followSuccessThunkCreator, getUsersThunkCreator,
     setCurrentPageAC,
     setTotalUsersCountAC,
@@ -15,6 +16,9 @@ import Users from "./Users"
 import s from "./Users.module.css"
 import Preloader from "../common/preloader/Preloader"
 import {userApi} from "../../api/Api";
+import {ThunkAction} from "redux-thunk";
+import {ActionTypeForAuthReduser} from "../Redux/HeaderAuthReduser";
+import {Dispatch} from "redux";
 
 export type MapStateToPropsType = {
     users: UsersType[]
@@ -33,9 +37,9 @@ type MapDispatchToPropsType = {
     // setTotalUsersCount: (totalUsersCount: number) => void
     // toggleIsFetching: (isFetching: boolean) => void
     toggleIsFollowingInProgress: (isFollowing: boolean, userId:number) => void
-    getUsersThunkCreator:any
-    followSuccessThunkCreator:any
-    unFollowSuccessThunkCreator:any
+    getUsersThunkCreator:(currentPage: number, pageSize: number)=>void
+    followSuccessThunkCreator:(userId: number)=>void
+    unFollowSuccessThunkCreator:(userId: number)=>void
 }
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType

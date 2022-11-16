@@ -26,13 +26,13 @@ export const userApi = {
     follow: (itemId: number)=>{
     return    instance.post(`follow/${itemId}`,{})},
 
+    getProfile:(userId:string)=>{
+     return   instance.get<ProfilePageType>(`profile/${userId}`)
+    },
+
     getAuth:()=>{
         return  instance.get <getAuthResponseType>(`auth/me`)
     },
-
-    getProfile:(userId:string)=>{
-     return   instance.get<ProfilePageType>(`profile/${userId}`)
-    }
 }
 
 type ResponseType = {

@@ -4,6 +4,7 @@ import {
 import {Dispatch} from "redux";
 import {userApi} from "../../api/Api";
 import {followAC, toggleIsFollowingAC} from "./UsersReduser";
+import {AppThunk} from "./RedaxStore";
 
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -12,7 +13,7 @@ export const SET_USER_PROFILE = "SET_USER_PROFILE"
 export type AddPostActionType = ReturnType<typeof addPostActionCreater>;
 export type setUserProfileType = ReturnType<typeof setUserProfile>;
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreater>;
-type actionType = AddPostActionType | setUserProfileType | UpdateNewPostTextActionType
+export type actionTypeForProfileReduser = AddPostActionType | setUserProfileType | UpdateNewPostTextActionType
 
 
 export type ProfilePageType = {
@@ -55,7 +56,7 @@ let initialState = {
 
 const ProfileReducer = (
     state: InitialStateTypeForProfile = initialState,
-    action: actionType
+    action: actionTypeForProfileReduser
 ): InitialStateTypeForProfile => {
     switch (action.type) {
         case ADD_POST: {
@@ -98,8 +99,8 @@ export const setUserProfile = (profile: ProfilePageType) =>
         profile: profile,
     } as const);
 
-export const getProfileThunkCreator = (userId: string) => {
-    return (dispatch: Dispatch) => {
+export const getProfileThunkCreator = (userId: string): AppThunk => {
+    return (dispatch: Dispatch<actionTypeForProfileReduser>) => {
 
         userApi.getProfile(userId)
             .then(res => {

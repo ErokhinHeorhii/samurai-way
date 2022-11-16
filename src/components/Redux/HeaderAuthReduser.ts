@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {userApi} from "../../api/Api";
 import {setUserProfile} from "./ProfileReduser";
+import {AppThunk} from "./RedaxStore";
 
 const SET_USERS_DATA = "SET_USERS_DATA";
 
@@ -19,11 +20,11 @@ const initialState: InitialStateType = {
 }
 export type SetUserDataACType = ReturnType<typeof setAuthUserData>
 
-type ActionType = SetUserDataACType
+ export type ActionTypeForAuthReduser = SetUserDataACType
 
 const HeaderAuthReduser = (
     state: InitialStateType = initialState,
-    action: ActionType
+    action: ActionTypeForAuthReduser
 ): InitialStateType => {
     switch (action.type) {
         case SET_USERS_DATA: {
@@ -48,8 +49,8 @@ export const setAuthUserData = (userId: number, email: string, login: string) =>
         },
     } as const);
 
-export const getAuthThunkCreator = () => {
-    return (dispatch: Dispatch) => {
+export const getAuthThunkCreator = ():AppThunk => {
+    return (dispatch: Dispatch<ActionTypeForAuthReduser>) => {
 
         userApi.getAuth()
             .then(res => {
