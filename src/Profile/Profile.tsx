@@ -4,7 +4,7 @@
 // import { AddPostActionType, UpdateNewPostTextActionType } from '../components/Redux/ProfileReduser'
 // import { myPostType } from './MyPost/MyPost'
 import MyPostContainer from './MyPost/MyPostContainer'
-import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
+import ProfileInfo from './ProfileInfo/ProfileInfo'
 import {ProfilePageType} from "../components/Redux/ProfileReduser";
 import {Redirect, withRouter} from "react-router-dom";
 import React from "react";
@@ -30,18 +30,11 @@ import React from "react";
 
 
 const Profile = (props:PropsType) => {
-    // const { posts, newPostText } = props.postsData
-    // const { addPost, updateNewPostText } = props
-    // const { dispatch } = props
 
     return (<div>
         <ProfileInfo profile={props.profile}/>
         < MyPostContainer
-            // posts={posts}
-            // // addPost={addPost}
-            // newPostText={newPostText}
-            // // updateNewPostText={updateNewPostText}
-            // dispatch={dispatch}
+
         />
 
     </div>)

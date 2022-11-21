@@ -13,6 +13,9 @@
     display: flex;
 
 }
+.wrapperForStatus{
+    margin: 10px;
+}
 
 .wrapperImage {
     width: 90px;

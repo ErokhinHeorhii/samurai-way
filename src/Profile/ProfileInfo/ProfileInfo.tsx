@@ -2,6 +2,7 @@ import s from './ProfileInfo.module.css'
 import {ProfilePageType} from "../../components/Redux/ProfileReduser";
 import Preloader from "../../components/common/preloader/Preloader";
 import avatarProfile from "../../assets/images/AvatarForProfile.jpg"
+import ProfileStatus from "./ProfileStatus"
 
 type PropsType = {
     profile: ProfilePageType
@@ -36,7 +37,7 @@ const ProfileInfo = (props: PropsType) => {
                 }</span>
 
         </div>
-
+        <ProfileStatus status={"hello my"}/>
 
     </div>)
 }
