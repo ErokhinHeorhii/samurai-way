@@ -179,7 +179,7 @@ export const toggleIsFollowingAC = (isFollowing: boolean, userId: number) =>
 
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number):AppThunk => {
-    return (dispatch: Dispatch<ActionTypeForUserReduser>) => {
+    return (dispatch) => {
 
         dispatch(toggleIsFetchingAC(true))
         dispatch(setCurrentPageAC(currentPage))

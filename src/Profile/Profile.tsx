@@ -6,6 +6,8 @@
 import MyPostContainer from './MyPost/MyPostContainer'
 import ProfileInfo from './ProfileInfo.tsx/ProfileInfo'
 import {ProfilePageType} from "../components/Redux/ProfileReduser";
+import {Redirect, withRouter} from "react-router-dom";
+import React from "react";
 
 // export type postPageType = {
 //   postsData: {

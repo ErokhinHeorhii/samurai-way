@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileThunkCreator, ProfilePageType, setUserProfile} from "../components/Redux/ProfileReduser";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 type WithRouterType = {
     userId: string
@@ -11,6 +11,7 @@ type WithRouterType = {
 
 type MapStateToPropsType = {
     profile: ProfilePageType
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     // setUserProfile: (profile: ProfilePageType) => void
@@ -34,12 +35,14 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 //                 this.props.setUserProfile(res.data)
 //             })
 
-
 //        перенесли логику в Thunk
         this.props.getProfileThunkCreator(userId)
     }
 
     render() {
+        if(!this.props.isAuth ) {
+            return <Redirect to ={"./login"}/>
+        }
         return (<div>
             <Profile profile={this.props.profile}/>
         </div>)
@@ -47,7 +50,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 }
 
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)

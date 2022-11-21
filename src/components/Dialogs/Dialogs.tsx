@@ -6,6 +6,7 @@ import DialogItem from "./DialogsItem/DialogItem";
 import Message
     //  { myMessageType } 
     from "./Message/Message";
+import {Redirect} from "react-router-dom";
 
 export type myDialogsDataType = {
     id: number
@@ -57,7 +58,9 @@ const Dialogs = (props: DialogsPropsType) => {
         updateNewMessageText(text)
         // dispatch(updateNewMessageTextActionCreater(text))
     }
-
+   if(!props.isAuth ) {
+       return <Redirect to ={"./login"}/>
+   }
     return (<>
 
             <div className={s.dialogs}>

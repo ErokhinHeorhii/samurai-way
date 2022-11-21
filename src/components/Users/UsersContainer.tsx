@@ -45,9 +45,9 @@ type MapDispatchToPropsType = {
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export class UsersApiComponent extends React.Component<UsersPropsType> {
-    // constructor(props: UsersPropsType) {
-    //   super(props)
-    // }
+    constructor(props: UsersPropsType) {
+      super(props)
+    }
 
     // метод вызывается после вмонтирования компоненты в DOM
     componentDidMount(): void {
@@ -150,3 +150,6 @@ export default connect(mapStateToProps, {
     followSuccessThunkCreator:followSuccessThunkCreator,
     unFollowSuccessThunkCreator: unFollowSuccessThunkCreator
 })(UsersApiComponent)
+// (...params) => dispatch(getUsersThunkCreator(...params))
+// typeof action === 'function': action(dispatch)
+// dispatch(action)
