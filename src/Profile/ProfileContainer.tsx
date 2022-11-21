@@ -4,6 +4,9 @@ import {connect} from "react-redux";
 import {getProfileThunkCreator, ProfilePageType, setUserProfile} from "../components/Redux/ProfileReduser";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../HOC/WithAuthRedirectComponent";
+import Dialogs from "../components/Dialogs/Dialogs";
+import {compose} from "redux";
 
 type WithRouterType = {
     userId: string
@@ -11,14 +14,15 @@ type WithRouterType = {
 
 type MapStateToPropsType = {
     profile: ProfilePageType
-    isAuth: boolean
+    // isAuth: boolean
 }
 type MapDispatchToPropsType = {
     // setUserProfile: (profile: ProfilePageType) => void
-    getProfileThunkCreator:(userId: string) =>void
+    getProfileThunkCreator: (userId: string) => void
 }
 
 export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<WithRouterType>
+
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
 
@@ -40,9 +44,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     }
 
     render() {
-        if(!this.props.isAuth ) {
-            return <Redirect to ={"./login"}/>
-        }
+        // if(!this.props.isAuth ) {
+        //     return <Redirect to ={"./login"}/>
+        // }
         return (<div>
             <Profile profile={this.props.profile}/>
         </div>)
@@ -51,9 +55,19 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    // isAuth: state.auth.isAuth
 })
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
+// let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, { getProfileThunkCreator})(WithUrlDataContainerComponent);
+/* Логика проверки на Login вынесена в HOC */
+// let AuthRedirectComponent = withAuthRedirect(WithUrlDataContainerComponent)
+
+// export default connect(mapStateToProps, { getProfileThunkCreator})(AuthRedirectComponent);
+
+//добавили финкцию compose  и зарефакторили с ее помощью
+export default compose <React.ComponentType>(
+    connect(mapStateToProps, {getProfileThunkCreator}),
+        withRouter,
+        withAuthRedirect
+)(ProfileContainer)

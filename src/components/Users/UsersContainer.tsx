@@ -1,6 +1,5 @@
 import React from "react"
 import {connect} from "react-redux"
-// import {Dispatch} from "redux"
 import {AllAppStateType, AppThunk} from "../Redux/RedaxStore"
 import {
     ActionTypeForUserReduser,
@@ -18,7 +17,8 @@ import Preloader from "../common/preloader/Preloader"
 import {userApi} from "../../api/Api";
 import {ThunkAction} from "redux-thunk";
 import {ActionTypeForAuthReduser} from "../Redux/HeaderAuthReduser";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {withAuthRedirect} from "../../HOC/WithAuthRedirectComponent";
 
 export type MapStateToPropsType = {
     users: UsersType[]
@@ -137,19 +137,38 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 
     }
 }*/
+// let AuthRedirectComponent = withAuthRedirect(UsersApiComponent)
+
 //    в случа когда мы передаем в connect обьект под копотом connect доставляет dispatch
-export default connect(mapStateToProps, {
-    follow: followAC,
-    unFollow: unfollowAC,
-    // setUsers: setUsersAC,
-    // setCurrentPage: setCurrentPageAC,
-    // setTotalUsersCount: setTotalUsersCountAC,
-    // toggleIsFetching: toggleIsFetchingAC,
-    toggleIsFollowingInProgress: toggleIsFollowingAC,
-    getUsersThunkCreator:getUsersThunkCreator,
-    followSuccessThunkCreator:followSuccessThunkCreator,
-    unFollowSuccessThunkCreator: unFollowSuccessThunkCreator
-})(UsersApiComponent)
+//  connect(mapStateToProps, {
+//     follow: followAC,
+//     unFollow: unfollowAC,
+//     // setUsers: setUsersAC,
+//     // setCurrentPage: setCurrentPageAC,
+//     // setTotalUsersCount: setTotalUsersCountAC,
+//     // toggleIsFetching: toggleIsFetchingAC,
+//     toggleIsFollowingInProgress: toggleIsFollowingAC,
+//     getUsersThunkCreator:getUsersThunkCreator,
+//     followSuccessThunkCreator:followSuccessThunkCreator,
+//     unFollowSuccessThunkCreator: unFollowSuccessThunkCreator
+// })(AuthRedirectComponent)
 // (...params) => dispatch(getUsersThunkCreator(...params))
 // typeof action === 'function': action(dispatch)
 // dispatch(action)
+
+//добавили финкцию compose  и зарефакторили с ее помощью
+export default compose <React.ComponentType>(
+    connect(mapStateToProps, {
+        follow: followAC,
+        unFollow: unfollowAC,
+        // setUsers: setUsersAC,
+        // setCurrentPage: setCurrentPageAC,
+        // setTotalUsersCount: setTotalUsersCountAC,
+        // toggleIsFetching: toggleIsFetchingAC,
+        toggleIsFollowingInProgress: toggleIsFollowingAC,
+        getUsersThunkCreator:getUsersThunkCreator,
+        followSuccessThunkCreator:followSuccessThunkCreator,
+        unFollowSuccessThunkCreator: unFollowSuccessThunkCreator
+    }),
+    withAuthRedirect
+)(UsersApiComponent)

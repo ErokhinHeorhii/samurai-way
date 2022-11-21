@@ -58,9 +58,9 @@ const Dialogs = (props: DialogsPropsType) => {
         updateNewMessageText(text)
         // dispatch(updateNewMessageTextActionCreater(text))
     }
-   if(!props.isAuth ) {
-       return <Redirect to ={"./login"}/>
-   }
+   // if(!props.isAuth ) {
+   //     return <Redirect to ={"./login"}/>
+   // }
     return (<>
 
             <div className={s.dialogs}>
