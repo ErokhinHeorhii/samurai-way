@@ -1,6 +1,10 @@
 import style from './ProfileInfo.module.css'
 import React, {ChangeEvent} from "react";
 
+type stateType = {
+    editMode: boolean
+    status: string
+}
 
 type PropsType = {
     status: string
@@ -8,7 +12,6 @@ type PropsType = {
 }
 
 class ProfileStatus extends React.Component<PropsType> {
-
 
     state = {
         editMode: false,
@@ -33,7 +36,7 @@ class ProfileStatus extends React.Component<PropsType> {
 
     }
 
-    onChangeStatus = (e:ChangeEvent<HTMLInputElement>)=> {
+    onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
         this.props.updateStatusThunkCreator(e.currentTarget.value)
         this.setState({
             status: e.currentTarget.value
@@ -41,6 +44,16 @@ class ProfileStatus extends React.Component<PropsType> {
 
     }
 
+    componentDidUpdate(prevProps: PropsType, prevState: stateType) {
+        /*обязательно делать условие чтобы не было зацикливания*/
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+        let a = this.state
+        let b = this.props
+    }
 
     render() {
 
