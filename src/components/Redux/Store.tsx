@@ -1,9 +1,14 @@
 import { TypeForAllData } from "../../App";
 import DialogReducer, {  AddMessageType, ADD_MESSAGE,  UpdateNewMessageTextType, UPDATE_NEW_MESSAGE_TEXT } from "./DialogReduser";
-import ProfileReducer, { AddPostActionType, ADD_POST,  UpdateNewPostTextActionType, UPDATE_NEW_POST_TEXT } from "./ProfileReduser";
+import ProfileReducer, {
+  AddPostACType,
+  UpdateNewPostTextACType,
+  UPDATE_NEW_POST_TEXT,
+  SetStatusACType
+} from "./ProfileReduser";
 import SideBarReducer from "./SideBarReduser";
 
-// export const ADD_POST = "ADD-POST"
+export const ADD_POST = "ADD-POST"
 // export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 // export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
 // export const ADD_MESSAGE = "ADD-MESSAGE"
@@ -25,8 +30,8 @@ export type StoreType = {
   ) => void
 }
 export type AllActionType =
-  AddPostActionType |
-  UpdateNewPostTextActionType |
+  AddPostACType |
+  UpdateNewPostTextACType |
   UpdateNewMessageTextType |
   AddMessageType
 

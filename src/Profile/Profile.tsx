@@ -5,7 +5,7 @@
 // import { myPostType } from './MyPost/MyPost'
 import MyPostContainer from './MyPost/MyPostContainer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-import {ProfilePageType} from "../components/Redux/ProfileReduser";
+import {ProfilePageType, updateStatusThunkCreator} from "../components/Redux/ProfileReduser";
 import {Redirect, withRouter} from "react-router-dom";
 import React from "react";
 
@@ -24,15 +24,18 @@ import React from "react";
 //   ) => void
 // }
 
- type PropsType={
-    profile:ProfilePageType
+type PropsType = {
+    profile: ProfilePageType
+    status: string
+    updateStatusThunkCreator: (status: string) => void
 }
 
 
-const Profile = (props:PropsType) => {
+const Profile = (props: PropsType) => {
 
     return (<div>
-        <ProfileInfo profile={props.profile}/>
+        <ProfileInfo profile={props.profile} status ={props.status}
+                     updateStatusThunkCreator ={props.updateStatusThunkCreator}/>
         < MyPostContainer
 
         />

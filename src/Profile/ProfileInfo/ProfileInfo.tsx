@@ -6,6 +6,8 @@ import ProfileStatus from "./ProfileStatus"
 
 type PropsType = {
     profile: ProfilePageType
+    status: string
+    updateStatusThunkCreator: (status: string) => void
 }
 const ProfileInfo = (props: PropsType) => {
     if (!props.profile) {
@@ -37,7 +39,7 @@ const ProfileInfo = (props: PropsType) => {
                 }</span>
 
         </div>
-        <ProfileStatus status={"hello my"}/>
+        <ProfileStatus status={props.status} updateStatusThunkCreator={props.updateStatusThunkCreator}/>
 
     </div>)
 }

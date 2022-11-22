@@ -1,11 +1,14 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileThunkCreator, ProfilePageType, setUserProfile} from "../components/Redux/ProfileReduser";
+import {
+    getProfileThunkCreator,
+    getStatusThunkCreator,
+    ProfilePageType, updateStatusThunkCreator,
+} from "../components/Redux/ProfileReduser";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../HOC/WithAuthRedirectComponent";
-import Dialogs from "../components/Dialogs/Dialogs";
 import {compose} from "redux";
 
 type WithRouterType = {
@@ -14,11 +17,12 @@ type WithRouterType = {
 
 type MapStateToPropsType = {
     profile: ProfilePageType
-    // isAuth: boolean
+    status:string
 }
 type MapDispatchToPropsType = {
-    // setUserProfile: (profile: ProfilePageType) => void
     getProfileThunkCreator: (userId: string) => void
+    getStatusThunkCreator:(userId: string)=> void
+    updateStatusThunkCreator:(status: string)=>void
 }
 
 export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<WithRouterType>
@@ -30,7 +34,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         //получаем userId из props которые прокинули с помощью withRouter (match/params/ userId: XXX)
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "2"
+            userId = "1049"
         }
 
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
@@ -41,6 +45,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 //        перенесли логику в Thunk
         this.props.getProfileThunkCreator(userId)
+        this.props.getStatusThunkCreator(userId)
     }
 
     render() {
@@ -48,7 +53,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         //     return <Redirect to ={"./login"}/>
         // }
         return (<div>
-            <Profile profile={this.props.profile}/>
+            <Profile profile={this.props.profile}
+                     status ={this.props.status}
+                     updateStatusThunkCreator ={this.props.updateStatusThunkCreator}/>
         </div>)
     }
 }
@@ -56,6 +63,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     // isAuth: state.auth.isAuth
+    status:state.profilePage.status
 })
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer)
@@ -67,7 +75,7 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
 
 //добавили финкцию compose  и зарефакторили с ее помощью
 export default compose <React.ComponentType>(
-    connect(mapStateToProps, {getProfileThunkCreator}),
+    connect(mapStateToProps, {getProfileThunkCreator,getStatusThunkCreator,updateStatusThunkCreator}),
         withRouter,
         withAuthRedirect
 )(ProfileContainer)

@@ -23,16 +23,34 @@ export const userApi = {
         return instance.delete(`follow/${itemId}`)
     },
 
-    follow: (itemId: number)=>{
-    return    instance.post(`follow/${itemId}`,{})},
-
-    getProfile:(userId:string)=>{
-     return   instance.get<ProfilePageType>(`profile/${userId}`)
+    follow: (itemId: number) => {
+        return instance.post(`follow/${itemId}`, {})
     },
 
-    getAuth:()=>{
-        return  instance.get <getAuthResponseType>(`auth/me`)
+    getProfile: (userId: string) => {
+        console.warn("use other method")
+        return profileApi.getProfile(userId)
     },
+
+    getAuth: () => {
+        return instance.get <getAuthResponseType>(`auth/me`)
+    },
+}
+
+export const profileApi = {
+    getProfile: (userId: string) => {
+        return instance.get<ProfilePageType>(`profile/${userId}`)
+    },
+
+    getStatus: (userId: string) => {
+        return instance.get(`profile/status/${userId}`)
+    },
+
+    updateStatus: (status:string) => {
+        return instance.put(`profile/status/`,{ status})
+    }
+
+
 }
 
 type ResponseType = {
@@ -41,7 +59,7 @@ type ResponseType = {
     totalCount: number
 }
 
-type getAuthResponseType ={
+type getAuthResponseType = {
     resultCode: number
     messages: [],
     data: {

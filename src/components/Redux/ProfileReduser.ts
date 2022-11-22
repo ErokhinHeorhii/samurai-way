@@ -2,19 +2,25 @@ import {
     myPostType,
 } from "../../Profile/MyPost/MyPost";
 import {Dispatch} from "redux";
-import {userApi} from "../../api/Api";
+import {profileApi, userApi} from "../../api/Api";
 import {followAC, toggleIsFollowingAC} from "./UsersReduser";
 import {AppThunk} from "./RedaxStore";
+import profile from "../../Profile/Profile";
 
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 export const SET_USER_PROFILE = "SET_USER_PROFILE"
+const SET_STATUS = "SET_STATUS"
 
-export type AddPostActionType = ReturnType<typeof addPostActionCreater>;
-export type setUserProfileType = ReturnType<typeof setUserProfile>;
-export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreater>;
-export type actionTypeForProfileReduser = AddPostActionType | setUserProfileType | UpdateNewPostTextActionType
-
+export type AddPostACType = ReturnType<typeof addPostActionCreater>;
+export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
+export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextActionCreater>;
+export type SetStatusACType = ReturnType<typeof setStatusAC>
+export type actionTypeForProfileReduser =
+    AddPostACType |
+    SetUserProfileACType |
+    UpdateNewPostTextACType |
+    SetStatusACType
 
 export type ProfilePageType = {
     userId: string
@@ -37,11 +43,11 @@ export type ProfilePageType = {
     }
 } | null
 
-
 export type InitialStateTypeForProfile = {
     posts: myPostType[]
     newPostText: string
     profile: ProfilePageType
+    status: string
 }
 
 let initialState = {
@@ -51,7 +57,8 @@ let initialState = {
         {id: 3, message: "yooo", likeCount: 4},
     ],
     newPostText: "Hello everybody)!",
-    profile: null
+    profile: null,
+    status: ""
 }
 
 const ProfileReducer = (
@@ -80,7 +87,13 @@ const ProfileReducer = (
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status
+            }
 
+        }
         default:
             return state;
     }
@@ -99,6 +112,11 @@ export const setUserProfile = (profile: ProfilePageType) =>
         profile: profile,
     } as const);
 
+export const setStatusAC = (status: string) => {
+    return {type: SET_STATUS, status} as const
+}
+
+
 export const getProfileThunkCreator = (userId: string): AppThunk => {
     return (dispatch: Dispatch<actionTypeForProfileReduser>) => {
 
@@ -108,6 +126,26 @@ export const getProfileThunkCreator = (userId: string): AppThunk => {
             })
     }
 }
+export const getStatusThunkCreator = (userId: string): AppThunk => {
+    return (dispatch: Dispatch<actionTypeForProfileReduser>) => {
 
+        profileApi.getStatus(userId)
+            .then(res => {
+                dispatch(setStatusAC(res.data))
+            })
+    }
+}
 
-export default ProfileReducer;
+export const updateStatusThunkCreator = (status: string): AppThunk => {
+    return (dispatch: Dispatch<actionTypeForProfileReduser>) => {
+
+        profileApi.updateStatus(status)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setStatusAC(status))
+                }
+            })
+    }
+
+}
+    export default ProfileReducer;
