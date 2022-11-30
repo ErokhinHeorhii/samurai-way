@@ -1,12 +1,6 @@
-// import { postPageType } from '../App'
-
-// import { AddMessageType, UpdateNewMessageTextType } from '../components/Redux/DialogReduser'
-// import { AddPostActionType, UpdateNewPostTextActionType } from '../components/Redux/ProfileReduser'
-// import { myPostType } from './MyPost/MyPost'
 import MyPostContainer from './MyPost/MyPostContainer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import {ProfilePageType, updateStatusThunkCreator} from "../components/Redux/ProfileReduser";
-import {Redirect, withRouter} from "react-router-dom";
 import React from "react";
 
 // export type postPageType = {

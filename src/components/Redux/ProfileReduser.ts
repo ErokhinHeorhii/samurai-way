@@ -10,13 +10,13 @@ import profile from "../../Profile/Profile";
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 export const SET_USER_PROFILE = "SET_USER_PROFILE"
-const SET_STATUS = "SET_STATUS"
+export const SET_STATUS = "SET_STATUS"
 
 export type AddPostACType = ReturnType<typeof addPostActionCreater>;
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
 export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextActionCreater>;
 export type SetStatusACType = ReturnType<typeof setStatusAC>
-export type actionTypeForProfileReduser =
+export type actionTypeForProfileReducer =
     AddPostACType |
     SetUserProfileACType |
     UpdateNewPostTextACType |
@@ -58,12 +58,12 @@ let initialState = {
     ],
     newPostText: "Hello everybody)!",
     profile: null,
-    status: ""
+    status: "Hello"
 }
 
 const ProfileReducer = (
     state: InitialStateTypeForProfile = initialState,
-    action: actionTypeForProfileReduser
+    action: actionTypeForProfileReducer
 ): InitialStateTypeForProfile => {
     switch (action.type) {
         case ADD_POST: {
@@ -118,7 +118,7 @@ export const setStatusAC = (status: string) => {
 
 
 export const getProfileThunkCreator = (userId: string): AppThunk => {
-    return (dispatch: Dispatch<actionTypeForProfileReduser>) => {
+    return (dispatch: Dispatch<actionTypeForProfileReducer>) => {
 
         userApi.getProfile(userId)
             .then(res => {
@@ -127,7 +127,7 @@ export const getProfileThunkCreator = (userId: string): AppThunk => {
     }
 }
 export const getStatusThunkCreator = (userId: string): AppThunk => {
-    return (dispatch: Dispatch<actionTypeForProfileReduser>) => {
+    return (dispatch: Dispatch<actionTypeForProfileReducer>) => {
 
         profileApi.getStatus(userId)
             .then(res => {
@@ -137,7 +137,7 @@ export const getStatusThunkCreator = (userId: string): AppThunk => {
 }
 
 export const updateStatusThunkCreator = (status: string): AppThunk => {
-    return (dispatch: Dispatch<actionTypeForProfileReduser>) => {
+    return (dispatch: Dispatch<actionTypeForProfileReducer>) => {
 
         profileApi.updateStatus(status)
             .then(res => {

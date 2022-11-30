@@ -28,7 +28,6 @@ export const userApi = {
     },
 
     getProfile: (userId: string) => {
-        console.warn("use other method")
         return profileApi.getProfile(userId)
     },
 
@@ -49,8 +48,6 @@ export const profileApi = {
     updateStatus: (status:string) => {
         return instance.put(`profile/status/`,{ status})
     }
-
-
 }
 
 type ResponseType = {

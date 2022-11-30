@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         //получаем userId из props которые прокинули с помощью withRouter (match/params/ userId: XXX)
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "1049"
+            userId = "26184"
         }
 
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)

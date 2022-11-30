@@ -41,10 +41,8 @@ export type AppStateType = {
     ) => void
 }
 
-// function App(props: AppStateType) {
 function App() {
-    // const { profilePage, dialogsPage, sideBar } = props.appState;
-    // const { dispatch } = props
+
 
     return (
         <div className="app-wrapper">
@@ -54,8 +52,6 @@ function App() {
                 <Route path='/dialogs' render={() =>
                     <DialogsContainer
                     />}/>
-                {/* <Route path='/' render={() => <Profile postsData={profilePage}
-                    dispatch={dispatch} />} /> */}
                 <Route path='/profile/:userId?' render={() =>
                     //обозначение параментра для withRouter в "match/path/userId"
                     <ProfileContainer
