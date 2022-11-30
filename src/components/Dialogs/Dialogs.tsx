@@ -7,6 +7,7 @@ import Message
     //  { myMessageType } 
     from "./Message/Message";
 import {Redirect} from "react-router-dom";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 export type myDialogsDataType = {
     id: number
@@ -30,8 +31,8 @@ export type myDialogsDataType = {
 // }
 
 const Dialogs = (props: DialogsPropsType) => {
-    const {dialogs, messages, answerMessages, newDialogsMessage} = props.dialogsPage
-    const {addMessage, updateNewMessageText} = props
+    const {dialogs, messages, answerMessages} = props.dialogsPage
+    const {addMessage} = props
     let dialogsElements = dialogs.map(item => {
         return <DialogItem key={item.id} name={item.name} id={item.id} src={item.src}/>
     })
@@ -45,38 +46,34 @@ const Dialogs = (props: DialogsPropsType) => {
         return <Message key={item.id} message={item.message} id={item.id}/>
     })
 
-    let refLinkToTextarea = React.createRef<HTMLTextAreaElement>()
+    // let refLinkToTextarea = React.createRef<HTMLTextAreaElement>()
 
     const addValueTextarea = () => {
-        addMessage()
+        // addMessage()
         // dispatch(addMessageActionCreater())
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // const text = refLinkToTextarea.current?.value ? refLinkToTextarea.current.value : " "
         const text = e.currentTarget ? e.currentTarget.value : " "
-        updateNewMessageText(text)
+        // updateNewMessageText(text)
         // dispatch(updateNewMessageTextActionCreater(text))
     }
-   // if(!props.isAuth ) {
-   //     return <Redirect to ={"./login"}/>
-   // }
-    return (<>
+    // if(!props.isAuth ) {
+    //     return <Redirect to ={"./login"}/>
+    // }
+    const addNewMessage = (values: any) => {
+        addMessage(values.newMessageBody)
+    }
 
+    return (<>
             <div className={s.dialogs}>
                 <div className={s.dialogsItem}>
                     {dialogsElements}
                 </div>
                 <div className={s.messages}>
-                <textarea
-                    className={s.textarea}
-                    ref={refLinkToTextarea}
-                    value={newDialogsMessage}
-                    onChange={onChangeHandler}>
-                </textarea>
-                    <SuperButton onClick={addValueTextarea}>Add</SuperButton>
+                    <AddMessageFormRedax onSubmit={addNewMessage}/>
                     {messagesElements}
-
                 </div>
                 <div className={s.messages}>
                     {answerMessagesElements}
@@ -85,6 +82,32 @@ const Dialogs = (props: DialogsPropsType) => {
         </>
     )
 }
+
+type AddMessageFormType = {
+    value: string
+    onChange: () => void
+}
+
+const AddMessageForm: React.FC<any> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field className={s.textarea} component="textarea" name="newMessageBody"
+                       placeholder="Enter your message"/>
+                {/*<textarea*/}
+                {/*    value={props.newDialogsMessage}*/}
+                {/*    onChange={props.onChangeHandler}>*/}
+                {/*</textarea>*/}
+            </div>
+            <SuperButton onClick={props.addValueTextarea}>Add</SuperButton>
+        </form>
+    )
+}
+
+const AddMessageFormRedax = reduxForm<any>({
+    form: "dialogAddMessageForm"
+})(AddMessageForm)
+
 
 export default Dialogs
 

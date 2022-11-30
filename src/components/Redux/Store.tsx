@@ -1,8 +1,8 @@
 import { TypeForAllData } from "../../App";
-import DialogReducer, {  AddMessageType, ADD_MESSAGE,  UpdateNewMessageTextType, UPDATE_NEW_MESSAGE_TEXT } from "./DialogReduser";
+import DialogReducer, {  AddMessageType, ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT } from "./DialogReduser";
 import ProfileReducer, {
   AddPostACType,
-  UpdateNewPostTextACType,
+  // UpdateNewPostTextACType,
   UPDATE_NEW_POST_TEXT,
   SetStatusACType
 } from "./ProfileReduser";
@@ -31,8 +31,8 @@ export type StoreType = {
 }
 export type AllActionType =
   AddPostACType |
-  UpdateNewPostTextACType |
-  UpdateNewMessageTextType |
+  // UpdateNewPostTextACType |
+  // UpdateNewMessageTextType |
   AddMessageType
 
 ///////////////////////////////////////////////////////////////////////
@@ -95,10 +95,10 @@ const store: StoreType = {
 
   dispatch(action: AllActionType) { // {type: "ADD-POST"}
 
-    if (action.type === UPDATE_NEW_POST_TEXT || action.type === ADD_POST) {
+    if (action.type === ADD_POST) {
       // this._state.profilePage = ProfileReducer(this._state.profilePage, action)
-    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT || action.type === ADD_MESSAGE) {
-      this._state.dialogsPage = DialogReducer(this._state.dialogsPage, action)
+    } else if ( action.type === ADD_MESSAGE) {
+      // this._state.dialogsPage = DialogReducer(this._state.dialogsPage, action)
     } else { this._state.sideBar = SideBarReducer(this._state.sideBar, action) }
 
     this._callSubScriber(this._state)

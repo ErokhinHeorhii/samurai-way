@@ -1,7 +1,12 @@
 import React from "react"
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-const LoginForm = (props: any) => {
+type FormDataType={
+    login:string
+    password:string
+    rememberMe:boolean
+}
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
     /*handleSubmit doing:
     e.preventDefault
@@ -33,13 +38,13 @@ const LoginForm = (props: any) => {
 }
 
 /*HOK для оборачивания LoginForm*/
-const LoginRedaxForm = reduxForm({
+const LoginRedaxForm = reduxForm<FormDataType>({
     //даем уникальное имя форме
     form: "login"
 })(LoginForm)
 
-const Login = (props: any) => {
-    const onSubmitHandler = (formData: any) => {
+const Login = () => {
+    const onSubmitHandler = (formData: FormDataType) => {
         console.log(formData)
     }
     return <div>

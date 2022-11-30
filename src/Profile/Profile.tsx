@@ -28,11 +28,9 @@ type PropsType = {
 const Profile = (props: PropsType) => {
 
     return (<div>
-        <ProfileInfo profile={props.profile} status ={props.status}
-                     updateStatusThunkCreator ={props.updateStatusThunkCreator}/>
-        < MyPostContainer
-
-        />
+        <ProfileInfo profile={props.profile} status={props.status}
+                     updateStatusThunkCreator={props.updateStatusThunkCreator}/>
+        < MyPostContainer/>
 
     </div>)
 }

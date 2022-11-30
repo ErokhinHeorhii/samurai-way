@@ -14,12 +14,12 @@ export const SET_STATUS = "SET_STATUS"
 
 export type AddPostACType = ReturnType<typeof addPostActionCreater>;
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
-export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextActionCreater>;
+// export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextActionCreater>;
 export type SetStatusACType = ReturnType<typeof setStatusAC>
 export type actionTypeForProfileReducer =
     AddPostACType |
     SetUserProfileACType |
-    UpdateNewPostTextACType |
+    // UpdateNewPostTextACType |
     SetStatusACType
 
 export type ProfilePageType = {
@@ -45,7 +45,7 @@ export type ProfilePageType = {
 
 export type InitialStateTypeForProfile = {
     posts: myPostType[]
-    newPostText: string
+    // newPostText: string
     profile: ProfilePageType
     status: string
 }
@@ -56,7 +56,7 @@ let initialState = {
         {id: 2, message: "How are you", likeCount: 2},
         {id: 3, message: "yooo", likeCount: 4},
     ],
-    newPostText: "Hello everybody)!",
+    // newPostText: "Hello everybody)!",
     profile: null,
     status: "Hello"
 }
@@ -67,23 +67,20 @@ const ProfileReducer = (
 ): InitialStateTypeForProfile => {
     switch (action.type) {
         case ADD_POST: {
-            if (!state.newPostText) {
-                return state;
-            } else {
-                const newPost: myPostType = {
-                    id: 5,
-                    message: state.newPostText,
-                    likeCount: 5,
-                };
-                let newState = {...state, posts: [newPost, ...state.posts], newPostText: " "}
-                // state.posts.push(newPost);
-                // state.newPostText = "";
-                return newState;
-            }
+
+            const newPost: myPostType = {
+                id: 5,
+                message: action.newPostText,
+                likeCount: 5,
+            };
+            let newState = {...state, posts: [newPost, ...state.posts]}
+            // state.posts.push(newPost);
+            // state.newPostText = "";
+            return newState;
         }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, newPostText: action.newText};
-        }
+        // case UPDATE_NEW_POST_TEXT: {
+        //     return {...state, newPostText: action.newText};
+        // }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
@@ -99,12 +96,13 @@ const ProfileReducer = (
     }
 };
 
-export const addPostActionCreater = () => ({type: ADD_POST} as const);
-export const updateNewPostTextActionCreater = (text: string) =>
-    ({
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text,
-    } as const);
+export const addPostActionCreater = (newPostText: string) => ({type: ADD_POST, newPostText} as const);
+
+// export const updateNewPostTextActionCreater = (text: string) =>
+//     ({
+//         type: UPDATE_NEW_POST_TEXT,
+//         newText: text,
+//     } as const);
 
 export const setUserProfile = (profile: ProfilePageType) =>
     ({
@@ -148,4 +146,4 @@ export const updateStatusThunkCreator = (status: string): AppThunk => {
     }
 
 }
-    export default ProfileReducer;
+export default ProfileReducer;

@@ -2,7 +2,7 @@ import {compose, Dispatch} from "redux";
 import {connect} from "react-redux";
 import {
     addMessageActionCreater,
-    InitialStateType, updateNewMessageTextActionCreater,
+    InitialStateType,
 } from "../Redux/DialogReduser";
 import {AllAppStateType} from "../Redux/RedaxStore";
 import Dialogs from "./Dialogs";
@@ -18,8 +18,8 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    updateNewMessageText: (text: string) => void
-    addMessage: () => void
+    // updateNewMessageText: (text: string) => void
+    addMessage: (values:string) => void
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -33,11 +33,11 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        updateNewMessageText: (text: string) => {
-            dispatch(updateNewMessageTextActionCreater(text))
-        },
-        addMessage: () => {
-            dispatch(addMessageActionCreater())
+        // updateNewMessageText: (text: string) => {
+        //     dispatch(updateNewMessageTextActionCreater(text))
+        // },
+        addMessage: (newMessageBody:string) => {
+            dispatch(addMessageActionCreater(newMessageBody))
         }
     }
 }
