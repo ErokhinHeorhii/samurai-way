@@ -2,6 +2,8 @@ import React from 'react'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
+import {Textarea} from "../../components/common/formControls/FormControls";
 
 export type myPostType = {
     id: string
@@ -54,6 +56,7 @@ const MyPost = (props: postDataType) => {
         </div>
     )
 }
+ const maxLength20=maxLengthCreator(20)
 
 const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     //Внутри  функции handleSubmit происходит  отмена действий по умолчанию;
@@ -61,7 +64,9 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     //         props.OnSubmit(formData)
     return <form onSubmit={props.handleSubmit}>
         <div>
-            <Field name="newPostText" component={"textarea"}></Field>
+            <Field name="newPostText" placeholder="post message"
+                   component={Textarea} validate={[requiredField,maxLength20]}
+            ></Field>
         </div>
         <div>
             <button>Add</button>
