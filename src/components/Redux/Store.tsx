@@ -7,6 +7,7 @@ import ProfileReducer, {
   SetStatusACType
 } from "./ProfileReduser";
 import SideBarReducer from "./SideBarReduser";
+import {v1} from "uuid";
 
 export const ADD_POST = "ADD-POST"
 // export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -41,9 +42,9 @@ const store: StoreType = {
   _state: {
     profilePage: {
       posts: [
-        { id: 1, message: "Hi", likeCount: 10 },
-        { id: 2, message: "How are you", likeCount: 2 },
-        { id: 3, message: "yooo", likeCount: 4 },
+        { id: v1(), message: "Hi", likeCount: 10 },
+        { id: v1(), message: "How are you", likeCount: 2 },
+        { id: v1(), message: "yooo", likeCount: 4 },
       ],
       newPostText: "Hello everybody)!"
     },

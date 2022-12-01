@@ -4,9 +4,7 @@ import s from "./Dialogs.module.css"
 import {DialogsPropsType} from "./DialogsContainer";
 import DialogItem from "./DialogsItem/DialogItem";
 import Message
-    //  { myMessageType } 
     from "./Message/Message";
-import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 export type myDialogsDataType = {
@@ -14,21 +12,9 @@ export type myDialogsDataType = {
     name: string
     src: string
 }
-// type NewDialogsPageType = {
-//     dialogs: myDialogsDataType[]
-//     messages: myMessageType[]
-//     newDialogsMessage: string
-//     answerMessages: myMessageType[]
-// }
-
-// export type dialogsPageType = {
-//     dialogsData: NewDialogsPageType
-//     addMessage: () => void
-//     updateNewMessageText: (newMessage: string) => void
-//     // dispatch: (
-//     //     action: AllActionType
-//     // ) => void
-// }
+type FormDataType = {
+    newMessageBody: string
+}
 
 const Dialogs = (props: DialogsPropsType) => {
     const {dialogs, messages, answerMessages} = props.dialogsPage
@@ -46,23 +32,13 @@ const Dialogs = (props: DialogsPropsType) => {
         return <Message key={item.id} message={item.message} id={item.id}/>
     })
 
-    // let refLinkToTextarea = React.createRef<HTMLTextAreaElement>()
-
-    const addValueTextarea = () => {
-        // addMessage()
-        // dispatch(addMessageActionCreater())
-    }
-
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // const text = refLinkToTextarea.current?.value ? refLinkToTextarea.current.value : " "
         const text = e.currentTarget ? e.currentTarget.value : " "
-        // updateNewMessageText(text)
-        // dispatch(updateNewMessageTextActionCreater(text))
     }
     // if(!props.isAuth ) {
     //     return <Redirect to ={"./login"}/>
     // }
-    const addNewMessage = (values: any) => {
+    const addNewMessage = (values: FormDataType) => {
         addMessage(values.newMessageBody)
     }
 
@@ -83,12 +59,7 @@ const Dialogs = (props: DialogsPropsType) => {
     )
 }
 
-type AddMessageFormType = {
-    value: string
-    onChange: () => void
-}
-
-const AddMessageForm: React.FC<any> = (props) => {
+const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -99,12 +70,12 @@ const AddMessageForm: React.FC<any> = (props) => {
                 {/*    onChange={props.onChangeHandler}>*/}
                 {/*</textarea>*/}
             </div>
-            <SuperButton onClick={props.addValueTextarea}>Add</SuperButton>
+            <SuperButton >Add</SuperButton>
         </form>
     )
 }
 
-const AddMessageFormRedax = reduxForm<any>({
+const AddMessageFormRedax = reduxForm<FormDataType>({
     form: "dialogAddMessageForm"
 })(AddMessageForm)
 

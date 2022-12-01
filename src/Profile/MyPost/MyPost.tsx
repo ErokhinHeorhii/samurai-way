@@ -1,28 +1,27 @@
 import React from 'react'
 import s from './MyPost.module.css'
 import Post from './Post/Post'
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 export type myPostType = {
-    id: number
+    id: string
     message: string
     likeCount: number
 }
 
 type NewPostDataTypeForReduser = {
     posts: myPostType[]
-    // newPostText: string
+}
+
+type FormDataType = {
+    newPostText: string
 }
 
 export type postDataType =
     NewPostDataTypeForReduser &
     {
         posts: myPostType[]
-        // newPostText: string
-        addPost: (newPostText:string) => void
-        // updateNewPostText: (newText: string) => void
-        // dispatch: (action: AllActionType
-        // ) => void
+        addPost: (newPostText: string) => void
     }
 
 
@@ -30,10 +29,7 @@ const MyPost = (props: postDataType) => {
 
     const {
         posts,
-        // newPostText,
-        // dispatch,
         addPost,
-        // updateNewPostText
     } = props
 
     let postsElements = posts.map(item => {
@@ -44,18 +40,9 @@ const MyPost = (props: postDataType) => {
         />
     })
 
-    // let newPostElement = React.createRef<HTMLTextAreaElement>()
-
-    const onAddPost = (values:any) => {
+    const onAddPost = (values: FormDataType) => {
         addPost(values.newPostText)
-        // dispatch(addPostActionCreater())
     }
-
-    // const onPostChange = () => {
-    //     let text = newPostElement.current ? newPostElement.current.value : " "
-    //     updateNewPostText(text)
-    //     // dispatch(updateNewPostTextActionCreater(text))
-    // }
 
     return (
         <div className={s.postsBlock}>
@@ -68,23 +55,23 @@ const MyPost = (props: postDataType) => {
     )
 }
 
-const AddPostRedaxForm = reduxForm<any>({
-    //даем уникальное имя форме
-    form: "ProfileAddNewPostForm"
-})(AddNewPostForm)
-
-function AddNewPostForm(props: any) {
+const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     //Внутри  функции handleSubmit происходит  отмена действий по умолчанию;
     //         все данные упаковывает в обьект;
     //         props.OnSubmit(formData)
     return <form onSubmit={props.handleSubmit}>
-        <div><Field name="newPostText" component={"textarea"}></Field>
-            {/*<textarea ref={props.ref} onChange={props.onChange} value={props.value}></textarea>*/}
+        <div>
+            <Field name="newPostText" component={"textarea"}></Field>
         </div>
         <div>
             <button>Add</button>
         </div>
     </form>;
 }
+
+const AddPostRedaxForm = reduxForm<FormDataType>({
+    //даем уникальное имя форме
+    form: "ProfileAddNewPostForm"
+})(AddNewPostForm)
 
 export default MyPost

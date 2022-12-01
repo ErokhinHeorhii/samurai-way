@@ -6,6 +6,7 @@ import {profileApi, userApi} from "../../api/Api";
 import {followAC, toggleIsFollowingAC} from "./UsersReduser";
 import {AppThunk} from "./RedaxStore";
 import profile from "../../Profile/Profile";
+import {v1} from "uuid";
 
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -14,12 +15,10 @@ export const SET_STATUS = "SET_STATUS"
 
 export type AddPostACType = ReturnType<typeof addPostActionCreater>;
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
-// export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextActionCreater>;
 export type SetStatusACType = ReturnType<typeof setStatusAC>
 export type actionTypeForProfileReducer =
     AddPostACType |
     SetUserProfileACType |
-    // UpdateNewPostTextACType |
     SetStatusACType
 
 export type ProfilePageType = {
@@ -45,18 +44,16 @@ export type ProfilePageType = {
 
 export type InitialStateTypeForProfile = {
     posts: myPostType[]
-    // newPostText: string
     profile: ProfilePageType
     status: string
 }
 
 let initialState = {
     posts: [
-        {id: 1, message: "Hi", likeCount: 10},
-        {id: 2, message: "How are you", likeCount: 2},
-        {id: 3, message: "yooo", likeCount: 4},
+        {id: v1(), message: "Hi", likeCount: 10},
+        {id: v1(), message: "How are you", likeCount: 2},
+        {id: v1(), message: "yooo", likeCount: 4},
     ],
-    // newPostText: "Hello everybody)!",
     profile: null,
     status: "Hello"
 }
@@ -69,18 +66,14 @@ const ProfileReducer = (
         case ADD_POST: {
 
             const newPost: myPostType = {
-                id: 5,
+                id: v1(),
                 message: action.newPostText,
                 likeCount: 5,
             };
             let newState = {...state, posts: [newPost, ...state.posts]}
-            // state.posts.push(newPost);
-            // state.newPostText = "";
+
             return newState;
         }
-        // case UPDATE_NEW_POST_TEXT: {
-        //     return {...state, newPostText: action.newText};
-        // }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
