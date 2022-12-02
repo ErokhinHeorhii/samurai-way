@@ -1,36 +1,51 @@
 import React from "react"
 import s from "./FormControl.module.css"
+import {WrappedFieldProps} from "redux-form/lib/Field";
 
-
-const FormControl  =(props:any)=>{
-
+type  FormControlParamsType = {
+    meta: {
+        touched: boolean
+        error?: string
+    },
 }
-export const Textarea = (props: any) => {
-    //необходимо достать их пропс input и другие неободимы пропсы и прокинуть в textarya
-    const {input, meta, ...restProps} = props
-    const isError =meta.touched && meta.error
+type  FormControlType = (params: FormControlParamsType) => React.ReactNode
+
+const FormControl: React.FC<FormControlParamsType> = (props) => {
+    const { meta:{touched, error}, children, ...restProps} = props
+    const isError = touched && error
 
     return (
-        <div className={s.formControl+ " " + (isError? s.error : "")}>
+        <div className={s.formControl + " " + (isError ? s.error : "")}>
             <div>
-                <textarea {...input} {...restProps}/>
+                {children}
             </div>
-            {  isError && <span className={s.spanError} >{meta.error}</span>}
+            {isError && <span className={s.spanError}>{error}</span>}
         </div>
     )
 }
+type TextareaType={
 
-export const Input = (props:any) => {
+}
+
+
+export const Textarea: React.FC<WrappedFieldProps> = (props) => {
     //необходимо достать их пропс input и другие неободимы пропсы и прокинуть в textarya
-    const {input, meta, ...restProps} = props
-    const isError =meta.touched && meta.error
+    const {input, meta,  ...restProps} = props
 
     return (
-        <div className={s.formControl+ " " + (isError? s.error : "")}>
-            <div>
-                <input {...input} {...restProps}/>
-            </div>
-            {  isError && <span className={s.spanError} >{meta.error}</span>}
-        </div>
+        <FormControl {...props}>
+            <textarea {...input} {...restProps}/>
+        </FormControl>
+    )
+}
+
+export const Input = (props: any) => {
+    //необходимо достать их пропс input и другие неободимы пропсы и прокинуть в textarya
+    const {input, meta, ...restProps} = props
+
+    return (
+        <FormControl {...props}>
+            <input {...input} {...restProps}/>
+        </FormControl>
     )
 }
