@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
-import {userApi} from "../../api/Api";
+import {authApi, userApi} from "../../api/Api";
 import {setUserProfile} from "./ProfileReduser";
-import {AppThunk} from "./RedaxStore";
+import {AppDispatch, AppThunk} from "./RedaxStore";
 
 const SET_USERS_DATA = "SET_USERS_DATA";
 
@@ -18,7 +18,7 @@ const initialState: InitialStateType = {
     login: null,
     isAuth: false
 }
-export type SetUserDataACType = ReturnType<typeof setAuthUserData>
+export type SetUserDataACType = ReturnType<typeof setAuthUserDataAC>
 
  export type ActionTypeForAuthReduser = SetUserDataACType
 
@@ -31,7 +31,6 @@ const HeaderAuthReduser = (
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true
             };
         }
         default:
@@ -39,13 +38,14 @@ const HeaderAuthReduser = (
     }
 };
 
-export const setAuthUserData = (userId: number, email: string, login: string) =>
+export const setAuthUserDataAC = (userId: number|null, email: string|null, login: string|null, isAuth: boolean) =>
     ({
         type: SET_USERS_DATA,
         payload: {
             userId: userId,
             email: email,
-            login: login
+            login: login,
+            isAuth:isAuth
         },
     } as const);
 
@@ -56,8 +56,30 @@ export const getAuthThunkCreator = ():AppThunk => {
             .then(res => {
                 if (res.data.resultCode === 0) {
                     const {id, login, email} = res.data.data
-                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setAuthUserDataAC(id, email, login, true))
 
+                }
+            })
+    }
+}
+
+export const loginThunkCreator = (email:string, password:string, rememberMe:boolean):AppThunk => {
+    return (dispatch:AppDispatch) => {
+        authApi.login(email, password, rememberMe )
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(getAuthThunkCreator())
+                }
+            })
+    }
+}
+
+export const loginOutThunkCreator = ():AppThunk => {
+    return (dispatch: Dispatch<ActionTypeForAuthReduser>) => {
+        authApi.logOut()
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setAuthUserDataAC(null, null, null, false))
                 }
             })
     }
@@ -66,3 +88,6 @@ export const getAuthThunkCreator = ():AppThunk => {
 
 
 export default HeaderAuthReduser;
+
+
+//connect создает calBack rjnjhsq получает указанные параметры и dispatch  loginThunkCreator с данными параметрами

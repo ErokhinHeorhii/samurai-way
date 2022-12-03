@@ -26,7 +26,7 @@
     border-radius: 5px;
 }
 .auth {
-    /*padding-right: 10px;*/
+    /*margin-right: 10px;*/
     display: inline-block;
     display: flex;
     width: 45px;
@@ -39,4 +39,18 @@
     justify-content: center;
     background-color: #a05f9c;
     color: #61dafb;
+}
+
+.button{
+    color: #61dafb;
+    margin-left: 5px;
+    height: 25px;
+    background-color: #a05f9c;
+    cursor: pointer;
+    border: 2px solid darkblue;
+    transition: .3s;
+    border-radius: 5px;
+}
+.button:hover {
+    background-color:  #a08f9c;
 }

@@ -16,7 +16,7 @@ export const SET_STATUS = "SET_STATUS"
 export type AddPostACType = ReturnType<typeof addPostActionCreater>;
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
 export type SetStatusACType = ReturnType<typeof setStatusAC>
-export type actionTypeForProfileReducer =
+export type ActionTypeForProfileReducer =
     AddPostACType |
     SetUserProfileACType |
     SetStatusACType
@@ -60,7 +60,7 @@ let initialState = {
 
 const ProfileReducer = (
     state: InitialStateTypeForProfile = initialState,
-    action: actionTypeForProfileReducer
+    action: ActionTypeForProfileReducer
 ): InitialStateTypeForProfile => {
     switch (action.type) {
         case ADD_POST: {
@@ -109,7 +109,7 @@ export const setStatusAC = (status: string) => {
 
 
 export const getProfileThunkCreator = (userId: string): AppThunk => {
-    return (dispatch: Dispatch<actionTypeForProfileReducer>) => {
+    return (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
 
         userApi.getProfile(userId)
             .then(res => {
@@ -118,7 +118,7 @@ export const getProfileThunkCreator = (userId: string): AppThunk => {
     }
 }
 export const getStatusThunkCreator = (userId: string): AppThunk => {
-    return (dispatch: Dispatch<actionTypeForProfileReducer>) => {
+    return (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
 
         profileApi.getStatus(userId)
             .then(res => {
@@ -128,7 +128,7 @@ export const getStatusThunkCreator = (userId: string): AppThunk => {
 }
 
 export const updateStatusThunkCreator = (status: string): AppThunk => {
-    return (dispatch: Dispatch<actionTypeForProfileReducer>) => {
+    return (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
 
         profileApi.updateStatus(status)
             .then(res => {

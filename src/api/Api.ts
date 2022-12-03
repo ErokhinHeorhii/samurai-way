@@ -2,7 +2,6 @@ import axios from "axios";
 import {UsersType} from "../components/Redux/UsersReduser";
 import {ProfilePageType} from "../components/Redux/ProfileReduser";
 
-
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {"API-KEY": "f3e0224e-c3b3-4350-8aca-c2b6191bc369"},
@@ -47,6 +46,16 @@ export const profileApi = {
 
     updateStatus: (status:string) => {
         return instance.put(`profile/status/`,{ status})
+    }
+}
+
+
+export const authApi = {
+    login(email:string, password:string, rememberMe:boolean=false){
+        return instance.post(`auth/login`,{email, password, rememberMe})
+    },
+    logOut(){
+        return instance.delete(`auth/login`)
     }
 }
 
