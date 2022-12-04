@@ -3,9 +3,9 @@ import DialogReducer from "./DialogReduser";
 import ProfileReducer, {ActionTypeForProfileReducer} from "./ProfileReduser";
 import SideBarReducer from "./SideBarReduser";
 import UsersRedusers, {ActionTypeForUserReduser} from "./UsersReduser";
-import HeaderAuthReduser, {ActionTypeForAuthReduser} from "./HeaderAuthReduser";
+import HeaderAuthReduser, {ActionTypeForAuthReduser, FormStopSubmitType} from "./HeaderAuthReduser";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
-import {reducer as formReducer} from 'redux-form'
+import {reducer as formReducer, stopSubmit} from 'redux-form'
 
 export const rootReduser = combineReducers({
     profilePage: ProfileReducer,
@@ -20,8 +20,9 @@ export type AllAppStateType = ReturnType<typeof rootReduser>
 
 type AnyAction =
     ActionTypeForUserReduser
-    |ActionTypeForAuthReduser
-    |ActionTypeForProfileReducer
+    | ActionTypeForAuthReduser
+    | ActionTypeForProfileReducer
+    | FormStopSubmitType
 
 export type AppDispatch = ThunkDispatch<AllAppStateType, unknown, AnyAction>
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,

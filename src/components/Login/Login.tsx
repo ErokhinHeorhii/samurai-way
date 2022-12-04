@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {loginOutThunkCreator, loginThunkCreator} from "../Redux/HeaderAuthReduser";
 import {Redirect} from "react-router-dom";
 import {AllAppStateType} from "../Redux/RedaxStore";
+import s from "../common/formControls/FormControl.module.css"
 
 type FormDataType={
     email:string
@@ -45,10 +46,13 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div style={{paddingTop: "10px"}}>
                 <Field placeholder={"Password"} name={"password"}  type ={"password"} component={Input} validate={[requiredField,maxLength25]}></Field>
             </div>
+            { props.error && <div className={s.formError}>{props.error}</div>}
             <div style={{display: "flex", width: "180px", justifyContent: "space-between", paddingTop: "15px"}}>
+
                 <div>
                     <Field component={"input"} name={"rememberMe"} type={"checkbox"}></Field> remember me
                 </div>
+
                 <div>
                     <button>Login</button>
                 </div>
@@ -77,8 +81,5 @@ const Login = (props:LoginPropsType) => {
         <LoginRedaxForm onSubmit={onSubmitHandler}/>
     </div>
 }
-
-
-
 
 export default  connect(mapStateToProps, {loginThunkCreator})(Login)

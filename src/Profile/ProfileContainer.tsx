@@ -18,6 +18,8 @@ type WithRouterType = {
 type MapStateToPropsType = {
     profile: ProfilePageType
     status:string
+    authorizedUserId:number|null
+    isAuth:boolean
 }
 type MapDispatchToPropsType = {
     getProfileThunkCreator: (userId: string) => void
@@ -33,8 +35,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     componentDidMount() {
         //получаем userId из props которые прокинули с помощью withRouter (match/params/ userId: XXX)
         let userId = this.props.match.params.userId
-        if (!userId) {
-            userId = "26184"
+        if(!userId) {
+            userId = this.props.authorizedUserId ? this.props.authorizedUserId.toString() : ""
         }
 
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
@@ -46,6 +48,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 //        перенесли логику в Thunk
         this.props.getProfileThunkCreator(userId)
         this.props.getStatusThunkCreator(userId)
+
+
     }
 
     render() {
@@ -55,7 +59,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         return (<div>
             <Profile profile={this.props.profile}
                      status ={this.props.status}
-                     updateStatusThunkCreator ={this.props.updateStatusThunkCreator}/>
+                     updateStatusThunkCreator ={this.props.updateStatusThunkCreator}
+            />
         </div>)
     }
 }
@@ -63,7 +68,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     // isAuth: state.auth.isAuth
-    status:state.profilePage.status
+    status:state.profilePage.status,
+    authorizedUserId:state.auth.userId,
+    isAuth:state.auth.isAuth
 })
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer)

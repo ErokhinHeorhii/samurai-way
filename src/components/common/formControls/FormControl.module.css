@@ -14,3 +14,12 @@
 .spanError {
     padding-left: 50px;
 }
+
+.formError{
+    color:red;
+    border: 1px Solid Red;
+    width:175px;
+    height: 35px;
+    margin-top: 10px;
+    word-wrap:break-word;
+}

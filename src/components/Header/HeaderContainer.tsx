@@ -11,7 +11,7 @@ type setAuthUserDataType = {
 }
 
 type MapStateToPropsType = {
-    id?: number | null
+    userId?: number | null
     email?: string | null
     login: string | null
     isAuth: boolean
@@ -46,7 +46,7 @@ const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth,
         login: state.auth.login,
-        id: state.auth.id,
+        userId: state.auth.userId,
         email: state.auth.email
     }
 }
