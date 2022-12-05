@@ -36,7 +36,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         //получаем userId из props которые прокинули с помощью withRouter (match/params/ userId: XXX)
         let userId = this.props.match.params.userId
         if(!userId) {
-            userId = this.props.authorizedUserId ? this.props.authorizedUserId.toString() : ""
+            //history.push заменяет путь в url напрямую без state
+            userId = this.props.authorizedUserId ? this.props.authorizedUserId.toString() : this.props.history.push("/login")!
         }
 
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)

@@ -15,6 +15,10 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {connect} from "react-redux";
+import {initialiseAppTC} from "./components/Redux/AppReduser";
+import {AllAppStateType} from "./components/Redux/RedaxStore";
+import Preloader from "./components/common/preloader/Preloader";
 
 
 export type TypeForAllData = {
@@ -40,34 +44,56 @@ export type AppStateType = {
         action: AllActionType
     ) => void
 }
-
-function App() {
-
-
-    return (
-        <div className="app-wrapper">
-            <HeaderContainer/>
-            <NavbarContainer/>
-            <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() =>
-                    <DialogsContainer
-                    />}/>
-                <Route path='/profile/:userId?' render={() =>
-                    //обозначение параментра для withRouter в "match/path/userId"
-                    <ProfileContainer
-                        // postsData={profilePage}
-                        //     dispatch={dispatch}
-                    />}/>
-                <Route path='/users' render={() =>
-                    <UsersContainer/>}/>
-                <Route path='/login' render={() =>
-                    <Login/>}/>
-                <Route path='/news' component={News}/>
-                <Route path='/music' component={Music}/>
-                <Route path='/setting' component={Setting}/>
-            </div>
-        </div>
-    );
+type MapStateToPropsType = {
+    initialized:boolean
+}
+type MapDispatchToPropsType = {
+    initialiseAppTC: () => void
 }
 
-export default App;
+const mapStateToProps = (state: AllAppStateType):MapStateToPropsType => ({
+    initialized: state.initialized.initialized
+})
+
+export type AppPropsType = MapDispatchToPropsType & MapStateToPropsType
+
+class App extends React.Component<AppPropsType> {
+
+    componentDidMount() {
+        this.props.initialiseAppTC()
+    }
+
+    render() {
+
+        if(!this.props.initialized) {
+            return <Preloader/>
+        }
+        return (
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <NavbarContainer/>
+                <div className='app-wrapper-content'>
+                    <Route path='/dialogs' render={() =>
+                        <DialogsContainer
+                        />}/>
+                    <Route path='/profile/:userId?' render={() =>
+                        //обозначение параментра для withRouter в "match/path/userId"
+                        <ProfileContainer
+                            // postsData={profilePage}
+                            //     dispatch={dispatch}
+                        />}/>
+                    <Route path='/users' render={() =>
+                        <UsersContainer/>}/>
+                    <Route path='/login' render={() =>
+                        <Login/>}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/setting' component={Setting}/>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default connect(mapStateToProps,
+    {initialiseAppTC})(App)

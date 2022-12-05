@@ -54,7 +54,7 @@ export const setAuthUserDataAC = (userId: number | null, email: string | null, l
 
 export const getAuthThunkCreator = (): AppThunk => {
     return (dispatch: Dispatch<ActionTypeForAuthReduser>) => {
-        userApi.getAuth()
+     return   userApi.getAuth()
             .then(res => {
                 if (res.data.resultCode === 0) {
                     const {id, login, email} = res.data.data

@@ -26,7 +26,7 @@ const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
         isAuth: state.auth.isAuth,
     }
 }
-export type LoginPropsType =  MapDispatchToPropsType &MapStateToPropsType
+export type LoginPropsType =  MapDispatchToPropsType & MapStateToPropsType
 
 const maxLength25=maxLengthCreator(25)
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {

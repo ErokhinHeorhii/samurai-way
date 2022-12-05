@@ -6,6 +6,7 @@ import UsersRedusers, {ActionTypeForUserReduser} from "./UsersReduser";
 import HeaderAuthReduser, {ActionTypeForAuthReduser, FormStopSubmitType} from "./HeaderAuthReduser";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
 import {reducer as formReducer, stopSubmit} from 'redux-form'
+import AppReducer, {ActionTypeForAppReduser} from "./AppReduser";
 
 export const rootReduser = combineReducers({
     profilePage: ProfileReducer,
@@ -13,16 +14,18 @@ export const rootReduser = combineReducers({
     sideBar: SideBarReducer,
     usersPage: UsersRedusers,
     auth: HeaderAuthReduser,
+    initialized: AppReducer,
     form: formReducer
 });
 
 export type AllAppStateType = ReturnType<typeof rootReduser>
 
-type AnyAction =
+export type AnyAction =
     ActionTypeForUserReduser
     | ActionTypeForAuthReduser
     | ActionTypeForProfileReducer
     | FormStopSubmitType
+| ActionTypeForAppReduser
 
 export type AppDispatch = ThunkDispatch<AllAppStateType, unknown, AnyAction>
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,

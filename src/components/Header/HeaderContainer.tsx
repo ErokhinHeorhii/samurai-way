@@ -18,24 +18,11 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
     // setAuthUserData: (userAprId: number, email: string, login: string) => void
-    getAuthThunkCreator:()=>void
     loginOutThunkCreator:()=>void
 }
  export type HeaderPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
-
-    componentDidMount() {
-        // userApi.getAuth()
-        //     .then(res => {
-        //         if (res.data.resultCode === 0) {
-        //             console.log(res.data.data)
-        //             const {id, login, email} = res.data.data
-        //         this.props.setAuthUserData(id, email, login)
-        //         }
-        //     })
-        this.props.getAuthThunkCreator()
-    }
 
     render() {
         return <Header {...this.props}/>
@@ -51,4 +38,4 @@ const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {getAuthThunkCreator, loginOutThunkCreator})(HeaderContainer)
+export default connect(mapStateToProps, {loginOutThunkCreator})(HeaderContainer)
