@@ -19,6 +19,13 @@ import {ThunkAction} from "redux-thunk";
 import {ActionTypeForAuthReduser} from "../Redux/HeaderAuthReduser";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirectComponent";
+import {
+    getIsFetching, getIsFollowingInProgress,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers,
+    getСurrentPage,
+} from "../Redux/users-selectors";
 
 export type MapStateToPropsType = {
     users: UsersType[]
@@ -105,12 +112,13 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
 
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isFollowingInProgress:state.usersPage.followingInProgress
+        //переписал на селекторы
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage:getСurrentPage(state),
+        isFetching: getIsFetching(state),
+        isFollowingInProgress:getIsFollowingInProgress(state)
     }
 }
 
@@ -161,10 +169,6 @@ export default compose <React.ComponentType>(
     connect(mapStateToProps, {
         follow: followAC,
         unFollow: unfollowAC,
-        // setUsers: setUsersAC,
-        // setCurrentPage: setCurrentPageAC,
-        // setTotalUsersCount: setTotalUsersCountAC,
-        // toggleIsFetching: toggleIsFetchingAC,
         toggleIsFollowingInProgress: toggleIsFollowingAC,
         getUsersThunkCreator:getUsersThunkCreator,
         followSuccessThunkCreator:followSuccessThunkCreator,
