@@ -6,12 +6,12 @@ type StateType = {
     status: string
 }
 
-type PropsType = {
+export type ProfileStatusPropsType = {
     status: string
     updateStatusThunkCreator: (status: string) => void
 }
 
-class ProfileStatus extends React.Component<PropsType> {
+class ProfileStatus extends React.Component<ProfileStatusPropsType> {
 
     state = {
         editMode: false,
@@ -35,14 +35,13 @@ class ProfileStatus extends React.Component<PropsType> {
     }
 
     onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
-debugger
         this.props.updateStatusThunkCreator(e.currentTarget.value)
         this.setState({
             status: e.currentTarget.value
         })
     }
 
-    componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+    componentDidUpdate(prevProps: ProfileStatusPropsType, prevState: StateType) {
         console.log("componentDidUpdate")
         /*обязательно делать условие чтобы не было зацикливания*/
         if (prevProps.status !== this.props.status) {

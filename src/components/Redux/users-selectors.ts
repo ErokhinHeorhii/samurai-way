@@ -1,9 +1,17 @@
 import {AllAppStateType} from "./RedaxStore";
 import {UsersType} from "./UsersReduser";
+import {createSelector} from "reselect";
 
- export const  getUsers=(state:AllAppStateType):UsersType[] =>{
-return state.usersPage.users
+// state:AllAppStateType
+// UsersType[]
+
+export const  getUsers=(state:AllAppStateType):UsersType[] =>{
+    return state.usersPage.users
 }
+
+export const getUsersSelector = createSelector(getUsers, (users:UsersType[])=>{
+    return users
+})
 
  export const getPageSize=(state:AllAppStateType): number =>{
     return state.usersPage.pageSize

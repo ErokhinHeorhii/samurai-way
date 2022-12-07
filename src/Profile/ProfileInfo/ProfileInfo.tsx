@@ -3,6 +3,7 @@ import {ProfilePageType} from "../../components/Redux/ProfileReduser";
 import Preloader from "../../components/common/preloader/Preloader";
 import avatarProfile from "../../assets/images/AvatarForProfile.jpg"
 import ProfileStatus from "./ProfileStatus"
+import ProfileStatusWithHooks from "./ProfileStatusWithHook";
 
 type PropsType = {
     profile: ProfilePageType
@@ -39,7 +40,7 @@ const ProfileInfo = (props: PropsType) => {
                 }</span>
 
         </div>
-        <ProfileStatus status={props.status} updateStatusThunkCreator={props.updateStatusThunkCreator}/>
+        <ProfileStatusWithHooks status={props.status} updateStatusThunkCreator={props.updateStatusThunkCreator}/>
 
     </div>)
 }
