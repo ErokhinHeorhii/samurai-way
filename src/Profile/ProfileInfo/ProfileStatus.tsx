@@ -42,7 +42,6 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     }
 
     componentDidUpdate(prevProps: ProfileStatusPropsType, prevState: StateType) {
-        console.log("componentDidUpdate")
         /*обязательно делать условие чтобы не было зацикливания*/
         if (prevProps.status !== this.props.status) {
             this.setState({

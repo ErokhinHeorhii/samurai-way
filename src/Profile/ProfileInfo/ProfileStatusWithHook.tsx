@@ -29,9 +29,10 @@ const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
         setStatus(e.currentTarget.value)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
 
-    },[])
     return (
         <div className={style.wrapperForStatus}>
 

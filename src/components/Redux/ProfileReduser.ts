@@ -122,6 +122,7 @@ export const getStatusThunkCreator = (userId: string): AppThunk => {
 
         profileApi.getStatus(userId)
             .then(res => {
+                console.log("status",res.data)
                 dispatch(setStatusAC(res.data))
             })
     }
