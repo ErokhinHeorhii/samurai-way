@@ -27,8 +27,8 @@ export type postDataType =
     }
 
 
-const MyPost = (props: postDataType) => {
-
+const MyPost = React.memo((props: postDataType) => {
+    console.log("render")
     const {
         posts,
         addPost,
@@ -55,8 +55,9 @@ const MyPost = (props: postDataType) => {
             </div>
         </div>
     )
-}
- const maxLength20=maxLengthCreator(20)
+});
+
+const maxLength20=maxLengthCreator(20)
 
 const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     //Внутри  функции handleSubmit происходит  отмена действий по умолчанию;

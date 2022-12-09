@@ -12,6 +12,7 @@ export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 export const SET_USER_PROFILE = "SET_USER_PROFILE"
 export const SET_STATUS = "SET_STATUS"
+export const DELETE_POST = "DELETE_POST"
 
 export type AddPostACType = ReturnType<typeof addPostActionCreater>;
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
@@ -19,7 +20,8 @@ export type SetStatusACType = ReturnType<typeof setStatusAC>
 export type ActionTypeForProfileReducer =
     AddPostACType |
     SetUserProfileACType |
-    SetStatusACType
+    SetStatusACType|
+    ReturnType<typeof deletePostACForTest>
 
 export type ProfilePageType = {
     userId: string
@@ -74,6 +76,11 @@ const ProfileReducer = (
 
             return newState;
         }
+        case DELETE_POST: {
+            let newState = {...state, posts: state.posts
+                    .filter(item=> item.id != action.payload.id)}
+            return newState;
+        }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
@@ -107,6 +114,13 @@ export const setStatusAC = (status: string) => {
     return {type: SET_STATUS, status} as const
 }
 
+
+export const deletePostACForTest =(id:string)=>{
+    return {
+        type:DELETE_POST,
+        payload:{id}
+    } as const
+}
 
 export const getProfileThunkCreator = (userId: string): AppThunk => {
     return (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
