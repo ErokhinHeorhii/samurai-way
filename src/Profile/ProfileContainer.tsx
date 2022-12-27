@@ -5,9 +5,9 @@ import {
     getProfileThunkCreator,
     getStatusThunkCreator,
     ProfilePageType, updateStatusThunkCreator,
-} from "../components/Redux/ProfileReduser";
+} from "../components/Redux/ProfileReducer";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../HOC/WithAuthRedirectComponent";
 import {compose} from "redux";
 

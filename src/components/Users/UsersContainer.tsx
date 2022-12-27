@@ -1,29 +1,22 @@
 import React from "react"
 import {connect} from "react-redux"
-import {AllAppStateType, AppThunk} from "../Redux/RedaxStore"
+import {AllAppStateType} from "../Redux/RedaxStore"
 import {
-    ActionTypeForUserReduser,
     followAC, followSuccessThunkCreator, getUsersThunkCreator,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC, toggleIsFollowingAC,
+    toggleIsFollowingAC,
     unfollowAC, unFollowSuccessThunkCreator,
     UsersType
-} from "../Redux/UsersReduser"
+} from "../Redux/UsersReducer"
 import Users from "./Users"
 import s from "./Users.module.css"
 import Preloader from "../common/preloader/Preloader"
-import {userApi} from "../../api/Api";
-import {ThunkAction} from "redux-thunk";
-import {ActionTypeForAuthReduser} from "../Redux/HeaderAuthReduser";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirectComponent";
 import {
     getIsFetching, getIsFollowingInProgress,
     getPageSize,
     getTotalUsersCount,
-    getUsers, getUsersSelector,
+     getUsersSelector,
     getСurrentPage,
 } from "../Redux/users-selectors";
 
@@ -37,53 +30,29 @@ export type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    // setUsers: (users: UsersType[]) => void
-    // setCurrentPage: (currentPage: number) => void
-    // setTotalUsersCount: (totalUsersCount: number) => void
-    // toggleIsFetching: (isFetching: boolean) => void
-    toggleIsFollowingInProgress: (isFollowing: boolean, userId:number) => void
-    getUsersThunkCreator:(currentPage: number, pageSize: number)=>void
-    followSuccessThunkCreator:(userId: number)=>void
-    unFollowSuccessThunkCreator:(userId: number)=>void
+    toggleIsFollowingInProgress: (isFollowing: boolean, userId: number) => void
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void
+    followSuccessThunkCreator: (userId: number) => void
+    unFollowSuccessThunkCreator: (userId: number) => void
 }
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export class UsersApiComponent extends React.Component<UsersPropsType> {
     constructor(props: UsersPropsType) {
-      super(props)
+        super(props)
     }
 
     // метод вызывается после вмонтирования компоненты в DOM
     componentDidMount(): void {
-        /*используем санки для запроса к серверу*/
-        this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
-
-        // this.props.toggleIsFetching(true)
-        // userApi.getUsers(this.props.currentPage, this.props.pageSize)
-        //     /*вынесли запрос в файл api.js в функцию getUsers*/
-        //     .then(data => {
-        //         this.props.toggleIsFetching(false)
-        //         this.props.setUsers(data.items)
-        //         this.props.setTotalUsersCount(Math.ceil(data.totalCount / 350))
-        //     })
+        let {currentPage, pageSize, getUsersThunkCreator }= this.props
+        getUsersThunkCreator(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-
+        let {getUsersThunkCreator, pageSize }= this.props
         /*используем санки для запроса к серверу*/
-        this.props.getUsersThunkCreator(pageNumber,this.props.pageSize)
-        // this.props.setCurrentPage(pageNumber)
-        // this.props.toggleIsFetching(true)
-        // // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true})
-        // userApi.getUsers(pageNumber, this.props.pageSize)
-        //     .then(data => {
-        //         console.log(data)
-        //         this.props.toggleIsFetching(false)
-        //         this.props.setUsers(data.items)
-        //     })
+        getUsersThunkCreator(pageNumber, pageSize)
     }
 
     render() {
@@ -98,14 +67,10 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
-                    follow={this.props.follow}
-                    unFollow={this.props.unFollow}
-                    // toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
                     isFollowingInProgress={this.props.isFollowingInProgress}
                     followSuccessThunkCreator={this.props.followSuccessThunkCreator}
                     unFollowSuccessThunkCreator={this.props.unFollowSuccessThunkCreator}
                 />}
-
         </div>
     }
 }
@@ -116,35 +81,11 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
         users: getUsersSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
-        currentPage:getСurrentPage(state),
+        currentPage: getСurrentPage(state),
         isFetching: getIsFetching(state),
-        isFollowingInProgress:getIsFollowingInProgress(state)
+        isFollowingInProgress: getIsFollowingInProgress(state)
     }
 }
-
-/*let mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-           follow: (userId: number) => {
-             dispatch(followAC(userId))
-           },
-           unFollow: (userId: number) => {
-             dispatch(unfollowAC(userId))
-           },
-           setUsers: (users: UsersType[]) => {
-             dispatch(setUsersAC(users))
-           },
-           setCurrentPage: (currentPage: number) => {
-             dispatch(setCurrentPageAC(currentPage))
-           },
-           setTotalUsersCount: (totalUsersCount: number) => {
-             dispatch(setTotalUsersCountAC(totalUsersCount))
-           },
-           toggleIsFetching: (isFetching: boolean) => {
-             dispatch(toggleIsFetchingAC(isFetching))
-           }
-
-    }
-}*/
 // let AuthRedirectComponent = withAuthRedirect(UsersApiComponent)
 
 //    в случа когда мы передаем в connect обьект под копотом connect доставляет dispatch
@@ -165,13 +106,13 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 // dispatch(action)
 
 //добавили финкцию compose  и зарефакторили с ее помощью
-export default compose <React.ComponentType>(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         follow: followAC,
         unFollow: unfollowAC,
         toggleIsFollowingInProgress: toggleIsFollowingAC,
-        getUsersThunkCreator:getUsersThunkCreator,
-        followSuccessThunkCreator:followSuccessThunkCreator,
+        getUsersThunkCreator: getUsersThunkCreator,
+        followSuccessThunkCreator: followSuccessThunkCreator,
         unFollowSuccessThunkCreator: unFollowSuccessThunkCreator
     }),
     withAuthRedirect

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { addPostActionCreater }
-from '../../components/Redux/ProfileReduser'
+from '../../components/Redux/ProfileReducer'
 import { AllAppStateType } from '../../components/Redux/RedaxStore'
 import MyPost, { myPostType } from './MyPost'
 

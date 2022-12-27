@@ -1,6 +1,6 @@
 import axios from "axios";
-import {UsersType} from "../components/Redux/UsersReduser";
-import {ProfilePageType} from "../components/Redux/ProfileReduser";
+import {UsersType} from "../components/Redux/UsersReducer";
+import {ProfilePageType} from "../components/Redux/ProfileReducer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -14,7 +14,6 @@ export const userApi = {
         return instance.get<ResponseType>(`users?page=${currentPage}&count=${pageSize}`)
             .then(res => {
                 return res.data
-                console.log(res)
             })
     },
 

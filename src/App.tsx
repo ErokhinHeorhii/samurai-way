@@ -16,7 +16,7 @@ import ProfileContainer from "./Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {initialiseAppTC} from "./components/Redux/AppReduser";
+import {initialiseAppTC} from "./components/Redux/AppReducer";
 import {AllAppStateType} from "./components/Redux/RedaxStore";
 import Preloader from "./components/common/preloader/Preloader";
 
@@ -78,10 +78,7 @@ class App extends React.Component<AppPropsType> {
                         />}/>
                     <Route path='/profile/:userId?' render={() =>
                         //обозначение параментра для withRouter в "match/path/userId"
-                        <ProfileContainer
-                            // postsData={profilePage}
-                            //     dispatch={dispatch}
-                        />}/>
+                        <ProfileContainer/>}/>
                     <Route path='/users' render={() =>
                         <UsersContainer/>}/>
                     <Route path='/login' render={() =>
@@ -89,6 +86,7 @@ class App extends React.Component<AppPropsType> {
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/setting' component={Setting}/>
+                    {/*<Route path='/' component={ProfileContainer}/>*/}
                 </div>
             </div>
         );

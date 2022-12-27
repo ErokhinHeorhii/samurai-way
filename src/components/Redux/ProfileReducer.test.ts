@@ -2,9 +2,8 @@ import ProfileReducer, {
     addPostActionCreater,
     deletePostACForTest,
     InitialStateTypeForProfile
-} from "./ProfileReduser";
+} from "./ProfileReducer";
 import {v1} from "uuid";
-import {myPostType} from "../../Profile/MyPost/MyPost";
 let initialState: InitialStateTypeForProfile
 const id_0 = v1()
 const id_1 = v1()

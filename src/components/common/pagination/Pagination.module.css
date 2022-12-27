@@ -1,0 +1,19 @@
+.page {
+    margin: 5px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
+    color: blueviolet;
+    font-size: 1.1rem;
+}
+
+.wrapperPage {
+    border-radius: 8px;
+    width: 200px;
+    margin: 5px auto;
+}
+.titlePage {
+    display: inline;
+}

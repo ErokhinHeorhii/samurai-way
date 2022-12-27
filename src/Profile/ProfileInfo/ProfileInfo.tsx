@@ -1,8 +1,7 @@
 import s from './ProfileInfo.module.css'
-import {ProfilePageType} from "../../components/Redux/ProfileReduser";
+import {ProfilePageType} from "../../components/Redux/ProfileReducer";
 import Preloader from "../../components/common/preloader/Preloader";
 import avatarProfile from "../../assets/images/AvatarForProfile.jpg"
-import ProfileStatus from "./ProfileStatus"
 import ProfileStatusWithHooks from "./ProfileStatusWithHook";
 
 type PropsType = {
@@ -10,8 +9,8 @@ type PropsType = {
     status: string
     updateStatusThunkCreator: (status: string) => void
 }
-const ProfileInfo = (props: PropsType) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatusThunkCreator}: PropsType) => {
+    if (!profile) {
         return <div>
             <img
                 className={s.Image}
@@ -29,18 +28,18 @@ const ProfileInfo = (props: PropsType) => {
         </div>
         <div className={s.discriptionBlock}>
             <div className={s.wrapperImage}>
-                <img className={s.avatarImage} src={props.profile.photos.small == null
+                <img className={s.avatarImage} src={profile.photos.small == null
                     ? avatarProfile
-                    : props.profile.photos.small}/>
+                    : profile.photos.small}/>
             </div>
-            <span className={s.wrapperName}>{props.profile.fullName}
-                {props.profile.lookingForAJob
+            <span className={s.wrapperName}>{profile.fullName}
+                {profile.lookingForAJob
                     ? <div className={s.lookingJob}> Looking for Job : YES </div>
                     : <div className={s.lookingJob}> Looking for Job : No </div>
                 }</span>
 
         </div>
-        <ProfileStatusWithHooks status={props.status} updateStatusThunkCreator={props.updateStatusThunkCreator}/>
+        <ProfileStatusWithHooks status={status} updateStatusThunkCreator={updateStatusThunkCreator}/>
 
     </div>)
 }

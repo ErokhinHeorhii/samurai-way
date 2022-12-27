@@ -3,7 +3,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/formControls/FormControls";
 import {maxLengthCreator, requiredField, validateEmail} from "../../utils/validators/validators";
 import {connect} from "react-redux";
-import {loginOutThunkCreator, loginThunkCreator} from "../Redux/HeaderAuthReduser";
+import { loginThunkCreator} from "../Redux/HeaderAuthReducer";
 import {Redirect} from "react-router-dom";
 import {AllAppStateType} from "../Redux/RedaxStore";
 import s from "../common/formControls/FormControl.module.css"
@@ -13,12 +13,12 @@ type FormDataType={
     password:string
     rememberMe:boolean
 }
+
 type MapStateToPropsType = {
       isAuth: boolean
 }
 type MapDispatchToPropsType = {
     loginThunkCreator: (email:string, password:string, rememberMe:boolean) => void
-    // loginOutThunkCreator:()=>void
 }
 
 const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
@@ -29,7 +29,8 @@ const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 export type LoginPropsType =  MapDispatchToPropsType & MapStateToPropsType
 
 const maxLength25=maxLengthCreator(25)
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit,error,...restProps}) => {
     /*handleSubmit doing:
     e.preventDefault
     * get all form data put them to Object
@@ -38,21 +39,31 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         {/*handleSubmit берем с пропс, в ней прописано отмена действий по умолчанию;
         все данные упаковывает в обьект;
         props.OnSubmit(formData)*/}
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 {/*контейнерная компонента Field*/}
-                <Field placeholder={"Login"} name={"email"} component={Input} validate={[requiredField,validateEmail]}></Field>
+                <Field placeholder={"Login"}
+                       name={"email"}
+                       component={Input}
+                       validate={[requiredField,validateEmail]}
+                ></Field>
             </div>
             <div style={{paddingTop: "10px"}}>
-                <Field placeholder={"Password"} name={"password"}  type ={"password"} component={Input} validate={[requiredField,maxLength25]}></Field>
+                <Field placeholder={"Password"}
+                       name={"password"}
+                       type ={"password"}
+                       component={Input}
+                       validate={[requiredField,maxLength25]}
+                ></Field>
             </div>
-            { props.error && <div className={s.formError}>{props.error}</div>}
+            { error && <div className={s.formError}>{error}</div>}
             <div style={{display: "flex", width: "180px", justifyContent: "space-between", paddingTop: "15px"}}>
-
                 <div>
-                    <Field component={"input"} name={"rememberMe"} type={"checkbox"}></Field> remember me
+                    <Field component={"input"}
+                           name={"rememberMe"}
+                           type={"checkbox"}
+                    ></Field> remember me
                 </div>
-
                 <div>
                     <button>Login</button>
                 </div>

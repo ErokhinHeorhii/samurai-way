@@ -1,16 +1,11 @@
-import {AnyAction, Dispatch} from "redux";
-import {authApi, userApi} from "../../api/Api";
-import {setUserProfile} from "./ProfileReduser";
-import {AppDispatch, AppThunk} from "./RedaxStore";
-import {stopSubmit} from "redux-form";
-import {ActionTypeForAuthReduser, getAuthThunkCreator} from "./HeaderAuthReduser";
+import { AppThunk} from "./RedaxStore";
+import { getAuthThunkCreator} from "./HeaderAuthReducer";
 
 const SET_INITIALIZED = "SET_INITIALIZED";
 
 export type InitialStateType = {
     initialized: boolean
 };
-
 
 const initialState: InitialStateType = {
     initialized: false
@@ -48,13 +43,9 @@ export const initialiseAppTC = (): AppThunk => {
             .then(()=>{
            dispatch(setInitializedSuccessAC())
         })
-
-
     }
 }
 
-
 export default AppReducer;
-
 
 //connect создает calBack rjnjhsq получает указанные параметры и dispatch  loginThunkCreator с данными параметрами

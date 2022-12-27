@@ -1,22 +1,8 @@
 import MyPostContainer from './MyPost/MyPostContainer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-import {ProfilePageType, updateStatusThunkCreator} from "../components/Redux/ProfileReduser";
+import {ProfilePageType} from "../components/Redux/ProfileReducer";
 import React from "react";
 
-// export type postPageType = {
-//   postsData: {
-//     posts: myPostType[]
-//     newPostText: string
-//   }
-//   // addPost: () => void
-//   // updateNewPostText: (newText: string) => void
-//   dispatch: (action:
-//     AddPostActionType |
-//     UpdateNewPostTextActionType |
-//     UpdateNewMessageTextType |
-//     AddMessageType
-//   ) => void
-// }
 
 type PropsType = {
     profile: ProfilePageType

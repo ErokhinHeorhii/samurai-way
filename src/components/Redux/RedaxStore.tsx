@@ -1,19 +1,19 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import DialogReducer from "./DialogReduser";
-import ProfileReducer, {ActionTypeForProfileReducer} from "./ProfileReduser";
-import SideBarReducer from "./SideBarReduser";
-import UsersRedusers, {ActionTypeForUserReduser} from "./UsersReduser";
-import HeaderAuthReduser, {ActionTypeForAuthReduser, FormStopSubmitType} from "./HeaderAuthReduser";
+import DialogReducer from "./DialogReducer";
+import ProfileReducer, {ActionTypeForProfileReducer} from "./ProfileReducer";
+import SideBarReducer from "./SideBarReducer";
+import UsersRedusers, {ActionTypeForUserReduser} from "./UsersReducer";
+import HeaderAuthReducer, {ActionTypeForAuthReducer, FormStopSubmitType} from "./HeaderAuthReducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
 import {reducer as formReducer, stopSubmit} from 'redux-form'
-import AppReducer, {ActionTypeForAppReduser} from "./AppReduser";
+import AppReducer, {ActionTypeForAppReduser} from "./AppReducer";
 
 export const rootReduser = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogReducer,
     sideBar: SideBarReducer,
     usersPage: UsersRedusers,
-    auth: HeaderAuthReduser,
+    auth: HeaderAuthReducer,
     initialized: AppReducer,
     form: formReducer
 });
@@ -22,7 +22,7 @@ export type AllAppStateType = ReturnType<typeof rootReduser>
 
 export type AnyAction =
     ActionTypeForUserReduser
-    | ActionTypeForAuthReduser
+    | ActionTypeForAuthReducer
     | ActionTypeForProfileReducer
     | FormStopSubmitType
 | ActionTypeForAppReduser

@@ -2,7 +2,7 @@
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import { AllAppStateType } from "../Redux/RedaxStore";
-import { IsideinitialStateTypeForNavbar } from "../Redux/SideBarReduser";
+import { IsideinitialStateTypeForNavbar } from "../Redux/SideBarReducer";
 
 type MapStateToPropsType = {
     sideBar:IsideinitialStateTypeForNavbar 

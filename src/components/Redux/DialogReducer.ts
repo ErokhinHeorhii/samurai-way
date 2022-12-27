@@ -4,7 +4,6 @@ import {myMessageType} from "../Dialogs/Message/Message";
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 export const ADD_MESSAGE = "ADD-MESSAGE";
 
-// export type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextActionCreater>;
 export type AddMessageType = ReturnType<typeof addMessageActionCreater>;
 
 export type InitialStateType = {
@@ -12,7 +11,6 @@ export type InitialStateType = {
     messages: myMessageType[];
     //при использовании form from Redax хранить промежуточное значения
     // импута в отдельном стейте не требуется.Значение будет храниться в form от Redax
-    //
     // newDialogsMessage: string;
     answerMessages: myMessageType[];
 };
@@ -70,10 +68,7 @@ const DialogReducer = (
     action:  AddMessageType
 ): InitialStateType => {
     switch (action.type) {
-        // case UPDATE_NEW_MESSAGE_TEXT: {
-        //     // state.newDialogsMessage = action.newMessage;
-        //     return {...state, newDialogsMessage: action.newMessage};
-        // }
+
         case ADD_MESSAGE: {
 
             const newMessage = {

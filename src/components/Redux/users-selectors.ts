@@ -1,5 +1,5 @@
 import {AllAppStateType} from "./RedaxStore";
-import {UsersType} from "./UsersReduser";
+import {UsersType} from "./UsersReducer";
 import {createSelector} from "reselect";
 
 // state:AllAppStateType
