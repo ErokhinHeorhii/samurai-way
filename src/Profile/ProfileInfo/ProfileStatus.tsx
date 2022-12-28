@@ -23,9 +23,6 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         this.setState({
             editMode: true
         })
-
-        /*костыль*/
-        // this.forceUpdate()
     }
 
     deactivateEditMode = () => {

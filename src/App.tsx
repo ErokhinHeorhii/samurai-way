@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {mySideBar} from './components/Navbar/Navbar';
 import {myDialogsDataType} from "./components/Dialogs/Dialogs";
-import {Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import News from './Router/News/News';
 import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
@@ -15,9 +15,9 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initialiseAppTC} from "./components/Redux/AppReducer";
-import {AllAppStateType} from "./components/Redux/RedaxStore";
+import store, {AllAppStateType} from "./components/Redux/RedaxStore";
 import Preloader from "./components/common/preloader/Preloader";
 
 
@@ -45,13 +45,13 @@ export type AppStateType = {
     ) => void
 }
 type MapStateToPropsType = {
-    initialized:boolean
+    initialized: boolean
 }
 type MapDispatchToPropsType = {
     initialiseAppTC: () => void
 }
 
-const mapStateToProps = (state: AllAppStateType):MapStateToPropsType => ({
+const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
     initialized: state.initialized.initialized
 })
 
@@ -65,7 +65,7 @@ class App extends React.Component<AppPropsType> {
 
     render() {
 
-        if(!this.props.initialized) {
+        if (!this.props.initialized) {
             return <Preloader/>
         }
         return (
@@ -93,5 +93,15 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-export default connect(mapStateToProps,
+let AppContainer = connect(mapStateToProps,
     {initialiseAppTC})(App)
+
+export let MainApp = () => {
+    return (<BrowserRouter>
+            <Provider store={store}>
+                {/* <App appState={state} dispatch={store.dispatch.bind(store)} /> */}
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    )
+}
