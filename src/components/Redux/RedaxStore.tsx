@@ -5,10 +5,11 @@ import SideBarReducer from "./SideBarReducer";
 import UsersRedusers, {ActionTypeForUserReduser} from "./UsersReducer";
 import HeaderAuthReducer, {ActionTypeForAuthReducer, FormStopSubmitType} from "./HeaderAuthReducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
-import {reducer as formReducer, stopSubmit} from 'redux-form'
+import { reducer as formReducer} from 'redux-form'
 import AppReducer, {ActionTypeForAppReduser} from "./AppReducer";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-export const rootReduser = combineReducers({
+export const rootReducer = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogReducer,
     sideBar: SideBarReducer,
@@ -18,7 +19,7 @@ export const rootReduser = combineReducers({
     form: formReducer
 });
 
-export type AllAppStateType = ReturnType<typeof rootReduser>
+export type AllAppStateType = ReturnType<typeof rootReducer>
 
 export type AnyAction =
     ActionTypeForUserReduser
@@ -33,8 +34,14 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     unknown,
     AnyAction>
 
-let store = createStore(rootReduser, applyMiddleware(thunkMiddleware))
-
+// let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+const store = createStore(
+    rootReducer,
+    composeWithDevTools(
+        applyMiddleware(thunkMiddleware)
+        // other store enhancers if any
+    )
+);
 // @ts-ignore
 window.store = store
 export default store
