@@ -25,10 +25,11 @@ export type UsersType = {
 export type InitialStateType = {
     users: UsersType[];
     pageSize: number;
-    totalUsersCount: number;
+    totalItemsCount: number;
     currentPage: number;
     isFetching: boolean;
-    followingInProgress: number[]
+    followingInProgress: number[],
+    portionSize:number
 };
 
 export type FollowACType = ReturnType<typeof followAC>;
@@ -51,10 +52,11 @@ export type ActionTypeForUserReduser =
 const initialState: InitialStateType = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 0,
+    totalItemsCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    portionSize : 9
 };
 
 
@@ -95,7 +97,7 @@ const UsersRedusers = (
         case SET_TOTAL_USERS_COUNT: {
             return {
                 ...state,
-                totalUsersCount: action.payload.totalUsersCount,
+                totalItemsCount: action.payload.totalItemsCount,
             };
         }
         case TOGGLE_IS_FETCHING: {
@@ -149,11 +151,11 @@ export const setCurrentPageAC = (currentPage: number) =>
         },
     } as const);
 
-export const setTotalUsersCountAC = (totalUsersCount: number) =>
+export const setTotalUsersCountAC = (totalItemsCount: number) =>
     ({
         type: SET_TOTAL_USERS_COUNT,
         payload: {
-            totalUsersCount: totalUsersCount,
+            totalItemsCount: totalItemsCount,
         },
     } as const);
 
@@ -162,8 +164,8 @@ export const toggleIsFetchingAC = (isFetching: boolean) =>
         type: TOGGLE_IS_FETCHING,
         payload: {
             isFetching: isFetching,
-        },
-    } as const);
+    },
+} as const);
 
 export const toggleIsFollowingAC = (isFollowing: boolean, userId: number) =>
     ({
@@ -183,7 +185,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): App
         /*вынесли запрос в файл api.js в функцию getUsers*/
         dispatch(toggleIsFetchingAC(false))
         dispatch(setUsersAC(data.items))
-        dispatch(setTotalUsersCountAC(Math.ceil(data.totalCount / 350)))
+        dispatch(setTotalUsersCountAC(Math.ceil(data.totalCount )))
     }
 }
 

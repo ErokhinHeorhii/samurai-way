@@ -18,7 +18,7 @@ export const getUsersSelector = createSelector(getUsers, (users:UsersType[])=>{
 }
 
 export const getTotalUsersCount=(state:AllAppStateType): number => {
-    return state.usersPage.totalUsersCount
+    return state.usersPage.totalItemsCount
 
 }
 
@@ -36,6 +36,11 @@ export const getIsFollowingInProgress=(state:AllAppStateType): number[] => {
     return state.usersPage.followingInProgress
 
 }
+
+export const getPortionSize=(state:AllAppStateType): number => {
+    return state.usersPage.portionSize
+}
+
 
 
 

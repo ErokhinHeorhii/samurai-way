@@ -9,11 +9,45 @@
     font-size: 1.1rem;
 }
 
-.wrapperPage {
-    border-radius: 8px;
-    width: 200px;
-    margin: 5px auto;
-}
 .titlePage {
-    display: inline;
+   text-align: center;
+    margin: 10px;
+}
+
+.wrapperForCount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.button{
+    position: relative;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    transition: .2s;
+}
+.button:hover{
+    opacity: .6;
+}
+
+.button:after {
+    position: absolute;
+    top: 6px;;
+    left: 8px;
+    content: '';
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-left: 2px solid gray;
+    border-bottom: 2px solid gray;
+    transform: rotate(45deg);
+}
+.button.buttonRight:after{
+    top: 5px;;
+    left: 4px;
+    transform: rotate(227deg);
 }

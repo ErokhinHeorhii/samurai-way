@@ -14,19 +14,20 @@ import {compose} from "redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirectComponent";
 import {
     getIsFetching, getIsFollowingInProgress,
-    getPageSize,
+    getPageSize, getPortionSize,
     getTotalUsersCount,
-     getUsersSelector,
+    getUsersSelector,
     getСurrentPage,
 } from "../Redux/users-selectors";
 
 export type MapStateToPropsType = {
     users: UsersType[]
     pageSize: number
-    totalUsersCount: number
+    totalItemsCount: number
     currentPage: number
     isFetching: boolean
     isFollowingInProgress: number[]
+    portionSize: number
 }
 
 type MapDispatchToPropsType = {
@@ -45,12 +46,12 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
 
     // метод вызывается после вмонтирования компоненты в DOM
     componentDidMount(): void {
-        let {currentPage, pageSize, getUsersThunkCreator }= this.props
+        let {currentPage, pageSize, getUsersThunkCreator} = this.props
         getUsersThunkCreator(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        let {getUsersThunkCreator, pageSize }= this.props
+        let {getUsersThunkCreator, pageSize} = this.props
         /*используем санки для запроса к серверу*/
         getUsersThunkCreator(pageNumber, pageSize)
     }
@@ -63,13 +64,14 @@ export class UsersApiComponent extends React.Component<UsersPropsType> {
                 </>
                 : <Users
                     onPageChanged={this.onPageChanged}
-                    totalUsersCount={this.props.totalUsersCount}
+                    totalItemsCount={this.props.totalItemsCount}
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
                     isFollowingInProgress={this.props.isFollowingInProgress}
                     followSuccessThunkCreator={this.props.followSuccessThunkCreator}
                     unFollowSuccessThunkCreator={this.props.unFollowSuccessThunkCreator}
+                    portionSize={this.props.portionSize}
                 />}
         </div>
     }
@@ -80,10 +82,11 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
         //переписал на селекторы
         users: getUsersSelector(state),
         pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
+        totalItemsCount: getTotalUsersCount(state),
         currentPage: getСurrentPage(state),
         isFetching: getIsFetching(state),
-        isFollowingInProgress: getIsFollowingInProgress(state)
+        isFollowingInProgress: getIsFollowingInProgress(state),
+        portionSize: getPortionSize(state)
     }
 }
 // let AuthRedirectComponent = withAuthRedirect(UsersApiComponent)

@@ -1,34 +1,53 @@
-import React from "react";
+import React, {useState} from "react";
 import s from "./Pagination.module.css"
 
 type PropsType = {
-    totalUsersCount: number,
-    pageSize: number,
-    currentPage: number,
+    totalItemsCount: number
+    pageSize: number
+    currentPage: number
     onPageChanged: (pageNumber: number) => void
+    portionSize: number
 }
 
 export const Pagination = (props: PropsType) => {
 
-    const {totalUsersCount, pageSize, currentPage, onPageChanged} = props
+    const {totalItemsCount, pageSize, currentPage, onPageChanged, portionSize} = props
 
-    let pagesCount = Math.ceil(totalUsersCount / pageSize)
-    let pagesArr = []
+    const pagesCount = Math.ceil(totalItemsCount / pageSize)
+    const pagesArr = []
     for (let i = 1; i <= pagesCount; i++) {
         pagesArr.push(i)
     }
-    return (
-        <div><h4 className={s.titlePage}>pages</h4>:
-            {pagesArr.map((item, index) => {
-                    return <span key={index}
-                                 className={currentPage === item ? s.selectedPage + " " + s.page : s.page}
-                                 onClick={(e) => {
-                                     onPageChanged(item)
-                                 }}>
+    const [pageNumber, setPageNumber] = useState(Math.ceil(currentPage / portionSize))
+
+    const portionCount = Math.ceil(pagesCount / portionSize)
+    const leftPageNumber = (pageNumber - 1) * portionSize + 1
+    const rightPageNumber = pageNumber * portionSize
+
+
+    return (<div className={s.wrapperForPagination}>
+            <h4 className={s.titlePage}>pages</h4>
+            <div className={s.wrapperForCount}>
+                {pageNumber > 1 && <button className={`${s.button} + ${s.buttonLeft}`} onClick={() => {
+                    setPageNumber(pageNumber - 1)
+                }}> </button>}
+                <div className={s.wrapperForItem}>
+                    {pagesArr
+                        .filter(item => item >= leftPageNumber && item <= rightPageNumber)
+                        .map((item, index) => {
+                            return <span key={index}
+                                         className={currentPage === item ? s.selectedPage + " " + s.page : s.page}
+                                         onClick={(e) => {
+                                             onPageChanged(item)
+                                         }}>
             {item}
           </span>
-                }
-            )}
+                        })}
+                </div>
+                {portionCount > pageNumber && <button className={`${s.button} + ${s.buttonRight}`} onClick={() => {
+                    setPageNumber(pageNumber + 1)
+                }}>  </button>}
+            </div>
         </div>
     )
 }

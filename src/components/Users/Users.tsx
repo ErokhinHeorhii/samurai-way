@@ -6,29 +6,31 @@ import User from "./User";
 
 export type NewUsersPropsType = {
     onPageChanged: (pageNumber: number) => void
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     currentPage: number
     users: Array<UsersType>
     isFollowingInProgress: number[]
     followSuccessThunkCreator: any
     unFollowSuccessThunkCreator: any
+    portionSize: number
 }
 
 const Users = (props: NewUsersPropsType) => {
 
     const {
-        totalUsersCount, pageSize, currentPage, onPageChanged, users, unFollowSuccessThunkCreator,
-         isFollowingInProgress, followSuccessThunkCreator, ...restProps
+        totalItemsCount, pageSize, currentPage, onPageChanged, users, unFollowSuccessThunkCreator,
+        isFollowingInProgress, followSuccessThunkCreator, portionSize, ...restProps
     } = props
 
     return (
-        <div>
+        <div className={s.wrapperForPaginationUsers}>
             <div className={s.wrapperPage}>
                 <Pagination currentPage={currentPage}
                             onPageChanged={onPageChanged}
                             pageSize={pageSize}
-                            totalUsersCount={totalUsersCount}
+                            totalItemsCount={totalItemsCount}
+                            portionSize={portionSize}
                 />
             </div>
             {
