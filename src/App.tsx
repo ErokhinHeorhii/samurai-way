@@ -3,23 +3,24 @@ import './App.css';
 import {mySideBar} from './components/Navbar/Navbar';
 import {myDialogsDataType} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import News from './Router/News/News';
-import Music from './Router/Music/Music';
 import Setting from './Router/Setting/Setting';
 import {myPostType} from './Profile/MyPost/MyPost';
 import {myMessageType} from './components/Dialogs/Message/Message';
 import {AllActionType} from './components/Redux/Store';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
-import {connect, Provider} from "react-redux";
-import {initialiseAppTC} from "./components/Redux/AppReducer";
-import store, {AllAppStateType} from "./components/Redux/RedaxStore";
-import Preloader from "./components/common/preloader/Preloader";
+import UsersContainer from './components/Users/UsersContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
+import {connect, Provider} from 'react-redux';
+import {initialiseAppTC} from './components/Redux/AppReducer';
+import store, {AllAppStateType} from './components/Redux/RedaxStore';
+import Preloader from './components/common/preloader/Preloader';
+import {withSuspense} from "./HOC/WithSuspense";
 
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./Profile/ProfileContainer'));
+const News = React.lazy(() => import('./Router/News/News'));
+const Music = React.lazy(() => import('./Router/Music/Music'));
 
 export type TypeForAllData = {
 
@@ -73,19 +74,16 @@ class App extends React.Component<AppPropsType> {
                 <HeaderContainer/>
                 <NavbarContainer/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() =>
-                        <DialogsContainer
-                        />}/>
-                    <Route path='/profile/:userId?' render={() =>
-                        //обозначение параментра для withRouter в "match/path/userId"
-                        <ProfileContainer/>}/>
+                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                    {/*//обозначение параментра для withRouter в "match/path/userId"*/}
+                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                     <Route path='/users' render={() =>
                         <UsersContainer/>}/>
                     <Route path='/login' render={() =>
                         <Login/>}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/setting' component={Setting}/>
+                    <Route path='/news' render={withSuspense(News)}/>
+                    <Route path='/music' render={withSuspense(Music)}/>
+                    <Route path='/setting' render={Setting}/>
                     {/*<Route path='/' component={ProfileContainer}/>*/}
                 </div>
             </div>

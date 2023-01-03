@@ -8,7 +8,7 @@ import {createSelector} from "reselect";
 export const  getUsers=(state:AllAppStateType):UsersType[] =>{
     return state.usersPage.users
 }
-
+//for example how we can use selector
 export const getUsersSelector = createSelector(getUsers, (users:UsersType[])=>{
     return users
 })
@@ -16,6 +16,10 @@ export const getUsersSelector = createSelector(getUsers, (users:UsersType[])=>{
  export const getPageSize=(state:AllAppStateType): number =>{
     return state.usersPage.pageSize
 }
+//for example how we can use selector
+export const getPageSizeSelector = createSelector(getPageSize, (pageSize:number)=>{
+    return pageSize
+})
 
 export const getTotalUsersCount=(state:AllAppStateType): number => {
     return state.usersPage.totalItemsCount

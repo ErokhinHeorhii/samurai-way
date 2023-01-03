@@ -1,4 +1,3 @@
-import store from './components/Redux/RedaxStore';
 import ReactDOM from 'react-dom';
 import {MainApp} from './App';
 import './index.css';

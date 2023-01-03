@@ -14,7 +14,7 @@ import {compose} from "redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirectComponent";
 import {
     getIsFetching, getIsFollowingInProgress,
-    getPageSize, getPortionSize,
+    getPageSizeSelector, getPortionSize,
     getTotalUsersCount,
     getUsersSelector,
     getСurrentPage,
@@ -81,7 +81,7 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
         //переписал на селекторы
         users: getUsersSelector(state),
-        pageSize: getPageSize(state),
+        pageSize: getPageSizeSelector(state),
         totalItemsCount: getTotalUsersCount(state),
         currentPage: getСurrentPage(state),
         isFetching: getIsFetching(state),

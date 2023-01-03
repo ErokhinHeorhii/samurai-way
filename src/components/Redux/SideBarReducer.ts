@@ -26,7 +26,6 @@ let initialState: IsideinitialStateTypeForNavbar = {
 };
 export const SideBarReducer = (
   state: IsideinitialStateTypeForNavbar = initialState,
-  action: any
 ) : IsideinitialStateTypeForNavbar=> {
   return state;
 };
