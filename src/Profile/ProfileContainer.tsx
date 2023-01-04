@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     getProfileThunkCreator,
     getStatusThunkCreator,
-    ProfilePageType, updateStatusThunkCreator,
+    ProfilePageType, savePhotoThunkCreator, updateStatusThunkCreator,
 } from "../components/Redux/ProfileReducer";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -17,50 +17,55 @@ type WithRouterType = {
 
 type MapStateToPropsType = {
     profile: ProfilePageType
-    status:string
-    authorizedUserId:number|null
-    isAuth:boolean
+    status: string
+    authorizedUserId: number | null
+    isAuth: boolean
 }
+
 type MapDispatchToPropsType = {
     getProfileThunkCreator: (userId: string) => void
-    getStatusThunkCreator:(userId: string)=> void
-    updateStatusThunkCreator:(status: string)=>void
+    getStatusThunkCreator: (userId: string) => void
+    updateStatusThunkCreator: (status: string) => void
+    savePhotoThunkCreator:(file:string)=>void
 }
 
 export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<WithRouterType>
 
-
 class ProfileContainer extends React.Component<ProfilePropsType> {
 
-    componentDidMount() {
+    refreshProfile() {
         //получаем userId из props которые прокинули с помощью withRouter (match/params/ userId: XXX)
         let userId = this.props.match.params.userId
-        if(!userId) {
+
+        if (!userId) {
             //history.push заменяет путь в url напрямую без state
             userId = this.props.authorizedUserId ? this.props.authorizedUserId.toString() : this.props.history.push("/login")!
         }
-
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-// userApi.getProfile(userId)
-//             .then(res => {
-//                 this.props.setUserProfile(res.data)
-//             })
-
-//        перенесли логику в Thunk
         this.props.getProfileThunkCreator(userId)
         this.props.getStatusThunkCreator(userId)
+    }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
 
+    componentDidUpdate(prevProps: Readonly<ProfilePropsType>,
+                       prevState: Readonly<{}>,
+                       snapshot?: any) {
+        //сравниваем текущие пропсы с предыдущими чтобы не было зацикливания
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+
+            this.refreshProfile()
+        }
     }
 
     render() {
-        // if(!this.props.isAuth ) {
-        //     return <Redirect to ={"./login"}/>
-        // }
         return (<div>
             <Profile profile={this.props.profile}
-                     status ={this.props.status}
-                     updateStatusThunkCreator ={this.props.updateStatusThunkCreator}
+                     status={this.props.status}
+                     updateStatusThunkCreator={this.props.updateStatusThunkCreator}
+                     isOwner={!this.props.match.params.userId}
+                     savePhotoThunkCreator={this.props.savePhotoThunkCreator}
             />
         </div>)
     }
@@ -69,9 +74,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     // isAuth: state.auth.isAuth
-    status:state.profilePage.status,
-    authorizedUserId:state.auth.userId,
-    isAuth:state.auth.isAuth
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer)
@@ -82,8 +87,8 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
 // export default connect(mapStateToProps, { getProfileThunkCreator})(AuthRedirectComponent);
 
 //добавили финкцию compose  и зарефакторили с ее помощью
-export default compose <React.ComponentType>(
-    connect(mapStateToProps, {getProfileThunkCreator,getStatusThunkCreator,updateStatusThunkCreator}),
-        withRouter,
-        withAuthRedirect
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator, savePhotoThunkCreator}),
+    withRouter,
+    withAuthRedirect
 )(ProfileContainer)

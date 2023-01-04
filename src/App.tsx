@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {mySideBar} from './components/Navbar/Navbar';
 import {myDialogsDataType} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route} from "react-router-dom";
 import Setting from './Router/Setting/Setting';
 import {myPostType} from './Profile/MyPost/MyPost';
 import {myMessageType} from './components/Dialogs/Message/Message';
@@ -95,11 +95,11 @@ let AppContainer = connect(mapStateToProps,
     {initialiseAppTC})(App)
 
 export let MainApp = () => {
-    return (<BrowserRouter>
+    return (<HashRouter >
             <Provider store={store}>
                 {/* <App appState={state} dispatch={store.dispatch.bind(store)} /> */}
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }

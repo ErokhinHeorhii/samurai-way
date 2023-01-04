@@ -11,15 +11,19 @@ export const UPDATE_NEW_POST_TEXT = "profile/UPDATE-NEW-POST-TEXT";
 export const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 export const SET_STATUS = "profile/SET_STATUS"
 export const DELETE_POST = "profile/DELETE_POST"
+export const SET_PHOTO_SUCCESS = "profile/SET_PHOTO_SUCCESS"
 
 export type AddPostACType = ReturnType<typeof addPostActionCreater>;
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
 export type SetStatusACType = ReturnType<typeof setStatusAC>
+export type SetPhotoACType = ReturnType<typeof setPhotoSuccessAC>
+
 export type ActionTypeForProfileReducer =
     AddPostACType |
     SetUserProfileACType |
     SetStatusACType |
-    ReturnType<typeof deletePostACForTest>
+    ReturnType<typeof deletePostACForTest> |
+    SetPhotoACType
 
 export type ProfilePageType = {
     userId: string
@@ -89,11 +93,18 @@ const ProfileReducer = (
                 status: action.status
             }
         }
+        case SET_PHOTO_SUCCESS: {
+            return {
+                ...state,
+                profile: {
+                    ...state.profile, photos: {...state.profile!.photos, small: action.payload.photo!}
+                } as ProfilePageType
+            }
+        }
         default:
             return state;
     }
-};
-
+}
 export const addPostActionCreater = (newPostText: string) =>
     ({
             type: ADD_POST, newPostText
@@ -120,6 +131,15 @@ export const deletePostACForTest = (id: string) =>
         } as const
     )
 
+export const setPhotoSuccessAC = (photo: string) =>
+    ({
+            type: SET_PHOTO_SUCCESS,
+            payload: {
+                photo
+            }
+        } as const
+    )
+
 export const getProfileThunkCreator = (userId: string): AppThunk => {
     return async (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
 
@@ -128,6 +148,7 @@ export const getProfileThunkCreator = (userId: string): AppThunk => {
 
     }
 }
+
 export const getStatusThunkCreator = (userId: string): AppThunk => {
     return async (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
 
@@ -145,6 +166,15 @@ export const updateStatusThunkCreator = (status: string): AppThunk => {
             dispatch(setStatusAC(status))
         }
     }
+}
 
+export const savePhotoThunkCreator = (file: string): AppThunk => {
+    return async (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
+debugger
+        let res = await profileApi.savePhoto(file)
+        if (res.data.resultCode === 0) {
+            dispatch(setPhotoSuccessAC(res.data.data.photos.small))
+        }
+    }
 }
 export default ProfileReducer;
