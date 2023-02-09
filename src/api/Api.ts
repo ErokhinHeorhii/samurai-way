@@ -63,14 +63,19 @@ export const profileApi = {
 
 
 export const authApi = {
-    login(email:string, password:string, rememberMe:boolean=false){
-        return instance.post(`auth/login`,{email, password, rememberMe})
+    login(email:string, password:string, rememberMe:boolean = false, captcha:string | null = null ){
+        return instance.post(`auth/login`,{email, password, rememberMe, captcha})
     },
     logOut(){
         return instance.delete(`auth/login`)
     }
 }
 
+export const securityApi = {
+    getCaptchaUrl() {
+        return instance.get<{url:string}>(`security/get-captcha-url`)
+    }
+}
 type ResponseType = {
     error: null,
     items: UsersType[],

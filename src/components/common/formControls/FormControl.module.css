@@ -23,3 +23,9 @@
     margin-top: 10px;
     word-wrap:break-word;
 }
+
+.img {
+    margin-top: 15px;
+    width: 175px;
+    height: auto;
+}

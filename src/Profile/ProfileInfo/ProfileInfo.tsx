@@ -35,6 +35,7 @@ type ProfileInfoPropsType = {
     saveProfileThunkCreator: (formData: FormDataType) => void
     isErrorContacts: boolean
 }
+// @ts-ignore
 const ProfileInfo = ({
                          profile,
                          status,
@@ -51,11 +52,13 @@ const ProfileInfo = ({
     useEffect(() => {
         debugger
         console.log("useeff")
-        if (isErrorContacts) {
-            setEditMode(true)
-        } else {
+        if (!isErrorContacts) {
             setEditMode(false)
+
+        }  else {
+            setEditMode(true)
         }
+
     }, [isErrorContacts, onSubmitHandler])
 
     if (!profile) {
