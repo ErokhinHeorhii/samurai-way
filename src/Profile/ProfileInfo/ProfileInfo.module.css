@@ -14,6 +14,7 @@
 }
 
 .wrapperForStatus{
+    color: #4f0c8d;
     margin: 10px;
 }
 
@@ -30,15 +31,31 @@
 .wrapperName{
     color: #4f0c8d;
     margin: 5px;
-    text-transform:capitalize;
     font-size: 1.3rem;
 }
 
-.lookingJob{
+.lookingJob, .contacts{
     font-size: 1rem;
-    margin: 5px;
+    margin: 8px 0;
+}
+.contacts{
+    margin-left: 15px;
+   color: #3d0570;
 }
 
 .wrapperInput{
     margin: 5px;
+}
+
+.status{
+    font-style:italic;
+    font-size: 1.2rem;
+}
+.formError{
+    color:red;
+    border: 1px Solid Red;
+    width:175px;
+    height: 35px;
+    margin-top: 10px;
+    word-wrap:break-word;
 }

@@ -4,21 +4,23 @@ import ProfileReducer, {
     InitialStateTypeForProfile
 } from "./ProfileReducer";
 import {v1} from "uuid";
+
 let initialState: InitialStateTypeForProfile
 const id_0 = v1()
 const id_1 = v1()
 const id_2 = v1()
 
-beforeEach(()=>{
+beforeEach(() => {
 
-     initialState = {
+    initialState = {
         posts: [
             {id: id_0, message: "Hi", likeCount: 10},
             {id: id_1, message: "How are you", likeCount: 2},
             {id: id_2, message: "yooo", likeCount: 4},
         ],
         profile: null,
-        status: "Hello"
+        status: "Hello",
+        isErrorContacts: false
     }
 })
 

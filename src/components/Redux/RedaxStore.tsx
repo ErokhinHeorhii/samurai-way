@@ -8,6 +8,7 @@ import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
 import { reducer as formReducer} from 'redux-form'
 import AppReducer, {ActionTypeForAppReduser} from "./AppReducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
+import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 export const rootReducer = combineReducers({
     profilePage: ProfileReducer,
@@ -33,8 +34,9 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     AllAppStateType,
     unknown,
     AnyAction>
-
+export type AppRootStateType = ReturnType<typeof rootReducer>
 // let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 const store = createStore(
     rootReducer,
     composeWithDevTools(
@@ -42,6 +44,7 @@ const store = createStore(
         // other store enhancers if any
     )
 );
+
 // @ts-ignore
 window.store = store
 export default store

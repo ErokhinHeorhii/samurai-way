@@ -29,7 +29,7 @@ export const Textarea: React.FC<WrappedFieldProps> = (props) => {
     const {input, meta,  ...restProps} = props
     return (
         <FormControl {...props}>
-            <textarea {...input} {...restProps}/>
+            <textarea {...input} {...restProps} />
         </FormControl>
     )
 }

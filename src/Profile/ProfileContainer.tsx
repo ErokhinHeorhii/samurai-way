@@ -4,12 +4,13 @@ import {connect} from "react-redux";
 import {
     getProfileThunkCreator,
     getStatusThunkCreator,
-    ProfilePageType, savePhotoThunkCreator, updateStatusThunkCreator,
+    ProfilePageType, savePhotoThunkCreator, saveProfileThunkCreator, updateStatusThunkCreator,
 } from "../components/Redux/ProfileReducer";
 import {AllAppStateType} from "../components/Redux/RedaxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../HOC/WithAuthRedirectComponent";
 import {compose} from "redux";
+import {FormDataType} from "./ProfileInfo/ProfileDataForm";
 
 type WithRouterType = {
     userId: string
@@ -20,6 +21,7 @@ type MapStateToPropsType = {
     status: string
     authorizedUserId: number | null
     isAuth: boolean
+    isErrorContacts: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -27,6 +29,7 @@ type MapDispatchToPropsType = {
     getStatusThunkCreator: (userId: string) => void
     updateStatusThunkCreator: (status: string) => void
     savePhotoThunkCreator:(file:string)=>void
+    saveProfileThunkCreator:(formData:FormDataType)=>void
 }
 
 export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<WithRouterType>
@@ -39,7 +42,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
         if (!userId) {
             //history.push заменяет путь в url напрямую без state
-            userId = this.props.authorizedUserId ? this.props.authorizedUserId.toString() : this.props.history.push("/login")!
+            userId = this.props.authorizedUserId ?
+                this.props.authorizedUserId.toString() :
+                this.props.history.push("/login")!
         }
         this.props.getProfileThunkCreator(userId)
         this.props.getStatusThunkCreator(userId)
@@ -66,6 +71,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
                      updateStatusThunkCreator={this.props.updateStatusThunkCreator}
                      isOwner={!this.props.match.params.userId}
                      savePhotoThunkCreator={this.props.savePhotoThunkCreator}
+                     saveProfileThunkCreator ={this.props.saveProfileThunkCreator}
+                     isErrorContacts={this.props.isErrorContacts}
             />
         </div>)
     }
@@ -73,10 +80,10 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    // isAuth: state.auth.isAuth
     status: state.profilePage.status,
     authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    isErrorContacts:state.profilePage.isErrorContacts
 })
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer)
@@ -88,7 +95,7 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
 
 //добавили финкцию compose  и зарефакторили с ее помощью
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator, savePhotoThunkCreator}),
+    connect(mapStateToProps, {getProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator, savePhotoThunkCreator, saveProfileThunkCreator}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

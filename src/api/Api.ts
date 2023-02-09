@@ -1,7 +1,7 @@
 import axios from "axios";
 import {UsersType} from "../components/Redux/UsersReducer";
 import {ProfilePageType} from "../components/Redux/ProfileReducer";
-import {isTypedArray} from "util/types";
+import {FormDataType} from "../Profile/ProfileInfo/ProfileDataForm";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -54,6 +54,10 @@ export const profileApi = {
         return instance.put(`profile/photo/`, formData, {headers: {
             "Content-Type" : "multipart/form-data"
             }})
+    },
+
+    saveProfile:(formData:FormDataType)=>{
+        return instance.put(`profile`, formData, )
     }
 }
 
