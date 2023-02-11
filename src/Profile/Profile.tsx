@@ -4,7 +4,6 @@ import {ProfilePageType} from "../components/Redux/ProfileReducer";
 import React from "react";
 import {FormDataType} from "./ProfileInfo/ProfileDataForm";
 
-
 type PropsType = {
     profile: ProfilePageType
     status: string
@@ -14,7 +13,6 @@ type PropsType = {
     saveProfileThunkCreator:(formData:FormDataType)=>void
     isErrorContacts:boolean
 }
-
 
 const Profile = (props: PropsType) => {
 

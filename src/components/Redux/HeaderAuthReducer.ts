@@ -79,7 +79,6 @@ export const getAuthThunkCreator = (): AppThunk => async (dispatch: Dispatch<Act
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha:string): AppThunk => {
     return async (dispatch) => {
-        debugger
         let res = await authApi.login(email, password, rememberMe, captcha)
         if (res.data.resultCode === 0) {
             dispatch(getAuthThunkCreator())

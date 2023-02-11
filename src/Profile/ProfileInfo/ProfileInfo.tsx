@@ -35,7 +35,6 @@ type ProfileInfoPropsType = {
     saveProfileThunkCreator: (formData: FormDataType) => void
     isErrorContacts: boolean
 }
-// @ts-ignore
 const ProfileInfo = ({
                          profile,
                          status,
@@ -50,11 +49,8 @@ const ProfileInfo = ({
     const [onSubmitHandler, setonSubmitHandler] = useState<boolean>(false)
 
     useEffect(() => {
-        debugger
-        console.log("useeff")
         if (!isErrorContacts) {
             setEditMode(false)
-
         }  else {
             setEditMode(true)
         }
@@ -77,8 +73,6 @@ const ProfileInfo = ({
     }
 
     const onSubmit = (formData: FormDataType) => {
-        debugger
-        console.log("onSubmit")
         saveProfileThunkCreator(formData)
         setonSubmitHandler(!onSubmitHandler)
     }
@@ -110,7 +104,6 @@ export const Contact = ({contactTitle, contactValue}: ContactsPropsType) => {
 export const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => {
 
     return (<div className={s.discriptionBlock}>
-
         <div className={s.wrapperImage}>
             <img className={s.avatarImage} src={profile!.photos.small == null
                 ? avatarProfile

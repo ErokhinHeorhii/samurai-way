@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import s from "./Pagination.module.css"
+import classnames from 'classnames'
 
 type PropsType = {
     totalItemsCount: number
@@ -24,11 +25,10 @@ export const Pagination = (props: PropsType) => {
     const leftPageNumber = (pageNumber - 1) * portionSize + 1
     const rightPageNumber = pageNumber * portionSize
 
-
     return (<div className={s.wrapperForPagination}>
             <h4 className={s.titlePage}>pages</h4>
             <div className={s.wrapperForCount}>
-                {pageNumber > 1 && <button className={`${s.button} + ${s.buttonLeft}`} onClick={() => {
+                {pageNumber > 1 && <button className={classnames(s.button,s.buttonLeft)} onClick={() => {
                     setPageNumber(pageNumber - 1)
                 }}> </button>}
                 <div className={s.wrapperForItem}>
@@ -36,7 +36,7 @@ export const Pagination = (props: PropsType) => {
                         .filter(item => item >= leftPageNumber && item <= rightPageNumber)
                         .map((item, index) => {
                             return <span key={index}
-                                         className={currentPage === item ? s.selectedPage + " " + s.page : s.page}
+                                         className={classnames(s.page,{[s.selectedPage]:currentPage === item })}
                                          onClick={(e) => {
                                              onPageChanged(item)
                                          }}>
@@ -44,7 +44,7 @@ export const Pagination = (props: PropsType) => {
           </span>
                         })}
                 </div>
-                {portionCount > pageNumber && <button className={`${s.button} + ${s.buttonRight}`} onClick={() => {
+                {portionCount > pageNumber && <button className={classnames(s.button,s.buttonRight)} onClick={() => {
                     setPageNumber(pageNumber + 1)
                 }}>  </button>}
             </div>

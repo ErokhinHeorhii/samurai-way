@@ -20,7 +20,7 @@ export type AddPostACType = ReturnType<typeof addPostActionCreater>;
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>;
 export type SetStatusACType = ReturnType<typeof setStatusAC>
 export type SetPhotoACType = ReturnType<typeof setPhotoSuccessAC>
-export type setErrorContactsACType =ReturnType<typeof setErrorContactsAC>
+export type setErrorContactsACType = ReturnType<typeof setErrorContactsAC>
 
 export type ActionTypeForProfileReducer =
     AddPostACType |
@@ -35,7 +35,7 @@ export type ProfilePageType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    aboutMe:string
+    aboutMe: string
     contacts: {
         github: string
         vk: string
@@ -56,7 +56,7 @@ export type InitialStateTypeForProfile = {
     posts: myPostType[]
     profile: ProfilePageType
     status: string
-    isErrorContacts:boolean
+    isErrorContacts: boolean
 
 }
 
@@ -68,7 +68,7 @@ let initialState = {
     ],
     profile: null,
     status: "Hello",
-    isErrorContacts:false
+    isErrorContacts: false
 }
 
 const ProfileReducer = (
@@ -102,7 +102,7 @@ const ProfileReducer = (
                 status: action.status
             }
         }
-        case SET_ERROR_CONTACTS:{
+        case SET_ERROR_CONTACTS: {
             return {
                 ...state,
                 isErrorContacts: action.payload.error
@@ -120,7 +120,7 @@ const ProfileReducer = (
             return state;
     }
 }
-export const addPostActionCreater = (newPostText:string) =>
+export const addPostActionCreater = (newPostText: string) =>
     ({
             type: ADD_POST, newPostText
         } as const
@@ -174,7 +174,6 @@ export const getProfileThunkCreator = (userId: string): AppThunk => {
 export const getStatusThunkCreator = (userId: string): AppThunk => {
     return async (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
         let res = await profileApi.getStatus(userId)
-        console.log("status", res.data)
         dispatch(setStatusAC(res.data))
     }
 }
@@ -187,7 +186,6 @@ export const updateStatusThunkCreator = (status: string): AppThunk => {
         }
     }
 }
-
 export const savePhotoThunkCreator = (file: string): AppThunk => {
     return async (dispatch: Dispatch<ActionTypeForProfileReducer>) => {
         let res = await profileApi.savePhoto(file)
@@ -198,12 +196,12 @@ export const savePhotoThunkCreator = (file: string): AppThunk => {
 }
 export const saveProfileThunkCreator = (formdata: FormDataType): AppThunk => {
 
-    return async (dispatch: AppDispatch, getState:() => AppRootStateType) => {
-       let userId = getState().auth.userId
+    return async (dispatch: AppDispatch, getState: () => AppRootStateType) => {
+        let userId = getState().auth.userId
         let res = await profileApi.saveProfile(formdata)
         if (res.data.resultCode === 0) {
-    userId && dispatch(getProfileThunkCreator(userId.toString()))
-              dispatch(setErrorContactsAC(false))
+            userId && dispatch(getProfileThunkCreator(userId.toString()))
+            dispatch(setErrorContactsAC(false))
         } else {
             dispatch(setErrorContactsAC(true))
             const errMessage = res.data.messages.length > 0 ?
@@ -214,7 +212,6 @@ export const saveProfileThunkCreator = (formdata: FormDataType): AppThunk => {
         }
     }
 }
-
 
 
 export default ProfileReducer;

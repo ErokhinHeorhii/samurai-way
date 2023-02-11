@@ -21,11 +21,13 @@ const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
     }
 
     const deactivateEditMode = () => {
+        props.updateStatusThunkCreator(status)
+        // setStatus(e.currentTarget.value)
         setEditMode(false)
     }
 
     const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
-        props.updateStatusThunkCreator(e.currentTarget.value)
+        // props.updateStatusThunkCreator(e.currentTarget.value)
         setStatus(e.currentTarget.value)
     }
 
@@ -38,7 +40,7 @@ const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
             <b>Your status: </b>
             {!editMode &&
                 <div>
-                    <span className={style.status}  onDoubleClick={activateEditMode}>{status || "Hello from me"}</span>
+                    <span className={style.status}  onDoubleClick={activateEditMode}>{props.status || "Hello from me"}</span>
                 </div>}
 
             {editMode &&

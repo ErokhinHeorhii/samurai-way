@@ -17,7 +17,6 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    // setAuthUserData: (userAprId: number, email: string, login: string) => void
     loginOutThunkCreator:()=>void
 }
  export type HeaderPropsType = MapStateToPropsType & MapDispatchToPropsType

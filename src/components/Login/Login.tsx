@@ -97,7 +97,6 @@ const LoginRedaxForm = reduxForm<FormDataType, PropsType>({
 })(LoginForm)
 
 const Login = (props: LoginPropsType) => {
-    debugger
     const onSubmitHandler = (formData: FormDataType) => {
         props.loginThunkCreator(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }

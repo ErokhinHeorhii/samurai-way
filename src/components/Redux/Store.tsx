@@ -22,7 +22,6 @@ export type AllActionType =
   AddPostACType |
   AddMessageType
 
-///////////////////////////////////////////////////////////////////////
 const store: StoreType = {
 
   _state: {
@@ -76,7 +75,7 @@ const store: StoreType = {
 
   subscribe(observer: (state: TypeForAllData) => void) {
     this._callSubScriber = observer
-    //  патерн -observer, такой же как и add.eventListener
+    //  патерн -observer, такой же как и addEventListener
   },
 
 
