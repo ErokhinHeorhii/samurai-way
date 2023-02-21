@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksamurai_way=self.webpackChunksamurai_way||[]).push([[564],{6564:function(a,s,e){e.r(s);var i=e(8727),u=e(6905),c=e(184);s.default=function(){return(0,c.jsx)("div",{children:(0,c.jsx)("img",{src:i,alt:i,className:u.Z.img})})}},8727:function(a,s,e){a.exports=e.p+"static/media/music.d104811b106ee3aa9251.jpg"}}]);
+//# sourceMappingURL=564.cbdd7bd7.chunk.js.map

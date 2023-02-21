@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/564.30b1cfb2.chunk.js","mappings":"mIAOA,UALc,WACZ,OACE","sources":["Router/Music/Music.tsx"],"sourcesContent":["\r\n\r\nconst Music = () => {\r\n  return (\r\n    <div>Music</div>\r\n  )\r\n}\r\nexport default Music;"],"names":[],"sourceRoot":""}

@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/817.2c503671.chunk.js","mappings":"mIAOA,UALa,WACX,OACE","sources":["Router/News/News.tsx"],"sourcesContent":["\r\n\r\nconst News = () => {\r\n  return (\r\n    <div>News</div>\r\n  )\r\n}\r\nexport default News;"],"names":[],"sourceRoot":""}
