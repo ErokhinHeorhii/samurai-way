@@ -5,7 +5,7 @@ import avatarProfile from "../../assets/images/AvatarForProfile.jpg"
 import ProfileStatusWithHooks from "./ProfileStatusWithHook";
 import React, {ChangeEvent, useEffect, useState} from "react";
 import ProfileProfileDataFormReduxForm, {FormDataType} from "./ProfileDataForm";
-
+import img from '../../assets/images/images.jpg'
 
 type ContactsType = {
     github: string
@@ -61,7 +61,7 @@ const ProfileInfo = ({
         return <div>
             <img
                 className={s.Image}
-                src="https://klike.net/uploads/posts/2019-06/1561526578_1.jpg"
+                src = {img}
                 alt="img"></img>
             <Preloader/>
         </div>
@@ -82,7 +82,7 @@ const ProfileInfo = ({
             <div>
                 <img
                     className={s.Image}
-                    src="https://klike.net/uploads/posts/2019-06/1561526578_1.jpg"
+                    src = {img}
                     alt="img"></img>
             </div>
             {editMode ?

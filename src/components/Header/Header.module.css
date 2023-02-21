@@ -1,6 +1,6 @@
 .header {
     grid-area: h;
-    background-color: rgb(112, 220, 97);
+    background-color: rgb(229 207 125);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -10,47 +10,41 @@
     padding-right: 15px;
     list-style: none;
     font-size: 1.5rem;
-    font-color: beige;
     font-weight: lighter;
-
 }
 
 .navLink{
     display: inline-block;
-    background-color: #a05f9c;
+    background-color: #b6a559;
     text-decoration: none;
-    color: #61dafb;
+    color: beige;
     cursor: pointer;
-    border: 1px Solid darkblue;
+    border: 1px Solid #565605;
     padding: 3px;
     border-radius: 5px;
 }
 .auth {
-    /*margin-right: 10px;*/
-    display: inline-block;
     display: flex;
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    border: 2px solid darkblue;
-    /*text-align: center;*/
-    /*vertical-align: center;*/
+    border: 2px solid beige;
     align-items: center;
     justify-content: center;
-    background-color: #a05f9c;
-    color: #61dafb;
+    background-color: #6e682c;
+    color: beige;
 }
 
 .button{
-    color: #61dafb;
+    color: beige;
     margin-left: 5px;
     height: 25px;
-    background-color: #a05f9c;
+    background-color: #6e682c;
     cursor: pointer;
-    border: 2px solid darkblue;
+    border: 2px solid beige;
     transition: .3s;
     border-radius: 5px;
 }
 .button:hover {
-    background-color:  #a08f9c;
+    background-color: #ada55c;
 }

@@ -37,9 +37,7 @@ const Dialogs = (props: DialogsPropsType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.currentTarget ? e.currentTarget.value : " "
     }
-    // if(!props.isAuth ) {
-    //     return <Redirect to ={"./login"}/>
-    // }
+
     const addNewMessage = (values: FormDataType) => {
         addMessage(values.newMessageBody)
     }
@@ -53,7 +51,7 @@ const Dialogs = (props: DialogsPropsType) => {
                     <AddMessageFormRedax onSubmit={addNewMessage}/>
                     {messagesElements}
                 </div>
-                <div className={s.messages}>
+                <div className={s.messages + ' ' + s.answerMessages }>
                     {answerMessagesElements}
                 </div>
             </div>
@@ -70,10 +68,6 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field className={s.textarea} component={Textarea}
                        validate={[requiredField,maxLength15]} name="newMessageBody"
                        placeholder="Enter your message"/>
-                {/*<textarea*/}
-                {/*    value={props.newDialogsMessage}*/}
-                {/*    onChange={props.onChangeHandler}>*/}
-                {/*</textarea>*/}
             </div>
             <SuperButton >Add</SuperButton>
         </form>

@@ -86,13 +86,7 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => ({
     isErrorContacts:state.profilePage.isErrorContacts
 })
 
-// let WithUrlDataContainerComponent = withRouter(ProfileContainer)
-
-/* Логика проверки на Login вынесена в HOC */
-// let AuthRedirectComponent = withAuthRedirect(WithUrlDataContainerComponent)
-
 // export default connect(mapStateToProps, { getProfileThunkCreator})(AuthRedirectComponent);
-
 //добавили финкцию compose  и зарефакторили с ее помощью
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator, savePhotoThunkCreator, saveProfileThunkCreator}),

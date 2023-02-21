@@ -4,7 +4,7 @@
 }
 
 .Image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
 }
 
@@ -20,7 +20,7 @@
 
 .wrapperImage {
     width: 140px;
-    hight: 140px;
+    height: 140px;
 }
 
 .avatarImage {

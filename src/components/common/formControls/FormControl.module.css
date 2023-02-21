@@ -15,17 +15,22 @@
     padding-left: 50px;
 }
 
-.formError{
-    color:red;
+.formError {
+    color: red;
     border: 1px Solid Red;
-    width:175px;
+    width: 175px;
     height: 35px;
     margin-top: 10px;
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
 
 .img {
     margin-top: 15px;
     width: 175px;
     height: auto;
+}
+
+.wrapperForLogin {
+    width: 350px;
+    margin: 0 auto
 }

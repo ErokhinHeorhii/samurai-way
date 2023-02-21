@@ -26,7 +26,7 @@ export const Pagination = (props: PropsType) => {
     const rightPageNumber = pageNumber * portionSize
 
     return (<div className={s.wrapperForPagination}>
-            <h4 className={s.titlePage}>pages</h4>
+            <h4 className={s.titlePage}>PAGES </h4>
             <div className={s.wrapperForCount}>
                 {pageNumber > 1 && <button className={classnames(s.button,s.buttonLeft)} onClick={() => {
                     setPageNumber(pageNumber - 1)

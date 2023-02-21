@@ -1,13 +1,13 @@
 .nav {
   grid-area: n;
-  background-color: #61dafb;
+  background-color: rgb(159, 149, 103);
   padding: 20px;
   font-size: 2rem;
 }
 
 .item {
   padding-bottom: 15px;
-  color: aliceblue;
+  color: beige;
 }
 
 .item a {
@@ -21,23 +21,21 @@
 
 .item:last-child a {
   padding-top: 40px;
-  color: rgb(232, 232, 129);
+  color: beige;
 }
-
 
 .item a.activeLink {
   color: rgb(236, 109, 18);
 }
 
 .friends {
-  padding-top: 40px;
-  color: rgb(101, 89, 212);
-
+  margin-top: 180px;
+  color: beige;
 }
 
 .itemFriend {
   font-size: 1.5rem;
-  color: rgb(160, 95, 156);
+  color: beige;
   display: inline-block;
   padding-right: 10px;
 }
@@ -52,7 +50,7 @@
 
 .imgFriends {
   width: 45px;
-  border-radius: 20px;
+  border-radius:  20px;
 }
 
 .wrapperFriends {
@@ -63,4 +61,5 @@
 
 .nameFriends {
   margin-top: 10px;
+  color: beige;
 }

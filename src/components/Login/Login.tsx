@@ -7,6 +7,7 @@ import {loginThunkCreator} from "../Redux/HeaderAuthReducer";
 import {Redirect} from "react-router-dom";
 import {AllAppStateType} from "../Redux/RedaxStore";
 import s from "../common/formControls/FormControl.module.css"
+import SuperButton from "../../SuperButton/SuperButton";
 
 type FormDataType = {
     email: string
@@ -47,13 +48,12 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType
     e.preventDefault
     * get all form data put them to Object
     * props.onSubmit(formData)*/
-    return <div style={{paddingLeft: "10px"}}>
+    return <div style={{paddingLeft: "10px", width: '200px'}} className={s.wrapperForLogin}>
         {/*handleSubmit берем с пропс, в ней прописано отмена действий по умолчанию;
         все данные упаковывает в обьект;
         props.OnSubmit(formData)*/}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{margin:'0 auto'}}>
             <div>
-                {/*контейнерная компонента Field*/}
                 <Field placeholder={"Login"}
                        name={"email"}
                        component={Input}
@@ -83,7 +83,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType
                     ></Field> remember me
                 </div>
                 <div>
-                    <button>Login</button>
+                    <SuperButton>Login</SuperButton>
                 </div>
             </div>
         </form>
@@ -103,8 +103,8 @@ const Login = (props: LoginPropsType) => {
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
-    return <div>
-        <h1> Login</h1>
+    return <div className={s.wrapperForLogin}>
+        <h1 style={{textAlign:'center', color: "beige"}}> Login</h1>
         {/*передаем onSumbit который выполняет handleSubmit() */}
         <LoginRedaxForm onSubmit={onSubmitHandler} captcha={props.captcha}/>
     </div>

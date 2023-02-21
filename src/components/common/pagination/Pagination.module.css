@@ -5,13 +5,14 @@
 
 .selectedPage {
     font-weight: bold;
-    color: blueviolet;
+    color: rgb(236, 109, 18);
     font-size: 1.1rem;
 }
 
 .titlePage {
    text-align: center;
     margin: 10px;
+    font-size: 18px;
 }
 
 .wrapperForCount{
@@ -26,14 +27,14 @@
     cursor: pointer;
     width: 25px;
     height: 25px;
-    border: 2px solid gray;
+    border: 2px solid rgb(236, 109, 18);
     border-radius: 50%;
 
 }
 .button:hover::after{
     transition: .1s;
-    border-left: 2px solid darkblue;
-    border-bottom: 2px solid darkblue;
+    border-left: 2px solid rgb(236, 109, 18);
+    border-bottom: 2px solid rgb(236, 109, 18);
 }
 
 .button:after {

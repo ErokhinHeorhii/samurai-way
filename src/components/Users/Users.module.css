@@ -21,7 +21,7 @@
   display: flex;
   margin: 5px;
   font-size: 1.2rem;
-  color: rgb(79, 12, 141);
+  color: beige;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -32,7 +32,7 @@
 }
 
 .wrapperDialog {
-  border: 2px Solid blueviolet;
+  border: 2px Solid beige;
   width: 450px;
   height: 80px;
   border-radius: 8px;
@@ -45,14 +45,14 @@
   display: flex;
   margin: 5px;
   font-size: 1rem;
-  color: rgb(39, 39, 164);
+  color: rgb(50 44 8);;
   flex-direction: column;
   justify-content: start;
 }
 
 .selectedPage {
   font-weight: bold;
-  color: blueviolet;
+  color: rgb(236, 109, 18);
   font-size: 1.1rem;
 }
 
@@ -65,11 +65,12 @@
   border-radius: 8px;
   width: 40%;
   margin: 5px auto;
+  color:beige;
 }
 
 .wrapperImage {
   position: relative;
-  
+
 }
 
 .imageLoader {
