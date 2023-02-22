@@ -81,17 +81,18 @@ const ProfileInfo = ({
         <div>
             <div>
                 <img
-                    className={s.Image}
+                    className={s.image}
                     src = {img}
                     alt="img"></img>
             </div>
+            {isOwner && <input className={s.wrapperInput} type={"file"} onChange={onMainPhotoSelected}/>}
             {editMode ?
                 <ProfileProfileDataFormReduxForm initialValues={profile} profile={profile}
                                                  onSubmit={onSubmit}/> :
                 <ProfileData profile={profile} isOwner={isOwner}
                              goToEditMode={() => setEditMode(true)}/>}
             <ProfileStatusWithHooks status={status} updateStatusThunkCreator={updateStatusThunkCreator}/>
-            {isOwner && <input className={s.wrapperInput} type={"file"} onChange={onMainPhotoSelected}/>}
+
         </div>)
 }
 

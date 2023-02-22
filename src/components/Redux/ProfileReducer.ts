@@ -64,7 +64,6 @@ let initialState = {
     posts: [
         {id: v1(), message: "Hi", likeCount: 10},
         {id: v1(), message: "How are you", likeCount: 2},
-        {id: v1(), message: "yooo", likeCount: 4},
     ],
     profile: null,
     status: "Hello",

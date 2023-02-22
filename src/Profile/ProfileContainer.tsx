@@ -59,7 +59,6 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
                        snapshot?: any) {
         //сравниваем текущие пропсы с предыдущими чтобы не было зацикливания
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
-
             this.refreshProfile()
         }
     }

@@ -27,32 +27,3 @@ export function withAuthRedirect<T>(Component: ComponentType<T>) {
 
     return connectedRedirectComponent
 }
-
-
-//
-// const [ panels, setPanels ] = useState<T[]>(defaultValues);
-//
-// const togglePanel = useCallback((panel: T) => {
-//     if (panels.includes(panel)) {
-//         setPanels(panels.filter( p => p !== panel));
-//     } else {
-//         setPanels([panel].concat(panels));
-//     }
-// }, [panels])
-
-
-// const useHook = (defaultValues: any) => {
-//
-//
-//     const [panels, setPanels] = useState<T[]>(defaultValues);
-//
-//     const togglePanel = useCallback((panel: T) => {
-//         if (panels.includes(panel)) {
-//             setPanels(panels.filter(p => p !== panel));
-//         } else {
-//             setPanels([panel].concat(panels));
-//         }
-//     }, [panels])
-//
-//     return [panels, togglePanel]
-// }

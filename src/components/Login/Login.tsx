@@ -25,7 +25,7 @@ type MapStateToPropsType = {
     captcha: string
 }
 type MapDispatchToPropsType = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha:string) => void
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
 const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
@@ -37,13 +37,14 @@ const mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 export type LoginPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 const maxLength25 = maxLengthCreator(25)
-
-const LoginForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType> = ({
-                                                                                         handleSubmit,
-                                                                                         error,
-                                                                                         captcha,
-                                                                                         ...restProps
-                                                                                     }) => {
+const style = {width: "180px", height: "20px"}
+const LoginForm: React.FC<InjectedFormProps<FormDataType,
+    PropsType> & PropsType> = ({
+                                   handleSubmit,
+                                   error,
+                                   captcha,
+                                   ...restProps
+                               }) => {
     /*handleSubmit doing:
     e.preventDefault
     * get all form data put them to Object
@@ -52,12 +53,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType
         {/*handleSubmit берем с пропс, в ней прописано отмена действий по умолчанию;
         все данные упаковывает в обьект;
         props.OnSubmit(formData)*/}
-        <form onSubmit={handleSubmit} style={{margin:'0 auto'}}>
+
+        <form onSubmit={handleSubmit} style={{margin: '0 auto'}}>
             <div>
                 <Field placeholder={"Login"}
                        name={"email"}
                        component={Input}
                        validate={[requiredField, validateEmail]}
+                       style={style}
                 ></Field>
             </div>
             <div style={{paddingTop: "10px"}}>
@@ -66,15 +69,16 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType
                        type={"password"}
                        component={Input}
                        validate={[requiredField, maxLength25]}
+                       style={style}
                 ></Field>
             </div>
             {captcha && <img className={s.img} src={captcha} alt={"img"}/>}
             {captcha && <Field placeholder={"CaptchaUrl"}
-                             name={"captcha"}
-                             component={Input}
-                             validate={[requiredField, maxLength25]}
+                               name={"captcha"}
+                               component={Input}
+                               validate={[requiredField, maxLength25]}
             ></Field>}
-            { error && <div className={s.formError}>{error}</div>}
+            {error && <div className={s.formError}>{error}</div>}
             <div style={{display: "flex", width: "180px", justifyContent: "space-between", paddingTop: "15px"}}>
                 <div>
                     <Field component={"input"}
@@ -85,7 +89,11 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType
                 <div>
                     <SuperButton>Login</SuperButton>
                 </div>
+
             </div>
+            <div className={s.password}>Email: free@samuraijs.com
+
+                Password: free</div>
         </form>
     </div>
 }
@@ -104,7 +112,7 @@ const Login = (props: LoginPropsType) => {
         return <Redirect to={"/profile"}/>
     }
     return <div className={s.wrapperForLogin}>
-        <h1 style={{textAlign:'center', color: "beige"}}> Login</h1>
+        <h1 style={{textAlign: 'center', color: "beige"}}> Login</h1>
         {/*передаем onSumbit который выполняет handleSubmit() */}
         <LoginRedaxForm onSubmit={onSubmitHandler} captcha={props.captcha}/>
     </div>

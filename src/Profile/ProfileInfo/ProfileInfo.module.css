@@ -3,18 +3,18 @@
     color: blueviolet;
 }
 
-.Image {
+.image {
     width: 100%;
     height: auto;
 }
 
 .discriptionBlock {
-    margin: 10px;
+    margin: 20px;
     display: flex;
 }
 
-.wrapperForStatus{
-    color: #4f0c8d;
+.wrapperForStatus {
+    color: rgb(114, 50, 6);
     margin: 10px;
 }
 
@@ -25,37 +25,52 @@
 
 .avatarImage {
     width: 100%;
-    border-radius: 5px;
+    border: Solid 3px rgb(236, 109, 18);
+    border-radius: 50%;
+    z-index: 5;
+    position: relative;
+    margin-top: -12px;
 }
 
-.wrapperName{
-    color: #4f0c8d;
-    margin: 5px;
+.wrapperName {
+    color: beige;
+    margin-left: 30px;
     font-size: 1.3rem;
 }
 
-.lookingJob, .contacts{
+.lookingJob, .contacts {
     font-size: 1rem;
     margin: 8px 0;
 }
-.contacts{
+
+.contacts {
     margin-left: 15px;
-   color: #3d0570;
+    color: beige;
 }
 
-.wrapperInput{
-    margin: 5px;
+.wrapperInput {
+    margin-top: 10px;
+    margin-left: 42px;
 }
 
-.status{
-    font-style:italic;
-    font-size: 1.2rem;
+.status {
+    padding-top: 4px;
+    font-size: 1.6rem;
 }
-.formError{
-    color:red;
+
+.status:hover {
+ cursor:pointer;
+}
+
+.formError {
+    color: red;
     border: 1px Solid Red;
-    width:175px;
+    width: 175px;
     height: 35px;
     margin-top: 10px;
-    word-wrap:break-word;
+    word-wrap: break-word;
+}
+
+.button{
+
 }

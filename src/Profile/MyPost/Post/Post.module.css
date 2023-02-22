@@ -1,9 +1,8 @@
 .item{
-  color:rgb(66, 8, 80);
+  color:rgb(114, 50, 6);
   width: 150px;
   padding-left: 10px;
   padding-top: 10px;
-  width: 150px;
 }
 
 .itemMessage{
@@ -18,4 +17,9 @@
 }
 .likeItem{
   padding-left: 10px;
+}
+
+.imgLike{
+  width: 20px;
+  padding-right: 6px;
 }

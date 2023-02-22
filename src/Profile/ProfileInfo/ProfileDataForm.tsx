@@ -5,20 +5,6 @@ import React from "react";
 import {Input, Textarea} from "../../components/common/formControls/FormControls";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-type ContactsPropsType = {
-    contactTitle: string
-    contactValue: string
-}
 type ProfileDataPropsType = {
     profile: ProfilePageType
     isOwner?: boolean
@@ -40,7 +26,7 @@ const ProfileDataForm = ({profile, handleSubmit, error}: ProfileDataFormType) =>
             <img className={s.avatarImage} src={profile!.photos.small == null
                 ? avatarProfile
                 : profile!.photos.small} alt={"img"}/>
-            <div>
+            <div className={s.button}>
                 <button onClick={() => {
                 }}>save
                 </button>
@@ -89,12 +75,7 @@ const ProfileDataForm = ({profile, handleSubmit, error}: ProfileDataFormType) =>
                             ></Field>
 
                         </div>
-
-                    // <Contact key={item} contactTitle={item}
-                    //                     contactValue={
-                    //                         profile!.contacts[item as keyof ContactsType]}/>
-                )
-
+                             )
             }
                 {error && <div className={s.formError}>{error}</div>}
             </div>

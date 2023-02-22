@@ -1,5 +1,5 @@
 import s from './Post.module.css'
-
+import like from '../../../assets/images/like.jpg'
 type PostType = {
   message: string
   likeCounts: string| number
@@ -15,7 +15,9 @@ function Post(props: PostType) {
                 <div className={s.itemMessage}>{props.message}</div>
             </div>
             <div className={s.likeItem}>
-                <span>like {props.likeCounts} </span>
+                <span>
+                    <img src={like} alt={"img"} className={s.imgLike}></img>
+                    {props.likeCounts} </span>
             </div>
         </div>
     )

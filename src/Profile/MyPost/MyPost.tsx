@@ -26,9 +26,7 @@ export type postDataType =
         addPost: (newPostText: string) => void
     }
 
-
 const MyPost = React.memo((props: postDataType) => {
-    console.log("render")
     const {
         posts,
         addPost,
@@ -63,7 +61,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     //Внутри  функции handleSubmit происходит  отмена действий по умолчанию;
     //         все данные упаковывает в обьект;
     //         props.OnSubmit(formData)
-    return <form onSubmit={props.handleSubmit}>
+    return <form onSubmit={props.handleSubmit} >
         <div>
             <Field name="newPostText" placeholder="post message"
                    component={Textarea} validate={[requiredField,maxLength20]}
@@ -76,7 +74,6 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 }
 
 const AddPostRedaxForm = reduxForm<FormDataType>({
-    //даем уникальное имя форме
     form: "ProfileAddNewPostForm"
 })(AddNewPostForm)
 
