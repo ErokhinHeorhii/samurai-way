@@ -6,6 +6,7 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHook";
 import React, {ChangeEvent, useEffect, useState} from "react";
 import ProfileProfileDataFormReduxForm, {FormDataType} from "./ProfileDataForm";
 import img from '../../assets/images/images.jpg'
+import SuperButton from "../../SuperButton/SuperButton";
 
 type ContactsType = {
     github: string
@@ -109,7 +110,7 @@ export const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsTy
             <img className={s.avatarImage} src={profile!.photos.small == null
                 ? avatarProfile
                 : profile!.photos.small} alt={"img"}/>
-            {isOwner && <button onClick={goToEditMode}>edit</button>}
+            {isOwner && <SuperButton onClick={goToEditMode}>edit</SuperButton>}
         </div>
         <span className={s.wrapperName}> <b>Full Name</b> : {profile!.fullName}
             {profile!.lookingForAJob

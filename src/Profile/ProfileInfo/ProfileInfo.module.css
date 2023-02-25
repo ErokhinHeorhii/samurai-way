@@ -14,7 +14,7 @@
 }
 
 .wrapperForStatus {
-    color: rgb(114, 50, 6);
+    color: beige;
     margin: 10px;
 }
 
@@ -50,17 +50,19 @@
 
 .wrapperInput {
     margin-top: 10px;
-    margin-left: 42px;
+    margin-left: 23px;
+
 }
 
 .status {
     padding-top: 4px;
     font-size: 1.6rem;
+    color: rgb(114, 50, 6);
 }
 
 .status:hover {
- cursor:pointer;
-}
+    cursor: pointer;
+   }
 
 .formError {
     color: red;
@@ -71,6 +73,6 @@
     word-wrap: break-word;
 }
 
-.button{
+.button {
 
 }

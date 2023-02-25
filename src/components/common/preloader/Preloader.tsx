@@ -1,7 +1,7 @@
-import preloader from "../../../assets/images/preloader.gif"
+import preloader from "../../../assets/images/XOsX.gif"
 import s from "../../Users/Users.module.css"
 
-const Preloader = (props:any) => {
+const Preloader = () => {
   return (<div className={s.wrapperImageLoader}>
     <img src={preloader} alt="loading" className={s.imageLoader} />
   </div>)

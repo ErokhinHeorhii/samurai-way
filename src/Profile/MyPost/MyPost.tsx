@@ -1,10 +1,11 @@
 import React from 'react'
 import s from './MyPost.module.css'
-import Post from './Post/Post'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
 import {Textarea} from "../../components/common/formControls/FormControls";
-
+import Message from "./Post/Message";
+import avatar from '../../assets/images/avatarProfile.jpg'
+import SuperButton from "../../SuperButton/SuperButton";
 export type myPostType = {
     id: string
     message: string
@@ -33,8 +34,9 @@ const MyPost = React.memo((props: postDataType) => {
     } = props
 
     let postsElements = posts.map(item => {
-        return <Post
+        return <Message
             key={item.id}
+            avatar ={avatar}
             message={item.message}
             likeCounts={item.likeCount}
         />
@@ -61,14 +63,15 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     //Внутри  функции handleSubmit происходит  отмена действий по умолчанию;
     //         все данные упаковывает в обьект;
     //         props.OnSubmit(formData)
+
     return <form onSubmit={props.handleSubmit} >
         <div>
             <Field name="newPostText" placeholder="post message"
-                   component={Textarea} validate={[requiredField,maxLength20]}
+                   component={Textarea} validate={[requiredField,maxLength20]} style={{width: '200px', resize: 'none'}}
             ></Field>
         </div>
         <div>
-            <button>Add</button>
+            <SuperButton>Add</SuperButton>
         </div>
     </form>;
 }

@@ -1,6 +1,3 @@
-.formControl {
-    /*display: flex;*/
-}
 
 .formControl.error input,
 .formControl.error textarea {

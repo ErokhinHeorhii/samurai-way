@@ -4,6 +4,7 @@ import avatarProfile from "../../assets/images/AvatarForProfile.jpg"
 import React from "react";
 import {Input, Textarea} from "../../components/common/formControls/FormControls";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import SuperButton from "../../SuperButton/SuperButton";
 
 type ProfileDataPropsType = {
     profile: ProfilePageType
@@ -27,9 +28,9 @@ const ProfileDataForm = ({profile, handleSubmit, error}: ProfileDataFormType) =>
                 ? avatarProfile
                 : profile!.photos.small} alt={"img"}/>
             <div className={s.button}>
-                <button onClick={() => {
+                <SuperButton onClick={() => {
                 }}>save
-                </button>
+                </SuperButton>
             </div>
         </div>
 

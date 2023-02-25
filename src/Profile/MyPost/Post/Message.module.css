@@ -1,0 +1,81 @@
+
+.item {
+    position: relative;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    max-width: 200px;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.itemAvatar {
+    position: relative;
+    width: 45px;
+    height: auto;
+    padding-right: 15px;
+    padding-bottom: -5px;
+}
+
+.itemImage {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.itemDialog {
+    position: relative;
+    width: 140px;
+    height: 50px;
+    background-color: beige;
+    border-radius: 5px 5px 5px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.itemName {
+    color: blueviolet;
+    padding-left: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 13px;
+}
+
+.itemPost {
+    color: rgb(114, 50, 6);
+    padding-left: 15px;
+    padding-top: 19px;
+    font-size: 16px;
+}
+
+.itemTime {
+    position: absolute;
+    right: 5px;
+    bottom: 2px;
+    font-size: .8rem;
+}
+
+.itemDialog::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 99%;
+    display: block;
+    width: 22px;
+    height: 30px;
+    background: radial-gradient(60px at top left, transparent 49%, beige 50%);
+}
+
+.imgLike{
+    width: 20px;
+    padding-right: 6px;
+    padding-left: 5px;
+}
+
+.wrapperLikeCount{
+    width: 210px;
+    display: flex;
+    justify-content: flex-end;
+}

@@ -3,12 +3,12 @@ import SuperButton from "../../SuperButton/SuperButton";
 import s from "./Dialogs.module.css"
 import {DialogsPropsType} from "./DialogsContainer";
 import DialogItem from "./DialogsItem/DialogItem";
-import Message
-    from "./Message/Message";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../common/formControls/FormControls";
 import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
-
+import Message from "../../Profile/MyPost/Post/Message";
+import avatar from '../../assets/images/avatarDialogs.jpg'
+import  avatarAnswer from '../../assets/images/avatarDialogsAnswer.jpg'
 export type myDialogsDataType = {
     id: number
     name: string
@@ -26,12 +26,12 @@ const Dialogs = (props: DialogsPropsType) => {
     })
 
     let messagesElements = messages.map(item => {
-        return (<Message key={item.id} message={item.message} id={item.id}/>
+        return (<Message key={item.id} message={item.message} id={item.id} avatar={avatar}/>
         )
     })
 
     let answerMessagesElements = answerMessages.map(item => {
-        return <Message key={item.id} message={item.message} id={item.id}/>
+        return <Message key={item.id} message={item.message} id={item.id} avatar={avatarAnswer}/>
     })
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,6 +40,7 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const addNewMessage = (values: FormDataType) => {
         addMessage(values.newMessageBody)
+
     }
 
     return (<>
