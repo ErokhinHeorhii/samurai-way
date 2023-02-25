@@ -79,14 +79,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType,
                                validate={[requiredField, maxLength25]}
             ></Field>}
             {error && <div className={s.formError}>{error}</div>}
-            <div style={{display: "flex", width: "180px", justifyContent: "space-between", paddingTop: "15px"}}>
+            <div style={{display: "flex", width: "185px", justifyContent: "space-between", paddingTop: "15px"}}>
                 <div>
                     <Field component={"input"}
                            name={"rememberMe"}
                            type={"checkbox"}
                     ></Field> remember me
                 </div>
-                <div>
+                <div style={{paddingLeft:'3px'}}>
                     <SuperButton>Login</SuperButton>
                 </div>
 
