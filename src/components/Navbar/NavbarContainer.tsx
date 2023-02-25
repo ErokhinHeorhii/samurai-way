@@ -1,14 +1,13 @@
-// import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import { AllAppStateType } from "../Redux/RedaxStore";
 import { IsideinitialStateTypeForNavbar } from "../Redux/SideBarReducer";
 
 type MapStateToPropsType = {
-    sideBar:IsideinitialStateTypeForNavbar 
+    sideBar:IsideinitialStateTypeForNavbar
 }
 
-export type DialogsPropsType =MapStateToPropsType  
+export type DialogsPropsType =MapStateToPropsType
 
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {

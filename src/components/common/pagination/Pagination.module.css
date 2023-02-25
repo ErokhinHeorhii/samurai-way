@@ -10,28 +10,29 @@
 }
 
 .titlePage {
-   text-align: center;
+    text-align: center;
     margin: 10px;
     font-size: 18px;
 }
 
-.wrapperForCount{
+.wrapperForCount {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
 }
 
-.button{
+.button {
     position: relative;
     cursor: pointer;
     width: 25px;
     height: 25px;
     border: 2px solid rgb(236, 109, 18);
     border-radius: 50%;
-
+    transition: .5s;
 }
-.button:hover::after{
+
+.button:hover::after {
     transition: .1s;
     border-left: 2px solid rgb(236, 109, 18);
     border-bottom: 2px solid rgb(236, 109, 18);
@@ -49,7 +50,8 @@
     border-bottom: 2px solid gray;
     transform: rotate(45deg);
 }
-.button.buttonRight:after{
+
+.button.buttonRight:after {
     top: 6px;
     left: 5px;
     transform: rotate(227deg);

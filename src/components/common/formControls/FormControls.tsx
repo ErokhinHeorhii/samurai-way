@@ -25,7 +25,6 @@ const FormControl: React.FC<FormControlParamsType> = (props) => {
 }
 
 export const Textarea: React.FC<WrappedFieldProps> = (props) => {
-    //необходимо достать их пропс input и другие неободимы пропсы и прокинуть в textarya
     const {input, meta,  ...restProps} = props
     return (
         <FormControl {...props}>
@@ -35,7 +34,6 @@ export const Textarea: React.FC<WrappedFieldProps> = (props) => {
 }
 
 export const Input = (props: any) => {
-    //необходимо достать их пропс input и другие неободимы пропсы и прокинуть в textarya
     const {input, meta, ...restProps} = props
     return (
         <FormControl {...props}>

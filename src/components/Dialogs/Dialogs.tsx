@@ -1,14 +1,15 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import SuperButton from "../../SuperButton/SuperButton";
 import s from "./Dialogs.module.css"
 import {DialogsPropsType} from "./DialogsContainer";
 import DialogItem from "./DialogsItem/DialogItem";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm, reset} from "redux-form";
 import {Textarea} from "../common/formControls/FormControls";
 import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
 import Message from "../../Profile/MyPost/Post/Message";
 import avatar from '../../assets/images/avatarDialogs.jpg'
 import  avatarAnswer from '../../assets/images/avatarDialogsAnswer.jpg'
+import {useDispatch} from "react-redux";
 export type myDialogsDataType = {
     id: number
     name: string
@@ -21,6 +22,7 @@ type FormDataType = {
 const Dialogs = (props: DialogsPropsType) => {
     const {dialogs, messages, answerMessages} = props.dialogsPage
     const {addMessage} = props
+    const dispatch = useDispatch()
     let dialogsElements = dialogs.map(item => {
         return <DialogItem key={item.id} name={item.name} id={item.id} src={item.src}/>
     })
@@ -34,13 +36,9 @@ const Dialogs = (props: DialogsPropsType) => {
         return <Message key={item.id} message={item.message} id={item.id} avatar={avatarAnswer}/>
     })
 
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const text = e.currentTarget ? e.currentTarget.value : " "
-    }
-
     const addNewMessage = (values: FormDataType) => {
         addMessage(values.newMessageBody)
-
+        dispatch(reset('dialogAddMessageForm'))
     }
 
     return (<>
