@@ -80,7 +80,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType,
             ></Field>}
             {error && <div className={s.formError}>{error}</div>}
             <div style={{display: "flex", width: "185px", justifyContent: "space-between", paddingTop: "15px"}}>
-                <div>
+                <div style={{color: "beige"}} >
                     <Field component={"input"}
                            name={"rememberMe"}
                            type={"checkbox"}
