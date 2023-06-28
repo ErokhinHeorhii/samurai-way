@@ -1,6 +1,6 @@
 ## Demo:
 
-[![demo](https://img.shields.io/badge/-demo-brightgreen?style=for-the-badge&logo=github)](https://geo070684.github.io/samurai-way)
+[![demo](https://img.shields.io/badge/-demo-brightgreen?style=for-the-badge&logo=github)](https://ErokhinHeorhii.github.io/samurai-way)
 
 В этом стартовом проекте установлены следующие библиотеки
 
